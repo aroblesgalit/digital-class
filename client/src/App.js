@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-// import Books from "./pages/Books";
-// import Detail from "./pages/Detail";
-// import NoMatch from "./pages/NoMatch";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Search from "./pages/Search";
+import Detail from "./pages/Detail";
+import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
 
 function App() {
@@ -11,12 +12,14 @@ function App() {
     <Router>
       <div>
         <Nav />
-        {/* <Switch>
-          <Route exact path={["/", "/books"]}>
-            <Books />
+        <Jumbotron/>
+        <Switch>
+          <Route exact path={["/"]}>
+            <Search/>
           </Route>
-        </Switch> */}
-        <Footer/>
+        </Switch>
+      <Footer/>
+
       </div>
     </Router>
   );
