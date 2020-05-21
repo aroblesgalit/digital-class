@@ -1,5 +1,5 @@
 const express = require("express");
-
+const db = require("./models");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
@@ -21,4 +21,55 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglis
 // Start the API server
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+
+
+app.get("/api/quizes", (req, res) =>{
+  db.Quiz.find({})
+  .then(dbQuiz => {
+      res.json(dbQuiz)
+  })
+  .catch(err =>{
+      res.json(err);
+  })
+})
+
+app.post("/api/quizes", (req, res) =>{
+  console.log("New Quiz" - req.body)
+  db.Quiz.create(req.body)
+  .then(dbQuiz => {
+      console.log("Quiz added")
+      res.json(dbQuiz)
+  })
+  .catch(err => {
+      res.json(err)
+  })
+})
+
+
+app.get("/api/teachers", (req, res) =>{
+  db.Teacher.find({})
+  .then(dbTeacher => {
+      res.json(dbTeacher)
+  })
+  .catch(err =>{
+      res.json(err);
+  })
+})
+
+app.post("/api/teachers", (req, res) =>{
+  console.log("New Teacher" - req.body)
+  db.Teacher.create(req.body)
+  .then(dbTeacher => {
+      console.log("Teacher added")
+      res.json(dbTeacher)
+  })
+  .catch(err => {
+      res.json(err)
+  })
+})
+
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}!`);
 });
