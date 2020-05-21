@@ -5,7 +5,7 @@ import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
-import Search from "./pages/Search";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -18,6 +18,8 @@ function App() {
             <Search/>
           </Route>
         </Switch>
+      <Footer/>
+
       </div>
     </Router>
   );
