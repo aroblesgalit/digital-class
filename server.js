@@ -25,15 +25,6 @@ app.listen(PORT, function() {
 
 
 
-app.get("/api/quizes", (req, res) =>{
-  db.Quiz.find({})
-  .then(dbQuiz => {
-      res.json(dbQuiz)
-  })
-  .catch(err =>{
-      res.json(err);
-  })
-})
 
 app.post("/api/quizes", (req, res) =>{
   console.log("New Quiz" - req.body)
@@ -67,6 +58,16 @@ app.post("/api/teachers", (req, res) =>{
   })
   .catch(err => {
       res.json(err)
+  })
+})
+
+app.get("/api/teachers/:id", (req,res) => {
+  db.Quiz.find({ teacher })
+  .then(dbQuiz => {
+    res.json(dbQuiz)
+  })
+  .catch(err => {
+    res.json(err)
   })
 })
 
