@@ -1,0 +1,16 @@
+.member-thumbnail {
+  height: 2.25rem;
+  border-radius: 9999px;
+  margin-bottom: 0.25rem;
+}
+
+.member-info {
+  font-size: 12px;
+  width: 85px;
+}
+
+footer {
+  color: #333;
+  background-color: #e1e1e1;
+  padding: 1rem 0;
+}
