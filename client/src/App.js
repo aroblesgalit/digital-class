@@ -10,17 +10,11 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Switch>
-          <Route exact path={["/", "/books"]}>
-            <Books />
+        {/* <Switch>
+          <Route exact path={["/"]}>
+            
           </Route>
-          <Route exact path="/books/:id">
-            <Detail />
-          </Route>
-          <Route>
-            <NoMatch />
-          </Route>
-        </Switch>
+        </Switch> */}
       </div>
     </Router>
   );
