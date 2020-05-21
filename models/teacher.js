@@ -5,7 +5,11 @@ const teacherSchema = newSchema({
     name: { type: String, required: true},
     school: { type: String, required: true},
     subject: { type: String, required: true},
-    email: { type: String, required: true},
+    email: {
+        type: String,
+        unique: true,
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+      },
     password: { type: String, required: true},
     quizes: [
         {
