@@ -10,7 +10,12 @@ const teacherSchema = newSchema({
         unique: true,
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
       },
-    password: { type: String, required: true},
+      password: {
+        type: String,
+        trim: true,
+        required: "Password is Required",
+        validate: [({ length }) => length >= 6, "Password should be longer."]
+      },
     quizes: [
         {
             type: Schema.Types.ObjectId,
