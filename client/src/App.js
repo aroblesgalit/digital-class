@@ -6,6 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
+import SignUpForm from "./components/SignUpForm";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         <Switch>
           <Route exact path={["/"]}>
             <Search/>
+          </Route>
+          <Route exact path="/teachers/signup">
+            <SignUpForm />
           </Route>
         </Switch>
       <Footer/>
