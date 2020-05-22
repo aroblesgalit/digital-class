@@ -13,3 +13,5 @@ router
     .get(teachersController.findById)
     .put(teachersController.update)
     .delete(teachersController.remove);
+
+    module.exports = router;
