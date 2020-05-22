@@ -1,0 +1,11 @@
+.quiz-form-container {
+  max-width: 70%;
+  margin: 0 3rem;
+}
+
+@media screen and (max-width: 840px) {
+  .quiz-form-container {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+}
