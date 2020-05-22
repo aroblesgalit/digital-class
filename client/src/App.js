@@ -22,7 +22,7 @@ function App() {
           <Route exact path='/teachers/signup'>
             <SignUpForm />
           </Route>
-          <Route exact path='/student/login'>
+          <Route exact path='/students/login'>
             <StudentLogin />
           </Route>
         </Switch>
