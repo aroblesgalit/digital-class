@@ -13,8 +13,7 @@ const studentSchema = new Schema({
         required: true
     },
     teachers: {
-        type: Array,
-        // Foreign Key
+        type: Array
     },
     email: {
         type: String,
