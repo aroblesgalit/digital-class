@@ -3,6 +3,11 @@
   margin: 0 3rem;
 }
 
+.my-button {
+  background-color: #7cebad;
+  border-color: transparent;
+}
+
 @media screen and (max-width: 840px) {
   .quiz-form-container {
     max-width: 100%;

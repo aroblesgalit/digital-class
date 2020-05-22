@@ -5,7 +5,7 @@ function QuizForm() {
   return (
     <div>
       <div className="quiz-form-container">
-        <h4 className="uk-margin-large-bottom">Create Quiz</h4>
+        <h4 className="uk-margin-large-bottom uk-margin-large-top">Create Quiz</h4>
         <form>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
@@ -51,7 +51,11 @@ function QuizForm() {
             <input className="uk-input" id="choice4" type="text" />
           </div>
 
-
+          <div className="uk-margin-top uk-flex uk-flex-right">
+            <button className="uk-button uk-button-default my-button uk-margin-small-right">Add New Question</button>
+            <button className="uk-button uk-button-default my-button">Submit Quiz</button>
+          </div>
+          
 
         </form>
 
