@@ -16,15 +16,10 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/digitalClass");
-
-// Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/digitalClass", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
 });
-
-
-
 
 app.post("/api/quizes", (req, res) =>{
   console.log("New Quiz" - req.body)
@@ -71,6 +66,7 @@ app.get("/api/teachers/:id", (req,res) => {
   })
 })
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+// Start the API server
+app.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
