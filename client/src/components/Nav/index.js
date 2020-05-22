@@ -20,10 +20,11 @@ function Nav() {
             <Link to="/">About</Link>
           </li>
           <li>
-            <Link to="/">Login</Link>
+            <Link to="/students/login">Login</Link>
           </li>
           <li>
-            <Link to="/teachers/signup">Signup</Link>
+            <Link to='/teachers/signup'>Signup</Link>
+            
           </li>
         </ul>
       </div>
