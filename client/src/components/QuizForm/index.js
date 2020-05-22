@@ -26,10 +26,31 @@ function QuizForm() {
           <hr className="uk-divider-icon" />
 
           {/* Question input */}
-            <div className="uk-width-auto">
-              <label htmlFor="question" className="uk-form-label">Question</label>
-              <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
-            </div>
+          <div className="uk-width-auto uk-margin-bottom">
+            <label htmlFor="question" className="uk-form-label">Question</label>
+            <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
+          </div>
+          <div>Choice 1</div>
+          <div className="uk-flex uk-flex-row uk-flex-middle">
+            <input type="radio" className="uk-radio uk-margin-right"></input>
+            <input className="uk-input" id="choice1" type="text" />
+          </div>
+          <div>Choice 2</div>
+          <div className="uk-flex uk-flex-row uk-flex-middle">
+            <input type="radio" className="uk-radio uk-margin-right"></input>
+            <input className="uk-input" id="choice2" type="text" />
+          </div>
+          <div>Choice 3</div>
+          <div className="uk-flex uk-flex-row uk-flex-middle">
+            <input type="radio" className="uk-radio uk-margin-right"></input>
+            <input className="uk-input" id="choice3" type="text" />
+          </div>
+          <div>Choice 4</div>
+          <div className="uk-flex uk-flex-row uk-flex-middle">
+            <input type="radio" className="uk-radio uk-margin-right"></input>
+            <input className="uk-input" id="choice4" type="text" />
+          </div>
+
 
 
         </form>
