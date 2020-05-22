@@ -24,10 +24,7 @@ const studentSchema = new Schema({
     email: {
         type: String,
         required: true,
-        validate: [
-            isEmail,
-            "invalid email"
-        ],
+        validate: [isEmail, "invalid email"],
         createIndexes: {
             unique: true
         }
