@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
     findByEmail: function(req, res) {
         db.Student
-            .find({ email: req.body.email })
+            .find(req.body.email)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

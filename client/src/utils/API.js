@@ -17,8 +17,12 @@ export default {
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
   },
-  // Get a user by email
-  getUserByEmail: function(email) {
-    return axios.get("/api/students", email)
+  // Get a student by email
+  getStudentByEmail: function(email) {
+    return axios.get("/api/students", email);
+  },
+  // Create an account for a student
+  registerAStudent: function(studentData) {
+    return axios.post("/api/students", studentData);
   }
 };
