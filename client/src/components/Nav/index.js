@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import './style.css'
 
 import { Link } from "react-router-dom"
 
@@ -9,7 +10,7 @@ function Nav() {
       <div className="uk-navbar-left">
         <ul className="uk-navbar-nav">
           <li className="uk-active">
-            <Link to="/">Digital Class</Link>
+            <Link to="/" className="site-title">Digital Class</Link>
           </li>
         </ul>
       </div>

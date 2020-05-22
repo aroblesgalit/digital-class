@@ -6,18 +6,19 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
+import QuizForm from './components/QuizForm';
 
 function App() {
   return (
     <Router>
       <div>
         <Nav />
-        <Jumbotron/>
-        <Switch>
+        <QuizForm/>
+        {/* <Switch>
           <Route exact path={["/"]}>
             <Search/>
           </Route>
-        </Switch>
+        </Switch> */}
       <Footer/>
 
       </div>
