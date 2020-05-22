@@ -14,4 +14,4 @@ router
     .put(teachersController.update)
     .delete(teachersController.remove);
 
-    module.exports = router;
+module.exports = router;

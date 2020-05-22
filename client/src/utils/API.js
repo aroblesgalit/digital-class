@@ -16,5 +16,13 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  // Get a student by email
+  getStudentByEmail: function(email) {
+    return axios.get("/api/students", email);
+  },
+  // Create an account for a student
+  registerAStudent: function(studentData) {
+    return axios.post("/api/students", studentData);
   }
 };
