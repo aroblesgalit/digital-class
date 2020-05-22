@@ -3,7 +3,7 @@
   margin: 0 3rem;
 }
 
-.my-button {
+.my-button, .uk-button-default:focus {
   background-color: #7cebad;
   border-color: transparent;
 }

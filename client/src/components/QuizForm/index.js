@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 function QuizForm() {
+  const [newQuizState, setNewQuizState] = useState({
+    title: "",
+    timeLimitMin: 0,
+    timeLimitSec: 0,
+    questions: [
+      {
+        id: 1,
+        choices: ["", "", "", ""],
+        correctAns: ""
+      }
+    ]
+  });
+
+  // console.log("newQuizState:  " + JSON.stringify(newQuizState))
+
+
+  const addQuestion = event => {
+    event.preventDefault();
+
+
+    const newQuestions = newQuizState.questions;
+    newQuestions.push({
+      id: newQuizState.questions.length + 1,
+      choices: ["", "", "", ""],
+      correctAns: ""
+    });
+    setNewQuizState({
+      ...newQuizState, questions: newQuestions
+    })
+  }
+
   return (
     <div>
       <div className="quiz-form-container">
@@ -25,39 +56,47 @@ function QuizForm() {
           </div>
           <hr className="uk-divider-icon" />
 
-          {/* Question input */}
-          <div className="uk-width-auto uk-margin-bottom">
-            <label htmlFor="question" className="uk-form-label">Question</label>
-            <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
-          </div>
-          <div>Choice 1</div>
-          <div className="uk-flex uk-flex-row uk-flex-middle">
-            <input type="radio" className="uk-radio uk-margin-right"></input>
-            <input className="uk-input" id="choice1" type="text" />
-          </div>
-          <div>Choice 2</div>
-          <div className="uk-flex uk-flex-row uk-flex-middle">
-            <input type="radio" className="uk-radio uk-margin-right"></input>
-            <input className="uk-input" id="choice2" type="text" />
-          </div>
-          <div>Choice 3</div>
-          <div className="uk-flex uk-flex-row uk-flex-middle">
-            <input type="radio" className="uk-radio uk-margin-right"></input>
-            <input className="uk-input" id="choice3" type="text" />
-          </div>
-          <div>Choice 4</div>
-          <div className="uk-flex uk-flex-row uk-flex-middle">
-            <input type="radio" className="uk-radio uk-margin-right"></input>
-            <input className="uk-input" id="choice4" type="text" />
-          </div>
+          {newQuizState.questions.map(item => {
+            return (
+              <div key={item.id}>
+                <div className="uk-width-auto uk-margin-bottom">
+                  <label htmlFor="question" className="uk-form-label">Question {item.id}</label>
+                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
+                </div>
+                <div>Choice 1</div>
+                <div className="uk-flex uk-flex-row uk-flex-middle">
+                  <input type="radio" className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice1" type="text" />
+                </div>
+                <div>Choice 2</div>
+                <div className="uk-flex uk-flex-row uk-flex-middle">
+                  <input type="radio" className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice2" type="text" />
+                </div>
+                <div>Choice 3</div>
+                <div className="uk-flex uk-flex-row uk-flex-middle">
+                  <input type="radio" className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice3" type="text" />
+                </div>
+                <div>Choice 4</div>
+                <div className="uk-flex uk-flex-row uk-flex-middle">
+                  <input type="radio" className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice4" type="text" />
+                </div>
+              </div>
+            )
+          })}
+
 
           <div className="uk-margin-top uk-flex uk-flex-right">
-            <button className="uk-button uk-button-default my-button uk-margin-small-right">Add New Question</button>
+            <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={addQuestion}>Add New Question</label>
             <button className="uk-button uk-button-default my-button">Submit Quiz</button>
           </div>
-          
+
 
         </form>
+
+
 
       </div>
     </div>
