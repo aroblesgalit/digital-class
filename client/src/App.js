@@ -17,9 +17,11 @@ function App() {
           <Route exact path={["/"]}>
             <Search/>
           </Route>
+          <Route exact path='/teachers/signup'>
+            <SignUpForm />
+          </Route>
         </Switch>
-      <Footer/>
-
+        <Footer/>
       </div>
     </Router>
   );
