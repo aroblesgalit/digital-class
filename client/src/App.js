@@ -1,15 +1,28 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-// import SignUp from './pages/SignUp';
-import SignUpForm from "./components/SignUpForm/SignUpForm";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Search from "./pages/Search";
+import Detail from "./pages/Detail";
+import NoMatch from "./pages/NoMatch";
+import Nav from "./components/Nav";
+import Jumbotron from "./components/Jumbotron";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
-        <Route exact path='/'>
-          <SignUpForm />
-        </Route>
-  
+      <div>
+        <Nav />
+        <Jumbotron/>
+        <Switch>
+          <Route exact path={["/"]}>
+            <Search/>
+          </Route>
+          <Route exact path='/teachers/signup'>
+            <SignUpForm />
+          </Route>
+        </Switch>
+        <Footer/>
+      </div>
     </Router>
   );
 }

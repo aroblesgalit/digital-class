@@ -1,3 +1,5 @@
 module.exports = {
-  Book: require("./book")
+  Book: require("./book"),
+  Student: require("./student"),
+  Result: require("./result")
 };
