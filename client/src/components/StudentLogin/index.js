@@ -14,13 +14,14 @@ function StudentLogin() {
         e.preventDefault();
 
         setStudent({
-            email: emailRef,
-            password: passwordRef
+            email: emailRef.current.value,
+            password: passwordRef.current.value
         });
 
-        axios.post("/students/login", studentState)
-            .then(function() {
-                console.log("Login worked!")
+        axios.post("/api/student-login/login", studentState)
+            .then(function(res) {
+                console.log(res);
+                console.log("Login worked!");
                 window.location.replace("/profile");
             })
             .catch(function(err) {
