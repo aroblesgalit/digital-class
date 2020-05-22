@@ -31,7 +31,7 @@ const studentSchema = new Schema({
 
 studentSchema.pre("save", async function save(next) {  
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified("password")) {
+    if (!this.isModified("password")) {
         return next();
     }
     try {
@@ -45,7 +45,7 @@ studentSchema.pre("save", async function save(next) {
     }
 });
 
-studentSchema.methods.validatePassword = async function validatePassword(data) {
+studentSchema.methods.validPassword = async function validPassword(data) {
     return bcrypt.compare(data, this.password); 
 };
 
