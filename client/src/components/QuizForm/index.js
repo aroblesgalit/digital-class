@@ -9,6 +9,7 @@ function QuizForm() {
     questions: [
       {
         id: 1,
+        body: "",
         choices: ["", "", "", ""],
         correctAns: ""
       }
@@ -24,6 +25,7 @@ function QuizForm() {
     const newQuestions = newQuizState.questions;
     newQuestions.push({
       id: newQuizState.questions.length + 1,
+      body: "",
       choices: ["", "", "", ""],
       correctAns: ""
     });
@@ -32,7 +34,7 @@ function QuizForm() {
     })
   }
 
-  const handleInputChange = (event, id, q) => {
+  const handleInputChangeChoices = (event, id, q) => {
     // get choices of target question from current state
     const choices = newQuizState.questions[id-1].choices;
 
@@ -46,6 +48,15 @@ function QuizForm() {
     newQuestions[id-1].choices = choices;
 
     // update state with updated questions array
+    setNewQuizState({
+      ...newQuizState, questions: newQuestions
+    })
+  }
+
+  const handleInputChangeBody = (event, id) => {
+    const newQuestions = newQuizState.questions;
+    newQuestions[id-1].body = event.target.value;
+
     setNewQuizState({
       ...newQuizState, questions: newQuestions
     })
@@ -79,27 +90,27 @@ function QuizForm() {
               <div key={item.id} className="uk-margin-large-bottom">
                 <div className="uk-width-auto uk-margin-bottom">
                   <label htmlFor="question" className="uk-form-label">Question {item.id}</label>
-                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
+                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" onChange={(event) => handleInputChangeBody(event, item.id)}/>
                 </div>
                 <div>Choice 1</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice1" type="text" onChange={(event) => handleInputChange(event, item.id, 1)} />
+                  <input className="uk-input" id="choice1" type="text" onChange={(event) => handleInputChangeChoices(event, item.id, 1)} />
                 </div>
                 <div>Choice 2</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice2" type="text" onChange={(event) => handleInputChange(event, item.id, 2)} />
+                  <input className="uk-input" id="choice2" type="text" onChange={(event) => handleInputChangeChoices(event, item.id, 2)} />
                 </div>
                 <div>Choice 3</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice3" type="text" onChange={(event) => handleInputChange(event, item.id, 3)} />
+                  <input className="uk-input" id="choice3" type="text" onChange={(event) => handleInputChangeChoices(event, item.id, 3)} />
                 </div>
                 <div>Choice 4</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice4" type="text" onChange={(event) => handleInputChange(event, item.id, 4)} />
+                  <input className="uk-input" id="choice4" type="text" onChange={(event) => handleInputChangeChoices(event, item.id, 4)} />
                 </div>
               </div>
             )
