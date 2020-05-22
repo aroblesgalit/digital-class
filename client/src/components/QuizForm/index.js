@@ -24,19 +24,14 @@ function QuizForm() {
             </div>
           </div>
           <hr className="uk-divider-icon" />
-          <div className="uk-width-1-2@s">
-            <input className="uk-input" type="text" placeholder="50" />
-          </div>
-          <div className="uk-width-1-4@s">
-            <input className="uk-input" type="text" placeholder="25" />
-          </div>
 
-          <div className="uk-width-1-2@s">
-            <input className="uk-input" type="text" placeholder="50" />
-          </div>
-          <div className="uk-width-1-2@s">
-            <input className="uk-input" type="text" placeholder="50" />
-          </div>
+          {/* Question input */}
+            <div className="uk-width-auto">
+              <label htmlFor="question" className="uk-form-label">Question</label>
+              <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" />
+            </div>
+
+
         </form>
 
       </div>
