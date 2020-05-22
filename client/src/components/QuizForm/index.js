@@ -5,7 +5,7 @@ function QuizForm() {
   return (
     <div>
       <div className="quiz-form-container uk-container">
-        <h4>Create Quiz</h4>
+        <h4 className="uk-margin-large-bottom">Create Quiz</h4>
         <form>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4">
@@ -19,7 +19,7 @@ function QuizForm() {
               </div>
               <div className="uk-width-1-2">
                 <label htmlFor="seconds" className="uk-form-label">Seconds</label>
-                <input className="uk-input" id="seconds" type="number" placeholder="00" />
+                <input className="uk-input" id="seconds" type="number" placeholder=":00" />
               </div>
             </div>
           </div>
