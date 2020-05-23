@@ -4,9 +4,6 @@ const bcrypt = require("bcrypt");
 const SALT_WORK_FACTOR = 10;
 
 const studentSchema = new Schema({
-    type: {
-        type: String
-    },
     name: {
         type: String,
         required: true
@@ -48,7 +45,7 @@ studentSchema.pre("save", async function save(next) {
     }
 });
 
-studentSchema.methods.validPassword = async function validPassword(data) {
+studentSchema.methods.validatePassword = async function validatePassword(data) {
     return bcrypt.compare(data, this.password); 
 };
 

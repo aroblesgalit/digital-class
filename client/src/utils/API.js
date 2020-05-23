@@ -28,5 +28,9 @@ export default {
   // Create an account for a student
   registerAStudent: function(studentData) {
     return axios.post("/api/students", studentData);
+  },
+  // Creating a quiz
+  createQuiz: function(quizData) {
+    return axios.post("/api/quizzes", quizData);
   }
 };
