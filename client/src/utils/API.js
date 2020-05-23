@@ -17,6 +17,10 @@ export default {
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
   },
+  // Log student in
+  loginStudent: function(credentials) {
+    return axios.post("/api/student-login/login", credentials);
+  },
   // Get a student by email
   getStudentByEmail: function(email) {
     return axios.get("/api/students", email);

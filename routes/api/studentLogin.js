@@ -11,7 +11,8 @@ router.post("/signup", function(req, res) {
             email: req.body.email,
             password: req.body.password,
             school: req.body.school,
-            name: req.body.name
+            name: req.body.name,
+            teachers: req.body.teachers
         })
             .then(function(dbStudent) {
                 // res.redirect(307, "/student/login");
