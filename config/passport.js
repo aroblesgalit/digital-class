@@ -21,7 +21,7 @@ passport.use("studentLocal", new LocalStrategy(
                     message: "Incorrect email."
                 });
                 // If there is a Student with the given email, but the password does not match
-            } else if (!dbStudent.validPassword(password)) {
+            } else if (!dbStudent.validatePassword(password)) {
                 return done(null, false, {
                     message: "Incorrect password."
                 });
@@ -50,7 +50,7 @@ passport.use("teacherLocal", new LocalStrategy(
                     message: "Incorrect email."
                 });
                 // If there is a Student with the given email, but the password does not match
-            } else if (!dbTeacher.validPassword(password)) {
+            } else if (!dbTeacher.validatePassword(password)) {
                 return done(null, false, {
                     message: "Incorrect password."
                 });
