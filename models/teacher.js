@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const SALT_WORK_FACTOR = 10;
 
 const teacherSchema = new Schema({
   name: { type: String, required: true },
@@ -39,7 +40,6 @@ teacherSchema.pre("save", async function save(next) {
 teacherSchema.methods.validatePassword = async function validatePassword(data) {
   return bcrypt.compare(data, this.password);
 };
-
 
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
