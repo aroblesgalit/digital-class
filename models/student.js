@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 const SALT_WORK_FACTOR = 10;
 
 const studentSchema = new Schema({
+    type: {
+        type: String
+    },
     name: {
         type: String,
         required: true

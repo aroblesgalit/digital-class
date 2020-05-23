@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
 const teacherSchema = newSchema({
+    type: { type: String },
     name: { type: String, required: true},
     school: { type: String, required: true},
     subject: { type: String, required: true},
