@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const SALT_WORK_FACTOR = 10;;
 
 const teacherSchema = newSchema({
     name: { type: String, required: true},
@@ -9,7 +10,7 @@ const teacherSchema = newSchema({
     email: {
         type: String,
         unique: true,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please enter a valid e-mail address"]
       },
       password: {
         type: String,
@@ -28,7 +29,7 @@ const teacherSchema = newSchema({
 
 teacherSchema.pre("save", async function save(next) {  
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified("password")) {
+  if (!this.isModified("password")) {
       return next();
   }
   try {
@@ -42,7 +43,7 @@ teacherSchema.pre("save", async function save(next) {
   }
 });
 
-teacherSchema.methods.validatePassword = async function validatePassword(data) {
+teacherSchema.methods.validPassword = async function validPassword(data) {
   return bcrypt.compare(data, this.password); 
 };
 
