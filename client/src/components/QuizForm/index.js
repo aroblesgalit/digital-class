@@ -9,9 +9,9 @@ function QuizForm() {
     questions: [
       {
         id: 1,
-        body: "",
+        question: "",
         choices: ["", "", "", ""],
-        correctAns: ""
+        answer: ""
       }
     ]
   });
@@ -25,9 +25,9 @@ function QuizForm() {
     const newQuestions = newQuizState.questions;
     newQuestions.push({
       id: newQuizState.questions.length + 1,
-      body: "",
+      question: "",
       choices: ["", "", "", ""],
-      correctAns: ""
+      answer: ""
     });
     setNewQuizState({
       ...newQuizState, questions: newQuestions
@@ -37,6 +37,18 @@ function QuizForm() {
   const handleTitleChange = (event) => {
     setNewQuizState({
       ...newQuizState, title: event.target.value
+    })
+  }
+
+  const handleMinutesChange = (event) => {
+    setNewQuizState({
+      ...newQuizState, timeLimitMin: event.target.value
+    })
+  }
+
+  const handleSecondsChange = (event) => {
+    setNewQuizState({
+      ...newQuizState, timeLimitSec: event.target.value
     })
   }
 
@@ -63,7 +75,7 @@ function QuizForm() {
 
   const handleBodyChange = (event, id) => {
     const newQuestions = newQuizState.questions;
-    newQuestions[id-1].body = event.target.value;
+    newQuestions[id-1].question = event.target.value;
 
     setNewQuizState({
       ...newQuizState, questions: newQuestions
@@ -73,7 +85,7 @@ function QuizForm() {
   // state to reflect the index of the correct answer
   const handleRadio = (id, c) => {
     const newQuestions = newQuizState.questions;
-    newQuestions[id-1].correctAns = c-1;
+    newQuestions[id-1].answer = c-1;
     setNewQuizState({
       ...newQuizState, questions: newQuestions
     })
@@ -92,11 +104,11 @@ function QuizForm() {
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
               <div className="uk-width-1-2">
                 <label htmlFor="minutes" className="uk-form-label">Minutes</label>
-                <input className="uk-input" id="minutes" type="number" placeholder="00" />
+                <input className="uk-input" id="minutes" type="number" min="0" onChange={(event) => handleMinutesChange(event)} placeholder="00" />
               </div>
               <div className="uk-width-1-2">
                 <label htmlFor="seconds" className="uk-form-label">Seconds</label>
-                <input className="uk-input" id="seconds" type="number" placeholder=":00" />
+                <input className="uk-input" id="seconds" type="number" min="0" max="59" onChange={(event) => handleSecondsChange(event)} placeholder=":00" />
               </div>
             </div>
           </div>
