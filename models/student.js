@@ -31,7 +31,7 @@ const studentSchema = new Schema({
 
 studentSchema.pre("save", async function save(next) {  
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified("password")) {
+    if (!this.isModified("password")) {
         return next();
     }
     try {

@@ -17,6 +17,10 @@ export default {
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
   },
+  // Log student in
+  loginStudent: function(credentials) {
+    return axios.post("/api/student-login/login", credentials);
+  },
   // Get a student by email
   getStudentByEmail: function(email) {
     return axios.get("/api/students", email);
@@ -24,5 +28,9 @@ export default {
   // Create an account for a student
   registerAStudent: function(studentData) {
     return axios.post("/api/students", studentData);
+  },
+  // Creating a quiz
+  createQuiz: function(quizData) {
+    return axios.post("/api/quizzes", quizData);
   }
 };
