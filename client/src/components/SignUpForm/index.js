@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './style.css';
 
+function SignUpForm() {
 
-function SignUpForm(props) {
+    // Create references for all the necessary fields
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const nameRef = useRef();
+    const subjectRef = useRef();
+    const schoolRef = useRef();
+
+    // Event handler for when the signup button is clicked
+    function handleSignup(e) {
+        e.preventDefault();
+    }
+
     return (
         <div className='signupWrapper'>
             <h3>Teacher SignUp:</h3>
@@ -50,7 +62,7 @@ function SignUpForm(props) {
                     </div>
                 </div>
                 <div className="uk-margin">
-                    <label className="uk-form-label" for="form-stacked-select">Select</label>
+                    <label className="uk-form-label">Select</label>
                     <div className="uk-form-controls">
                         <select className="uk-select-medium" id="form-stacked-select">
                             <option>Bowie High School</option>
