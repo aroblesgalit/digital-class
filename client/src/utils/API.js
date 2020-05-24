@@ -24,5 +24,6 @@ export default {
   // Create an account for a student
   registerAStudent: function(studentData) {
     return axios.post("/api/students", studentData);
-  }
+  },
+  
 };
