@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API from '../../utils/API'
 import './style.css';
 
 function QuizForm() {
@@ -91,11 +92,24 @@ function QuizForm() {
     })
   }
 
+  const preventFormSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  const handleSubmitClick = (event) => {
+    event.preventDefault();
+    API.getTeacher().then(res => {
+      console.log(res.data);
+    })
+    // API.createQuiz(newQuizState);
+    // console.log("submitted");
+  }
+
   return (
     <div>
       <div className="quiz-form-container">
         <h4 className="uk-margin-large-bottom uk-margin-large-top">Create Quiz</h4>
-        <form>
+        <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
               <label htmlFor="quiz-title" className="uk-form-label" >Title</label>
@@ -149,7 +163,7 @@ function QuizForm() {
 
           <div className="uk-margin-top uk-flex uk-flex-right">
             <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={addQuestion}>Add New Question</label>
-            <button className="uk-button uk-button-default my-button">Submit Quiz</button>
+            <label className="uk-button uk-button-default my-button" onClick={(event) => handleSubmitClick(event)}>Submit Quiz</label>
           </div>
 
 

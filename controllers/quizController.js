@@ -1,42 +1,42 @@
 const db = require("../models");
 
-// Defining methods for the studentsController
+// Defining methods for the teacherssController
 module.exports = {
-    findByEmail: function(req, res) {
-        db.Student
-            .find(req.body.email)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
+    
+
     findAll: function(req, res) {
-        db.Student
+        db.Quiz
             .find(req.query)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
+    // Get quizes by teacher id
     findById: function(req, res) {
-        db.Student
-            .findById(req.params.id)
+        db.Quiz
+            .findById(req.params.Teacher.id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-        db.Student 
+        db.Quiz 
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
     update: function(req, res) {
-        db.Student
+        db.Quiz
             .findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
-        db.Student
+        db.Quiz
             .findById({ _id: req.params })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
-};
+
+}

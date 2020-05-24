@@ -3,11 +3,6 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const SALT_WORK_FACTOR = 10;
 
-const isEmail = function(email) {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email);
-}
-
 const studentSchema = new Schema({
     name: {
         type: String,
@@ -18,27 +13,25 @@ const studentSchema = new Schema({
         required: true
     },
     teachers: {
-        type: Array,
-        // Foreign Key
+        type: Array
     },
     email: {
         type: String,
         required: true,
-        validate: [isEmail, "invalid email"],
-        createIndexes: {
-            unique: true
-        }
+        unique: true,
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        validate: [({ length }) => length >= 6, "Password should be longer."]
     }
 
 });
 
 studentSchema.pre("save", async function save(next) {  
     // only hash the password if it has been modified (or is new)
-    if (!user.isModified("password")) {
+    if (!this.isModified("password")) {
         return next();
     }
     try {

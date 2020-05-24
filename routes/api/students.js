@@ -5,7 +5,8 @@ const studentsController = require("../../controllers/studentsController");
 router
     .route("/")
     .get(studentsController.findAll)
-    .post(studentsController.create);
+    .post(studentsController.create)
+    .get(studentsController.findByEmail);
 
 // Matches with "/api/students/:id"
 router

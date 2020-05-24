@@ -1,39 +1,33 @@
 const db = require("../models");
 
-// Defining methods for the studentsController
+// Defining methods for the teacherssController
 module.exports = {
-    findByEmail: function(req, res) {
-        db.Student
-            .find(req.body.email)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
     findAll: function(req, res) {
-        db.Student
+        db.Teacher
             .find(req.query)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
-        db.Student
+        db.Teacher
             .findById(req.params.id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-        db.Student 
+        db.Teacher 
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
-        db.Student
+        db.Teacher
             .findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
-        db.Student
+        db.Teacher
             .findById({ _id: req.params })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
