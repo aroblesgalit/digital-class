@@ -11,6 +11,7 @@ import SignUpForm from './components/SignUpForm';
 import StudentLogin from "./components/StudentLogin";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
+import TeacherProfile from "./pages/TeacherProfile";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
+            <TeacherProfile />
+          </Route>
+          <Route exact path="/teachers/createquiz">
             <CreateQuiz />
           </Route>
           <Route exact path='/teachers/signup'>
