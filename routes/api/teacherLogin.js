@@ -10,7 +10,7 @@ router.post("/signup", function (req, res) {
     db.Teacher.create({
         email: req.body.email,
         password: req.body.password,
-        school: req.body.password,
+        school: req.body.school,
         name: req.body.name,
         subject: req.body.subject
     })
