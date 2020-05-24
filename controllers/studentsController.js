@@ -2,9 +2,11 @@ const db = require("../models");
 
 // Defining methods for the studentsController
 module.exports = {
-    findByEmail: function(req, res) {
+    getStudentsByTeacher: function(req, res) {
         db.Student
-            .find(req.body.email)
+            .find({
+                teachers: req._id
+            })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
