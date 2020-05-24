@@ -12,5 +12,9 @@ export default {
   // Creating a quiz
   createQuiz: function(quizData) {
     return axios.post("/api/quizzes", quizData);
+  },
+  // Get student data
+  getStudentData: function() {
+    return axios.get("/api/student-login/user_data");
   }
 };

@@ -8,6 +8,8 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import SignUpForm from './components/SignUpForm';
 import StudentLogin from "./components/StudentLogin";
+import TestMember from "./pages/TestMember";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
           <Route exact path='/students/login'>
             <StudentLogin />
           </Route>
+          <PrivateRoute path="/test-member">
+            <TestMember />
+          </PrivateRoute>
         </Switch>
         <Footer/>
       </div>
