@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer>
       <div className="uk-flex uk-flex-column">
-        <div className="uk-margin-small-bottom">
+        <div className="uk-margin-small-bottom uk-margin-small-top">
           Developed by
         </div>
         <div className="uk-flex uk-flex-row uk-flex-center">

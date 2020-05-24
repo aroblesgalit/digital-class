@@ -1,0 +1,16 @@
+.quiz-form-container {
+  max-width: 70%;
+  margin: 0 3rem;
+}
+
+.my-button, .uk-button-default:focus {
+  background-color: #7cebad;
+  border-color: transparent;
+}
+
+@media screen and (max-width: 840px) {
+  .quiz-form-container {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+}

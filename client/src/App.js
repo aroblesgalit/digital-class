@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 // import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
+import QuizForm from './components/QuizForm';
 import SignUpForm from './components/SignUpForm';
 import StudentLogin from "./components/StudentLogin";
 import TestMember from "./pages/TestMember";
@@ -18,7 +19,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            {/* <Search/> */}
+            <QuizForm/>
           </Route>
           <Route exact path='/teachers/signup'>
             <SignUpForm />
