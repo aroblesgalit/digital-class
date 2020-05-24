@@ -1,0 +1,16 @@
+.left-col-container {
+  width: 250px;
+}
+
+.profile-picture {
+  max-width: 200px;
+}
+
+@media screen and (max-width: 640px) {
+  .left-col-container {
+    width: 100%;
+  }
+  .profile-picture {
+    max-width: 150px;
+  }
+}
