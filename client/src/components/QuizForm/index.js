@@ -5,6 +5,7 @@ import './style.css';
 function QuizForm() {
   const [newQuizState, setNewQuizState] = useState({
     title: "",
+    teacher: "",
     timeLimitMin: 0,
     timeLimitSec: 0,
     questions: [
@@ -99,10 +100,14 @@ function QuizForm() {
   const handleSubmitClick = (event) => {
     event.preventDefault();
     API.getTeacher().then(res => {
-      console.log(res.data);
-    })
-    // API.createQuiz(newQuizState);
-    // console.log("submitted");
+      setNewQuizState({
+        ...newQuizState, teacher: res.data.id
+      })
+    }).then(() => {
+      API.createQuiz(newQuizState);
+      console.log("submitted");
+    });
+  
   }
 
   return (

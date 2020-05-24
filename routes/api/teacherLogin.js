@@ -10,7 +10,7 @@ router.post("/signup", function (req, res) {
     db.Teacher.create({
         email: req.body.email,
         password: req.body.password,
-        school: req.body.password,
+        school: req.body.school,
         name: req.body.name,
         subject: req.body.subject
     })
@@ -39,7 +39,7 @@ router.get("/user_data", function (req, res) {
         // Sending back a password, even a hashed password, isn't a good idea
         res.json({
             email: req.user.email,
-            id: req.user.id,
+            id: req.user._id,
             name: req.user.name,
             school: req.user.school,
             subject: req.user.subject
