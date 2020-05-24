@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const quizSchema = newSchema({
+const quizSchema = new Schema({
     title: { type: String, required: true},
-    school: { type: String, required: true},
-    subject: { type: String, required: true},
-    timeLimit: { type: Number, required: true},
+    timeLimitMin: { type: Number, required: true},
+    timeLimitSec: { type: Number, required: true},
     questions: [
 
         {
-            question: "",
-            choices: ["", "", "", ""],
-            answer: ""
+            id: { type: Number },
+            question: { type: String },
+            choices: { type: Array },
+            answer: { type: Number }
 
         }
     ],
@@ -21,10 +21,10 @@ const quizSchema = newSchema({
             ref: "Teacher"
         }
     ],
-    result: [
+    results: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Results"
+            ref: "Result"
         }
     ]
 })
