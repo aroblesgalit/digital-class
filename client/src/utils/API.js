@@ -16,5 +16,9 @@ export default {
   // Get teacher data
   getTeacher: function() {
     return axios.get("/api/teacher-login/user_data");
+  },
+  // Get student data
+  getStudentData: function() {
+    return axios.get("/api/student-login/user_data");
   }
 };
