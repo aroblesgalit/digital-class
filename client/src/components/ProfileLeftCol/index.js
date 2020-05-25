@@ -4,7 +4,7 @@ import './style.css';
 function ProfileLeftCol(props) {
   return (
 
-    <div className="left-col-container uk-flex uk-flex-column uk-margin uk-margin-left" >
+    <div className="left-col-container uk-align-left uk-flex uk-flex-column uk-margin uk-margin-top uk-margin-left" >
       <div className="uk-text-large">
         {props.name}
       </div>

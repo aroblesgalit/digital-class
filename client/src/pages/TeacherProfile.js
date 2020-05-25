@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileLeftCol from '../components/ProfileLeftCol';
+import TeacherProfileContent from '../components/TeacherProfileContent';
 
 const user = {
   name: "Ryan Gautier",
@@ -11,7 +12,10 @@ const user = {
 
 function TeacherProfile() {
  return(
+   <div>
      <ProfileLeftCol {...user}/>
+     <TeacherProfileContent />
+    </div>
  );
 }
 

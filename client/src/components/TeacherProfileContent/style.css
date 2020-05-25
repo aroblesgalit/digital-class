@@ -1,0 +1,11 @@
+.content {
+  padding-top: 65px;
+}
+
+.uk-tab>.uk-active>a {
+  border-color: #7cedab;
+}
+
+.uk-tab>*>a {
+  border-bottom: 3px solid transparent;
+}
