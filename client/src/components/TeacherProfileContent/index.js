@@ -6,7 +6,7 @@ function TeacherProfileContent() {
 
     <div className="content">
       <ul uk-tab="true">
-        <li class="uk-active"><a href="">Wobba</a></li>
+        <li className="uk-active"><a href="">Wobba</a></li>
         <li><a href="">HEllo</a></li>
         <li><a href="">fdfdf</a></li>
         <li><a href="">sss</a></li>
