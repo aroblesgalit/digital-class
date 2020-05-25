@@ -30,9 +30,13 @@ function StudentLogin() {
 
     return (
         <div className='loginWrapper'>
-            <h3>Student Login:</h3>
+            <h3>Login:</h3>
             <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
                 <div className='uk-margin'>
+                <select className='uk-form-width-xsmall'>
+                                <option value='Teacher'>Teacher Login</option>
+                                <option value='Student'>Student Login</option>
+                            </select>
                     <label className='uk-form-label uk-text'>Email:</label>
                     <div className='uk-form-controls'>
                         <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='student@email.com' ref={emailRef} />
