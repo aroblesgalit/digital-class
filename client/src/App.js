@@ -8,6 +8,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import SignUpForm from './components/SignUpForm';
 import StudentLogin from "./components/StudentLogin";
+import TeacherLogin from "./components/TeacherLogin";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path='/students/login'>
             <StudentLogin />
+          </Route>
+          <Route exact path='/teachers/login'>
+            <TeacherLogin />
           </Route>
         </Switch>
         <Footer/>
