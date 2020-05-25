@@ -1,16 +1,19 @@
 import React from 'react';
 import './style.css';
+import StudentList from '../StudentList';
 
 function TeacherProfileContent() {
+
+  
   return (
 
     <div className="content">
       <ul uk-tab="true">
-        <li className="uk-active"><a href="">Wobba</a></li>
-        <li><a href="">HEllo</a></li>
-        <li><a href="">fdfdf</a></li>
-        <li><a href="">sss</a></li>
+        <li className="uk-active"><a href="">Students</a></li>
+        <li><a href="">Quizzes</a></li>
       </ul>
+
+      <StudentList />
     </div>
 
   )
