@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function studentList() {
+function StudentList() {
   return (
     <div className="uk-grid-small uk-child-width-expand@s uk-text-center" uk-grid="true">
       <div>
@@ -19,4 +19,4 @@ function studentList() {
   )
 }
 
-export default studentList;
+export default StudentList;
