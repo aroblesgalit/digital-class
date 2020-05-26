@@ -21,9 +21,16 @@ export default {
   getStudentData: function() {
     return axios.get("/api/student-login/user_data");
   },
-  // Get all students
-  getAllStudents: function() {
-    return axios.get("/api/students");
+  // Get all students under the authenticated teacher
+  getStudentsByTeacher: function(teacherId) {
+    return axios.get("/api/students", teacherId);
+  },
+  // Get all results for a quiz
+  getResultsByQuiz: function(quizId) {
+    return axios.get("/api/results", quizId);
+  },
+  getQuizByTeacher: function(teacherId) {
+    return axios.get("/api/quizzes", teacherId);
   }
   // Get quiz data
 };

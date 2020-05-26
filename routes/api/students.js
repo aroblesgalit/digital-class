@@ -6,7 +6,7 @@ router
     .route("/")
     .get(studentsController.findAll)
     .post(studentsController.create)
-    .get(studentsController.findByEmail);
+    .get(studentsController.getStudentsByTeacher);
 
 // Matches with "/api/students/:id"
 router
@@ -14,5 +14,5 @@ router
     .get(studentsController.findById)
     .put(studentsController.update)
     .delete(studentsController.remove);
-
+    
 module.exports = router;
