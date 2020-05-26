@@ -1,6 +1,5 @@
 .content {
-  padding-top: 65px;
-  padding-right: 30px;
+  padding: 65px 30px 0 30px;
 }
 
 .uk-tab>.uk-active>a {

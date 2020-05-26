@@ -20,5 +20,10 @@ export default {
   // Get student data
   getStudentData: function() {
     return axios.get("/api/student-login/user_data");
+  },
+  // Get all students
+  getAllStudents: function() {
+    return axios.get("/api/students");
   }
+  // Get quiz data
 };

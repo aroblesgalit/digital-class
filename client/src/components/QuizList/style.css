@@ -1,0 +1,5 @@
+.my-button, .uk-button-default:focus {
+  background-color: #7cebad;
+  border-color: transparent;
+  width: unset !important;
+}
