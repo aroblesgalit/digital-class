@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import QuizForm from './components/QuizForm';
 import SignUpForm from './components/SignUpForm';
 // import LoginForm from "./components/LogInForm";
-import StudentLogin from "./components/StudentLogin";
+import Login from "./components/Login";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -25,8 +25,8 @@ function App() {
           <Route exact path='/teachers/signup'>
             <SignUpForm />
           </Route>
-          <Route exact path='/students/login'>
-            <StudentLogin/>
+          <Route exact path='/login'>
+            <Login/>
           </Route>
           <PrivateRoute path="/test-member">
             <TestMember />
