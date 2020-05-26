@@ -31,11 +31,6 @@ function StudentQuiz(props) {
     });
   }, []);
 
-  // useEffect(() => {
-  //   timer();
-  // }, [questionState.started]);
-
-  // console.log("newQuizState:  " + JSON.stringify(newQuizState))
 
   // get quiz by ID
   const getQuiz = () => {
