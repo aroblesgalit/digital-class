@@ -6,3 +6,7 @@
   background-color: #2a598f;
   color: #fefefe;
 }
+
+.choice {
+  max-width: 250px;
+}

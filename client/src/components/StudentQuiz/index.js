@@ -51,7 +51,7 @@ function StudentQuiz(props) {
         id: 2,
         body: "This is question 2",
         choices: [
-          "Choice 21", "Choice 22", "Choice 23", "Choice 24"
+          "Choice 21", "Choice 22", "Choice 23", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra pharetra ligula at vehicula. Integer accumsan sagittis diam ac scelerisque. Nunc nulla dolor, molestie non augue quis, tempus bibendum ante. Phasellus tincidunt, dui nec vehicula venenatis, turpis turpis vulputate felis, id elementum lorem dui id velit. Phasellus consequat ante vulputate suscipit imperdiet. Duis volutpat eget libero id aliquam",
         ],
         answer: 2
       },
@@ -160,7 +160,7 @@ function StudentQuiz(props) {
                     <div key={key+1}>
                       <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
                         <input type="radio" name="choice" onChange={() => handleRadio(key)} className="uk-radio uk-margin-right"></input>
-                        <div className="" id="choice1">{item}</div>
+                        <div className="choice">{item}</div>
                       </div>
                     </div>
                   )
