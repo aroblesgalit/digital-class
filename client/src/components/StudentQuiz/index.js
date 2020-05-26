@@ -179,7 +179,7 @@ function StudentQuiz(props) {
             }
             {questionState.currentQuestion < questionState.questions.length-1 ? 
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
-              <label className="uk-button uk-button-default my-button uk-margin-small-right" >Submit</label>
+              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" >Submit</label>
             }
 
           </div>
