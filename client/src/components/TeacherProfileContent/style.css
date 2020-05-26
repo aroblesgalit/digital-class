@@ -9,3 +9,18 @@
 .uk-tab>*>a {
   border-bottom: 3px solid transparent;
 }
+
+.uk-label {
+  background: #7cedab !important;
+  color: #333;
+}
+
+.uk-card-badge {
+  top: 20px;
+  right: 20px;
+}
+
+.uk-card-title {
+  font-size: 1.25rem;
+  line-height: 1;
+}

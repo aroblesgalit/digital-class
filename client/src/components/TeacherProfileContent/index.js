@@ -25,16 +25,80 @@ useEffect(() => {
 
   // need to update to get by teacher id
   const getStudents = () => {
-    API.getAllStudents().then(res => {
-      setTeacherProfileState({
-        ...teacherProfileState, students: res.data
-      })
-    });
+    // API.getTeacher().then(res => {console.log(res)});
+    // API.getAllStudents().then(res => {
+    //   setTeacherProfileState({
+    //     ...teacherProfileState, students: res.data
+    //   })
+    // });
+    const students = [
+      {
+        id: 1,
+        name: "Cynthia Dominguez",
+        email: "email@email.com"
+      },
+      {
+        id: 2,
+        name: "Alvin Galit",
+        email: "email@email.com"
+      },
+      {
+        id: 3,
+        name: "Ryan Gautier",
+        email: "email@email.com"
+      },
+      {
+        id: 4,
+        name: "Jordan Roenitz",
+        email: "email@email.com"
+      },
+      {
+        id: 5,
+        name: "Michale Cassarro",
+        email: "email@email.com"
+      },
+      {
+        id: 6,
+        name: "Another Student",
+        email: "email@email.com"
+      },
+      {
+        id: 7,
+        name: "Ryan A",
+        email: "email@email.com"
+      }
+    ];
+    setTeacherProfileState({
+          ...teacherProfileState, students: students
+        })
   }
 
   // need to update to get by teacher id
   const getQuizzes = () => {
-    const quizzes =[];
+    const quizzes =[
+      {
+        id: 1,
+        title: "Unit 01 Quiz 1",
+        questions: [{key: 1}, {key: 2},{key: 3},{key: 4},{key: 5},{key: 6},{key: 7}],
+        results: [{key: 1}]
+      },
+      {
+        id: 2,
+        title: "Unit 01 Quiz 2",
+        questions: [{key: 1}, {key: 2},{key: 3},{key: 4},{key: 5}],
+        results: [{key: 1}]
+      },
+      {
+        id: 3,
+        title: "Unit 02 Quiz 1",
+        questions: [{key: 1}, {key: 2},{key: 3},{key: 4},{key: 5},{key: 6}]
+      },
+      {
+        id: 4,
+        title: "Unit 03 Quiz 1",
+        questions: [{key: 1}, {key: 2},{key: 3},{key: 4},{key: 5},{key: 6},{key: 7}]
+      },
+    ];
     return quizzes;
   }
 

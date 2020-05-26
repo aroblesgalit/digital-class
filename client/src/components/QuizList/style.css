@@ -3,3 +3,13 @@
   border-color: transparent;
   width: unset !important;
 }
+
+.uk-link, a {
+  color: #555;
+  text-decoration: none;
+}
+
+.uk-link, a:hover {
+  color: #111;
+  text-decoration: none;
+}
