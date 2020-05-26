@@ -78,20 +78,27 @@ function StudentQuiz(props) {
           "Choice 51", "Choice 52", "Choice 53", "Choice 54"
         ],
         answer: 0
+      },
+      {
+        id: 6,
+        body: "This is question 6",
+        choices: [
+          "Choice 61", "Choice 62", "Choice 63", "Choice 64"
+        ],
+        answer: 0
       }
     ]
   }
 
 
-  // takes question id and answer choice (1-4) as input, and updates the 
+  // takes answer choice (0-3) as input, and updates the 
   // state to reflect the index of the correct answer
   const handleRadio = (c) => {
-    // const newQuestions = newQuizState.questions;
-    // newQuestions[id - 1].answer = c - 1;
-    // setNewQuizState({
-    //   ...newQuizState, questions: newQuestions
-    return c;
-    // })
+    let newQuestions = questionState.questions;
+    newQuestions[questionState.currentQuestion].stuAnswer = c;
+    setQuestionState({
+      ...questionState, questions: newQuestions
+    });
   }
 
   const preventFormSubmit = (event) => {
@@ -119,18 +126,28 @@ function StudentQuiz(props) {
   //   }, 1000)
   // }
 
-  // const handleSubmitClick = (event) => {
-  //   event.preventDefault();
-  //   API.getTeacher().then(res => {
-  //     setNewQuizState({
-  //       ...newQuizState, teacher: res.data.id
-  //     })
-  //   }).then(() => {
-  //     API.createQuiz(newQuizState);
-  //     console.log("submitted");
-  //   });
 
-  // }
+  const gradeQuiz = () => {
+    let scoreArr = [];
+    questionState.questions.forEach(item => {
+      if (item.stuAnswer === item.answer) {
+        scoreArr.push(1);
+      }
+      else {
+        scoreArr.push(0);
+      }
+    })
+    let sum = scoreArr.reduce(function(a, b){
+      return a + b;
+    }, 0);
+    let score = (sum/questionState.questions.length)*100;
+    console.log(score.toFixed(2));
+}
+
+  const handleSubmitClick = (event) => {
+    event.preventDefault();
+    gradeQuiz();
+  }
 
   return (
     <div>
@@ -159,8 +176,8 @@ function StudentQuiz(props) {
                   return (
                     <div key={key+1}>
                       <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
-                        <input type="radio" name="choice" onChange={() => handleRadio(key)} className="uk-radio uk-margin-right"></input>
-                        <div className="choice">{item}</div>
+                        <input type="radio" checked={(key===questionState.questions[questionState.currentQuestion].stuAnswer)} name={"choice"+questionState.currentQuestion} onChange={() => handleRadio(key)} className="uk-radio uk-margin-right radio-choice"></input>
+                        <div>{item}</div>
                       </div>
                     </div>
                   )
@@ -179,7 +196,7 @@ function StudentQuiz(props) {
             }
             {questionState.currentQuestion < questionState.questions.length-1 ? 
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
-              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" >Submit</label>
+              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Submit</label>
             }
 
           </div>

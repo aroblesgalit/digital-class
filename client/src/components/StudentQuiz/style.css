@@ -7,6 +7,6 @@
   color: #fefefe;
 }
 
-.choice {
-  max-width: 250px;
+.radio-choice {
+  min-width: 16px;
 }
