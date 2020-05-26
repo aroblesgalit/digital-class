@@ -2,6 +2,14 @@ const db = require("../models");
 
 // Defining methods for the resultsController
 module.exports = {
+    getResultsByQuiz: function(req, res) {
+        db.Result
+            .find({
+                quiz: req._id
+            })
+            .then(dbModels => res.json(dbModels))
+            .catch(err => res.status(422).json(err));
+    },
     findAll: function(req, res) {
         db.Result
             .find(req.query)

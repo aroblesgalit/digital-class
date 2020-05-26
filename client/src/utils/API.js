@@ -12,5 +12,24 @@ export default {
   // Creating a quiz
   createQuiz: function(quizData) {
     return axios.post("/api/quizzes", quizData);
+  },
+  // Get teacher data
+  getTeacher: function() {
+    return axios.get("/api/teacher-login/user_data");
+  },
+  // Get student data
+  getStudentData: function() {
+    return axios.get("/api/student-login/user_data");
+  },
+  // Get all students under the authenticated teacher
+  getStudentsByTeacher: function(teacherId) {
+    return axios.get("/api/students", teacherId);
+  },
+  // Get all results for a quiz
+  getResultsByQuiz: function(quizId) {
+    return axios.get("/api/results", quizId);
+  },
+  getQuizByTeacher: function(teacherId) {
+    return axios.get("/api/quizzes", teacherId);
   }
 };

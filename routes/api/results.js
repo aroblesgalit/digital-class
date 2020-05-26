@@ -5,7 +5,8 @@ const resultsController = require("../../controllers/resultsController");
 router
     .route("/")
     .get(resultsController.findAll)
-    .post(resultsController.create);
+    .post(resultsController.create)
+    .get(resultsController.getResultsByQuiz);
 
 // Match with "/api/results/:id"
 router 
