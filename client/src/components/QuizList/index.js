@@ -16,7 +16,7 @@ function QuizList(props) {
             </div>
             <div className="uk-margin-top">
               {item.results ? 
-              <Link to="/">
+              <Link to="/results/321">
                 View Results 
               </Link>
               : ""}

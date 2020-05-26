@@ -12,6 +12,7 @@ import StudentLogin from "./components/StudentLogin";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
 import TeacherProfile from "./pages/TeacherProfile";
+import QuizResults from "./pages/QuizResults";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path='/students/login'>
             <StudentLogin />
+          </Route>
+          <Route path="/results/:id">
+            <QuizResults />
           </Route>
           <PrivateRoute path="/test-member">
             <TestMember />
