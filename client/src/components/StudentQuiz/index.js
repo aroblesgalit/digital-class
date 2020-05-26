@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 // import API from '../../utils/API'
 import './style.css';
 
+
 function StudentQuiz(props) {
   const [questionState, setQuestionState] = useState({
-    timeLimit: 0,
+    started: "",
+    timeLimitMin: 1,
+    timeLimitSec: 0,
     questions: [{
-        id: 1,
-        body: "",
-        choices: [],
-        answer: 0,
-        stuAnswer: ""
-      }],
-      currentQuestion: 0
+      id: 1,
+      body: "",
+      choices: [],
+      answer: 0,
+      stuAnswer: ""
+    }],
+    currentQuestion: 0
   });
 
   // load quiz into state on page load
@@ -24,9 +27,13 @@ function StudentQuiz(props) {
       item.stuAnswer = "";
     });
     setQuestionState({
-      ...questionState, questions: newQuestions
+      ...questionState, questions: newQuestions, timeLimitMin: myquiz.timeLimit, started: false
     });
   }, []);
+
+  // useEffect(() => {
+  //   timer();
+  // }, [questionState.started]);
 
   // console.log("newQuizState:  " + JSON.stringify(newQuizState))
 
@@ -118,10 +125,25 @@ function StudentQuiz(props) {
   }
 
   // const timer = () => {
-  //   let interval = setInterval(() => {
+  //   let interval = setTimeout(() => {
   //     let min = questionState.timeLimitmMin;
+  //     let sec = questionState.timeLimitSec;
+  //     if (sec === 0 && min !== 0) {
+  //       min--;
+  //       sec = 59;
+  //     }
+  //     else if (sec === 0 && min === 0) {
+  //       clearTimeout(interval);
+  //       alert("end");
+  //     }
+  //     else {
+  //       sec--;
+  //     }
   //     setQuestionState({
-  //       ...questionState, timeLimit: questionState.timeLimit -1;
+  //       ...questionState, timeLimitSec: sec
+  //     });
+  //     setQuestionState({
+  //       ...questionState, timeLimitMin: min
   //     });
   //   }, 1000)
   // }
@@ -137,21 +159,29 @@ function StudentQuiz(props) {
         scoreArr.push(0);
       }
     })
-    let sum = scoreArr.reduce(function(a, b){
+    let sum = scoreArr.reduce(function (a, b) {
       return a + b;
     }, 0);
-    let score = (sum/questionState.questions.length)*100;
+    let score = (sum / questionState.questions.length) * 100;
     console.log(score.toFixed(2));
-}
+  }
 
   const handleSubmitClick = (event) => {
     event.preventDefault();
     gradeQuiz();
   }
 
+  const handleStart = () => {
+    setQuestionState({
+      ...questionState, started: true
+    });
+    // timer();
+  }
+
+
   return (
     <div>
-      <div className="quiz-form-container">
+      {questionState.started ? <div className="quiz-form-container">
         <h4 className="uk-margin-large-bottom uk-margin-large-top">{quiz.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
@@ -160,41 +190,41 @@ function StudentQuiz(props) {
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
               <div>
-                Time Remaining: {quiz.timeLimit}
+                Time Remaining: {questionState.timeLimitMin}:{questionState.timeLimitSec}
               </div>
             </div>
           </div>
           <hr className="uk-divider-icon" />
 
-              <div className="uk-margin-large-bottom">
-                <div className="uk-width-auto uk-margin-bottom">
-                  <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
-                  <div className="" >{questionState.questions[questionState.currentQuestion].body}</div>
+          <div className="uk-margin-large-bottom">
+            <div className="uk-width-auto uk-margin-bottom">
+              <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
+              <div className="" >{questionState.questions[questionState.currentQuestion].body}</div>
+            </div>
+            {questionState.questions[questionState.currentQuestion].choices.map(item => {
+              let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
+              return (
+                <div key={key + 1}>
+                  <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
+                    <input type="radio" checked={(key === questionState.questions[questionState.currentQuestion].stuAnswer)} name={"choice" + questionState.currentQuestion} onChange={() => handleRadio(key)} className="uk-radio uk-margin-right radio-choice"></input>
+                    <div>{item}</div>
+                  </div>
                 </div>
-                {questionState.questions[questionState.currentQuestion].choices.map(item => {
-                  let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
-                  return (
-                    <div key={key+1}>
-                      <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
-                        <input type="radio" checked={(key===questionState.questions[questionState.currentQuestion].stuAnswer)} name={"choice"+questionState.currentQuestion} onChange={() => handleRadio(key)} className="uk-radio uk-margin-right radio-choice"></input>
-                        <div>{item}</div>
-                      </div>
-                    </div>
-                  )
-                })}
+              )
+            })}
 
-                
-              </div>
-            
-          
+
+          </div>
+
+
 
 
           <div className="uk-margin-top uk-flex uk-flex-right">
-          {questionState.currentQuestion > 0 ? 
+            {questionState.currentQuestion > 0 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handlePrevQuestion}>Previous</label> :
               <div></div>
             }
-            {questionState.currentQuestion < questionState.questions.length-1 ? 
+            {questionState.currentQuestion < questionState.questions.length - 1 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
               <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Submit</label>
             }
@@ -206,7 +236,14 @@ function StudentQuiz(props) {
 
 
 
-      </div>
+      </div> : <div className="start-screen">
+        This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimitMin} minutes to complete this quiz.
+        <br/><br/>
+        The timer will begin when you press the start button.
+        <br/>
+        <label className="uk-button uk-button-default my-button uk-margin-top" onClick={() => handleStart()}>Start</label>
+        </div>}
+      
     </div>
   )
 }

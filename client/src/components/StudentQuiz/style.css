@@ -10,3 +10,9 @@
 .radio-choice {
   min-width: 16px;
 }
+
+.start-screen {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
