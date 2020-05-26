@@ -7,7 +7,7 @@ module.exports = {
             .find({
                 teachers: req._id
             })
-            .then(dbModel => res.json(dbModel))
+            .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
     },
     findAll: function(req, res) {
