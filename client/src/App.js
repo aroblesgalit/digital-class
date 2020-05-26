@@ -8,7 +8,8 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import CreateQuiz from './pages/CreateQuiz';
 import SignUpForm from './components/SignUpForm';
-import StudentLogin from "./components/StudentLogin";
+// import LoginForm from "./components/LogInForm";
+import Login from "./components/Login";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
 import TeacherProfile from "./pages/TeacherProfile";
@@ -29,8 +30,8 @@ function App() {
           <Route exact path='/teachers/signup'>
             <SignUpForm />
           </Route>
-          <Route exact path='/students/login'>
-            <StudentLogin />
+          <Route exact path='/login'>
+            <Login/>
           </Route>
           <Route path="/results/:id">
             <QuizResults />
