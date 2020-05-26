@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import './style.css';
 import API from "../../utils/API";
+import axios from "axios";
+
 
 function SignUpForm() {
 
@@ -10,6 +12,8 @@ function SignUpForm() {
     const nameRef = useRef();
     const subjectRef = useRef();
     const schoolRef = useRef();
+    const schoolQueryRef = useRef();
+    const stateRef = useRef();
 
     // Event handler for when the signup button is clicked
     function handleSignup(e) {
@@ -31,6 +35,15 @@ function SignUpForm() {
             .catch(function (err) {
                 console.log(err);
             });
+    }
+
+    function handleSearch(e) {
+        e.preventDefault();
+
+        const schoolQuery = schoolQueryRef.current.value;
+        const state = stateRef.current.value;
+
+        axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&appID=1a78edd4&appKey=06865bbcc0e16fc48d0c5a5192fce09c`)
     }
 
     return (
@@ -66,13 +79,13 @@ function SignUpForm() {
                     <div>
                         <label className='uk-form-label uk-text'>Search For School:</label>
                         <div className='uk-form-controls'>
-                            <input className='uk-input uk-form-width-medium' id='School' type='text' />
+                            <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
                         </div>
                     </div>
                     <div className='stateSel'>
                         <label className='uk-form-label uk-text'>State:</label>
                         <div className='uk-form-controls'>
-                            <select className='uk-form-width-xsmall'>
+                            <select className='uk-form-width-xsmall' ref={stateRef}>
                                 <option value='TX'>TX</option>
                                 <option value='CA'>CA</option>
                             </select>
