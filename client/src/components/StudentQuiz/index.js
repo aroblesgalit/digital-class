@@ -5,25 +5,27 @@ import './style.css';
 function StudentQuiz(props) {
   const [questionState, setQuestionState] = useState({
     timeLimit: 0,
-    question: {
+    questions: [{
         id: 1,
         body: "",
         choices: [],
         answer: 0,
         stuAnswer: ""
-      }
+      }],
+      currentQuestion: 0
   });
 
-  // load question 1 on page load
+  // load quiz into state on page load
   useEffect(() => {
     const myquiz = getQuiz();
-    let newQuestion = myquiz.questions[0];
-    newQuestion.stuAnswer = "";
-    console.log(newQuestion);
-    setQuestionState({
-      ...questionState, question: newQuestion
+    let newQuestions = myquiz.questions;
+
+    newQuestions.map(item => {
+      item.stuAnswer = "";
     });
-    console.log(questionState.question.choices);
+    setQuestionState({
+      ...questionState, questions: newQuestions
+    });
   }, []);
 
   // console.log("newQuizState:  " + JSON.stringify(newQuizState))
@@ -32,13 +34,14 @@ function StudentQuiz(props) {
   const getQuiz = () => {
     return quiz;
   }
+
   const quiz = {
     title: "Quiz 01",
     timeLimit: 10,
     questions: [
       {
         id: 1,
-        body: "This is question 1",
+        body: "This is question 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra pharetra ligula at vehicula. Integer accumsan sagittis diam ac scelerisque. Nunc nulla dolor, molestie non augue quis, tempus bibendum ante. Phasellus tincidunt, dui nec vehicula venenatis, turpis turpis vulputate felis, id elementum lorem dui id velit. Phasellus consequat ante vulputate suscipit imperdiet. Duis volutpat eget libero id aliquam? ",
         choices: [
           "Choice 11", "Choice 12", "Choice 13", "Choice 14"
         ],
@@ -95,6 +98,21 @@ function StudentQuiz(props) {
     event.preventDefault();
   }
 
+  const handleNextQuestion = () => {
+    setQuestionState({
+      ...questionState, currentQuestion: questionState.currentQuestion + 1
+    });
+  }
+
+  // const timer = () => {
+  //   let interval = setInterval(() => {
+  //     let min = questionState.timeLimitmMin;
+  //     setQuestionState({
+  //       ...questionState, timeLimit: questionState.timeLimit -1;
+  //     });
+  //   }, 1000)
+  // }
+
   // const handleSubmitClick = (event) => {
   //   event.preventDefault();
   //   API.getTeacher().then(res => {
@@ -111,15 +129,15 @@ function StudentQuiz(props) {
   return (
     <div>
       <div className="quiz-form-container">
-        <h4 className="uk-margin-large-bottom uk-margin-large-top">{props.title}</h4>
+        <h4 className="uk-margin-large-bottom uk-margin-large-top">{quiz.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
               {quiz.title}
             </div>
-            <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
-              <div className="uk-width-1-2">
-                {quiz.timeLimit}
+            <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
+              <div>
+                Time Remaining: {quiz.timeLimit}
               </div>
             </div>
           </div>
@@ -127,14 +145,14 @@ function StudentQuiz(props) {
 
               <div className="uk-margin-large-bottom">
                 <div className="uk-width-auto uk-margin-bottom">
-                  <div>Question {questionState.question.id}</div>
-                  <div className="" >{questionState.question.body}</div>
+                  <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
+                  <div className="" >{questionState.questions[questionState.currentQuestion].body}</div>
                 </div>
-                {questionState.question.choices.map(item => {
-                  let key = questionState.question.choices.indexOf(item);
+                {questionState.questions[questionState.currentQuestion].choices.map(item => {
+                  let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
                   return (
                     <div key={key+1}>
-                      <div className="uk-flex uk-flex-row uk-flex-middle">
+                      <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
                         <input type="radio" name="choice" onChange={() => handleRadio(key)} className="uk-radio uk-margin-right"></input>
                         <div className="" id="choice1">{item}</div>
                       </div>
@@ -149,7 +167,7 @@ function StudentQuiz(props) {
 
 
           <div className="uk-margin-top uk-flex uk-flex-right">
-            <label className="uk-button uk-button-default my-button uk-margin-small-right">Next Question</label>
+            <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next Question</label>
           </div>
 
 
