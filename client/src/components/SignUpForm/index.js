@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import axios from "axios";
+require("dotenv").config();
 
 
 function SignUpForm() {
@@ -14,6 +15,8 @@ function SignUpForm() {
     const schoolRef = useRef();
     const schoolQueryRef = useRef();
     const stateRef = useRef();
+
+    const [schools, setSchools] = useState([]);
 
     // Event handler for when the signup button is clicked
     function handleSignup(e) {
@@ -40,10 +43,20 @@ function SignUpForm() {
     function handleSearch(e) {
         e.preventDefault();
 
+        const appId = process.env.REACT_APP_ID;
+        const appKey = process.env.REACT_APP_KEY;
+
         const schoolQuery = schoolQueryRef.current.value;
         const state = stateRef.current.value;
 
-        axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&appID=1a78edd4&appKey=06865bbcc0e16fc48d0c5a5192fce09c`)
+        axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
+            .then(res => {
+                console.log(res.data.schoolMatches);
+                setSchools(res.data.schoolMatches);
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
@@ -91,13 +104,19 @@ function SignUpForm() {
                             </select>
                         </div>
                     </div>
+                    <button className='uk-button' onClick={handleSearch}>Search for school</button>
                 </div>
                 <div className="uk-margin">
                     <label className="uk-form-label">Select</label>
                     <div className="uk-form-controls">
                         <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
-                            <option value="Bowie High School">Bowie High School</option>
-                            <option value="Westlake High School">Westlake High School</option>
+                            {   
+                                schools.length >= 1 ? (
+                                    schools.map(school =>
+                                        <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
+                                    )
+                                ) : <option>--Select a School--</option>
+                            } 
                         </select>
                     </div>
                 </div>
