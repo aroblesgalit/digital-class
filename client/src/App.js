@@ -12,6 +12,7 @@ import SignUpForm from './components/SignUpForm';
 import Login from "./components/Login";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
+import TakeQuiz from "./pages/TakeQuiz";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path='/login'>
             <Login/>
+          </Route>
+          <Route path='/students/quiz/:id'>
+            <TakeQuiz />
           </Route>
           <PrivateRoute path="/test-member">
             <TestMember />
