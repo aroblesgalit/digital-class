@@ -35,7 +35,7 @@ function SignUpForm() {
 
     return (
         <div className='signupWrapper'>
-            <h3>Teacher SignUp:</h3>
+            <h3>SignUp:</h3>
             <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
                 <div className='uk-margin'>
                     <label className='uk-form-label uk-text'>Email:</label>
