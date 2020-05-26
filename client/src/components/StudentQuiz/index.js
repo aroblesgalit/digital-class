@@ -104,6 +104,12 @@ function StudentQuiz(props) {
     });
   }
 
+  const handlePrevQuestion = () => {
+    setQuestionState({
+      ...questionState, currentQuestion: questionState.currentQuestion - 1
+    });
+  }
+
   // const timer = () => {
   //   let interval = setInterval(() => {
   //     let min = questionState.timeLimitmMin;
@@ -167,8 +173,12 @@ function StudentQuiz(props) {
 
 
           <div className="uk-margin-top uk-flex uk-flex-right">
+          {questionState.currentQuestion > 0 ? 
+              <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handlePrevQuestion}>Previous</label> :
+              <div></div>
+            }
             {questionState.currentQuestion < questionState.questions.length-1 ? 
-              <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next Question</label> :
+              <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
               <label className="uk-button uk-button-default my-button uk-margin-small-right" >Submit</label>
             }
 
