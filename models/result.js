@@ -13,6 +13,12 @@ const resultSchema = new Schema({
     student: {
         type: Schema.Types.ObjectId,
         ref: "Student"
+    },
+    feedback: {
+        type: String
+    },
+    score: {
+        type: Number
     }
 
 });
