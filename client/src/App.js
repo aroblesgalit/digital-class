@@ -6,9 +6,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 // import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
+import QuizForm from './components/QuizForm';
 import SignUpForm from './components/SignUpForm';
 // import LoginForm from "./components/LogInForm";
 import StudentLogin from "./components/StudentLogin";
+import TestMember from "./pages/TestMember";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -17,7 +20,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            {/* <Search/> */}
+            <QuizForm/>
           </Route>
           <Route exact path='/teachers/signup'>
             <SignUpForm />
@@ -25,6 +28,9 @@ function App() {
           <Route exact path='/students/login'>
             <StudentLogin/>
           </Route>
+          <PrivateRoute path="/test-member">
+            <TestMember />
+          </PrivateRoute>
         </Switch>
         <Footer/>
       </div>

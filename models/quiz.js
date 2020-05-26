@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const quizSchema = new Schema({
-    title: { type: String, required: true},
-    timeLimitMin: { type: Number, required: true},
-    timeLimitSec: { type: Number, required: true},
+    title: { type: String, required: true },
+    timeLimitMin: { type: Number, required: true },
+    timeLimitSec: { type: Number, required: true },
     questions: [
 
         {
@@ -15,12 +15,10 @@ const quizSchema = new Schema({
 
         }
     ],
-    teacher: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Teacher"
-        }
-    ],
+    teacher: {
+        type: Schema.Types.ObjectId,
+        ref: "Teacher"
+    },
     results: [
         {
             type: Schema.Types.ObjectId,

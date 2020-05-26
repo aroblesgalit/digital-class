@@ -21,7 +21,7 @@ function StudentLogin() {
         })
             // Send user to profile page
             .then(function (res) {
-                window.location.replace("/");
+                window.location.replace("/test-member");
                 console.log(res);
                 console.log("Login worked!");
             })
