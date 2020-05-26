@@ -8,7 +8,7 @@ function StudentQuiz(props) {
     question: {
         id: 1,
         body: "",
-        choices: ["", "", "", ""],
+        choices: [],
         answer: 0,
         stuAnswer: ""
       }
@@ -131,10 +131,11 @@ function StudentQuiz(props) {
                   <div className="" >{questionState.question.body}</div>
                 </div>
                 {questionState.question.choices.map(item => {
+                  let key = questionState.question.choices.indexOf(item);
                   return (
-                    <div>Choice {questionState.question.choices.indexOf(item)}
+                    <div key={key+1}>
                       <div className="uk-flex uk-flex-row uk-flex-middle">
-                        <input type="radio" name="choice" onChange={() => handleRadio(questionState.question.choices.indexOf(item))} className="uk-radio uk-margin-right"></input>
+                        <input type="radio" name="choice" onChange={() => handleRadio(key)} className="uk-radio uk-margin-right"></input>
                         <div className="" id="choice1">{item}</div>
                       </div>
                     </div>
