@@ -7,8 +7,8 @@ import Nav from "./components/Nav";
 // import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
 import SignUpForm from './components/SignUpForm';
+// import LoginForm from "./components/LogInForm";
 import StudentLogin from "./components/StudentLogin";
-import TeacherLogin from "./components/TeacherLogin";
 
 function App() {
   return (
@@ -23,10 +23,7 @@ function App() {
             <SignUpForm />
           </Route>
           <Route exact path='/students/login'>
-            <StudentLogin />
-          </Route>
-          <Route exact path='/teachers/login'>
-            <TeacherLogin />
+            <StudentLogin/>
           </Route>
         </Switch>
         <Footer/>
