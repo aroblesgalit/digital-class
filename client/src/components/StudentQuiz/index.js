@@ -167,7 +167,11 @@ function StudentQuiz(props) {
 
 
           <div className="uk-margin-top uk-flex uk-flex-right">
-            <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next Question</label>
+            {questionState.currentQuestion < questionState.questions.length-1 ? 
+              <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next Question</label> :
+              <label className="uk-button uk-button-default my-button uk-margin-small-right" >Submit</label>
+            }
+
           </div>
 
 
