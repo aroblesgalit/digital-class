@@ -44,3 +44,4 @@ teacherSchema.methods.validatePassword = async function validatePassword(data) {
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
 module.exports = Teacher
+
