@@ -99,7 +99,12 @@ function QuizForm() {
 
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    API.createQuiz(newQuizState).then(res => console.log(res)).catch(err => console.log(err));
+    API.createQuiz(newQuizState)
+      .then(res => {
+        console.log(res);
+        window.location.replace("/teachers/profile");
+      })
+      .catch(err => console.log(err));
   }
 
   return (
