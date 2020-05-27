@@ -4,7 +4,7 @@ import StudentList from '../StudentList';
 import QuizList from '../QuizList';
 import API from '../../utils/API';
 
-function TeacherProfileContent() {
+function TeacherProfileContent(props) {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
     teacher: "",
@@ -13,21 +13,21 @@ function TeacherProfileContent() {
   })
 
   useEffect(() => {
-    getTeacher();
+    // getTeacher();
     getStudents();
-    // getQuizzes();
+    getQuizzes();
   }, []);
 
-  const getTeacher = () => {
-    API.getTeacher().
-    then(res => {
-      const teacherid = res.data.id;
-      setTeacherProfileState({
-        ...teacherProfileState, teacher: teacherid
-      })
-    })
+  // const getTeacher = () => {
+  //   API.getTeacher().
+  //   then(res => {
+  //     const teacherid = res.data.id;
+  //     setTeacherProfileState({
+  //       ...teacherProfileState, teacher: teacherid
+  //     })
+  //   })
 
-  }
+  // }
 
   const handleTabChange = (selected) => {
     setTeacherProfileState({
@@ -40,15 +40,15 @@ function TeacherProfileContent() {
   const getStudents = () => {
     // API.getTeacher()
     //   .then(res => 
-        console.log("teacher : " + teacherProfileState.teacher);
-        API.getStudentsByTeacher(teacherProfileState.teacher)
+        console.log("teacher : " + props.id);
+        API.getStudentsByTeacher(props.id)
         .then(res => {
           console.log(res);
           
           setTeacherProfileState({
             ...teacherProfileState, students: res.data
           })
-          console.log("teacher 2: " + teacherProfileState.teacher);
+          // console.log("teacher 2: " + teacherProfileState.teacher);
 
         })
   };
@@ -57,14 +57,15 @@ function TeacherProfileContent() {
   // need to update to get by teacher id
   const getQuizzes = () => {
     console.log("getting quizzes");
-    API.getTeacher()
-      .then(res => API.getQuizByTeacher(res.data.id)
+    // API.getTeacher()
+      // .then(res =>
+        API.getQuizByTeacher(props.id)
         .then(res => {
           console.log(res);
           setTeacherProfileState({
             ...teacherProfileState, quizzes: res.data
           })
-        }))
+        })
   };
 
 
