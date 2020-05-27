@@ -28,7 +28,7 @@ useEffect(() => {
     API.getTeacher()
     .then(res => API.getStudentsByTeacher(res.data.id)
     .then(res => { 
-      console.log(res.data);
+      console.log(res);
       setTeacherProfileState({
         ...teacherProfileState, students: res.data
       })
