@@ -14,6 +14,7 @@ import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
+import StudentProfile from './pages/StudentProfile'
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path='/teachers/profile'>
             <TeacherProfile />
+          </Route>
+          <Route exact path='/students/profile'>
+            <StudentProfile />
           </Route>
           <Route exact path='/login'>
             <Login/>
