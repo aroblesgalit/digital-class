@@ -5,7 +5,7 @@ module.exports = {
     getStudentsByTeacher: function(req, res) {
         db.Student
             .find({
-                teachers: req._id
+                teachers: req.user._id
             })
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));

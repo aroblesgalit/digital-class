@@ -6,12 +6,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 // import Jumbotron from "./components/Jumbotron";
 import Footer from "./components/Footer";
-import QuizForm from './components/QuizForm';
+import CreateQuiz from './pages/CreateQuiz';
 import SignUpForm from './components/SignUpForm';
 // import LoginForm from "./components/LogInForm";
 import Login from "./components/Login";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
+import TeacherProfile from "./pages/TeacherProfile";
+import QuizResults from "./pages/QuizResults";
 
 function App() {
   return (
@@ -20,13 +22,22 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <QuizForm/>
+            <SignUpForm />
+          </Route>
+          <Route exact path="/teachers/createquiz">
+            <CreateQuiz />
           </Route>
           <Route exact path='/signup'>
             <SignUpForm />
           </Route>
+          <Route exact path='/teachers/profile'>
+            <TeacherProfile />
+          </Route>
           <Route exact path='/login'>
             <Login/>
+          </Route>
+          <Route path="/results/:id">
+            <QuizResults />
           </Route>
           <PrivateRoute path="/test-member">
             <TestMember />
