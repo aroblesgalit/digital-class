@@ -11,7 +11,7 @@ export default {
   },
   // Sign student up
   signupStudent: function(studentData) {
-    return axios.post("api/student-login/signup", studentData);
+    return axios.post("/api/student-login/signup", studentData);
   },
   // Sign teacher up
   signupTeacher: function(teacherData) {
@@ -39,5 +39,8 @@ export default {
   },
   getQuizByTeacher: function(teacherId) {
     return axios.get("/api/quizzes", teacherId);
+  },
+  getQuizById: function(id) {
+    return axios.get("/api/quizzes" + id);
   }
 };
