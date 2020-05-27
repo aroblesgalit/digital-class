@@ -73,5 +73,13 @@ export default {
         })
         .catch(err => reject(err));
     })
+  },
+  // Get schools from search in db
+  getSchoolsFromDB: function () {
+    return axios.get("/api/schools");
+  },
+  // Add school search in db
+  addSchoolToDB: function (data) {
+    return axios.post("/api/schools", data);
   }
 };
