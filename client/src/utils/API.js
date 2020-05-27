@@ -2,59 +2,75 @@ import axios from "axios";
 
 export default {
   // Log student in
-  loginStudent: function(credentials) {
+  loginStudent: function (credentials) {
     return axios.post("/api/student-login/login", credentials);
   },
   // Teacher Log in
-  loginTeacher: function(credentials){
-    return axios.post("/api/teacher-login/login",credentials);
+  loginTeacher: function (credentials) {
+    return axios.post("/api/teacher-login/login", credentials);
   },
   // Sign student up
-  signupStudent: function(studentData) {
+  signupStudent: function (studentData) {
     return axios.post("/api/student-login/signup", studentData);
   },
   // Sign teacher up
-  signupTeacher: function(teacherData) {
+  signupTeacher: function (teacherData) {
     return axios.post("/api/teacher-login/signup", teacherData);
   },
   // Creating a quiz
-  createQuiz: function(quizData) {
+  createQuiz: function (quizData) {
     return axios.post("/api/quizzes", quizData);
   },
   // Get teacher data
-  getTeacher: function() {
+  getTeacher: function () {
     return axios.get("/api/teacher-login/user_data");
   },
   // Get student data
-  getStudentData: function() {
+  getStudentData: function () {
     return axios.get("/api/student-login/user_data");
   },
   // Get a teacher by id
-  getTeacherById: function(id) {
+  getTeacherById: function (id) {
     return axios.get("/api/teachers/" + id);
   },
   // Get all students under the authenticated teacher
-  getStudentsByTeacher: function() {
+  getStudentsByTeacher: function () {
     return axios.get("/api/teacher-login/students");
   },
   // Create a result
-  createResult: function(resultData) {
+  createResult: function (resultData) {
     return axios.post("/api/results", resultData);
   },
   // Get all results for a quiz
-  getResultsByQuiz: function(quizId) {
+  getResultsByQuiz: function (quizId) {
     return axios.get("/api/results", quizId);
   },
   // Get all quizzes by teacher's id
-  getQuizzesByTeacher: function() {
+  getQuizzesByTeacher: function () {
     return axios.get("/api/teacher-login/quizzes");
   },
   // Get a quiz by its id
-  getQuizById: function(id) {
+  getQuizById: function (id) {
     return axios.get("/api/quizzes" + id);
   },
   // Get all quizzes
-  getAllQuizzes: function() {
+  getAllQuizzes: function () {
     return axios.get("/api/quizzes")
+  },
+  // Search for schools
+  searchSchools: function (query, state) {
+    const appId = process.env.REACT_APP_ID;
+    const appKey = process.env.REACT_APP_KEY;
+
+    let queryUrl = `https://api.schooldigger.com/v1.2/autocomplete/schools?q=${query}&st=${state}&appID=${appId}&appKey=${appKey}`;
+    return new Promise((resolve, reject) => {
+      axios
+        .get(queryUrl)
+        .then(res => {
+          const schools = res.data.schoolMatches;
+          resolve(schools);
+        })
+        .catch(err => reject(err));
+    })
   }
 };
