@@ -5,6 +5,9 @@ const schoolSchema = new Schema({
     query: {
         type: String
     },
+    state: {
+        type: String
+    },
     results: {
         type: Array
     }

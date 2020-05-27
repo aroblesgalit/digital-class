@@ -83,7 +83,7 @@ function SignUpForm() {
     }
     
 
-    async function handleSearch(e) {
+    function handleSearch(e) {
         e.preventDefault();
         setSchools([]);
 
@@ -91,29 +91,27 @@ function SignUpForm() {
         const state = stateRef.current.value;
 
         for (let i = 0; i < schoolsDB.length; i++) {
-            if (schoolsDB[i].query === schoolQuery) {
+            if (schoolsDB[i].query === schoolQuery && schoolsDB[i].state === state) {
                 setSchools(schoolsDB[i].results);
-                console.log("For Loop: " + schoolsDB[i].results);
-                return;
+                console.log("Ran ForLoop");
             }
         }
 
         if (schools.length < 1) {
+            console.log("Ran third-party API");
             API.searchSchools(schoolQuery, state)
                 .then((res) => {
-                    // console.log("Searchschool result: " + res);
                     setSchools(res);
-                    // console.log("SearchSchools api after setgSchools: " + res);
                     API.addSchoolToDB({
                         query: schoolQuery,
-                        results: res
+                        state: state,
+                        results: res,
                     })
-                        // .then(() => console.log("School added to db: " + res))
+                        .then(() => console.log(schoolQuery + " added to school db"))
                         .catch(err => console.log(err));
                 })
                 .catch(err => console.log(err));
         }
-
     }
 
     function teacherSignup() {
