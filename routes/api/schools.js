@@ -7,4 +7,8 @@ router
     .get(schoolsController.findAll)
     .post(schoolsController.create);
 
+router
+    .route("/:query")
+    .get(schoolsController.findByQuery);
+
 module.exports = router;

@@ -85,5 +85,9 @@ export default {
   // Add school search in db
   addSchoolToDB: function (data) {
     return axios.post("/api/schools", data);
+  },
+  // Get school by query
+  getSchoolByQuery: function (query) {
+    return axios.get("/api/schools/" + query);
   }
 };
