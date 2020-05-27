@@ -22,13 +22,16 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <TeacherProfile />
+            <SignUpForm />
           </Route>
           <Route exact path="/teachers/createquiz">
             <CreateQuiz />
           </Route>
           <Route exact path='/teachers/signup'>
             <SignUpForm />
+          </Route>
+          <Route exact path='/teachers/profile'>
+            <TeacherProfile />
           </Route>
           <Route exact path='/login'>
             <Login/>
