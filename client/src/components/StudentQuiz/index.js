@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// import API from '../../utils/API'
+import { useParams } from 'react-router-dom';
 import './style.css';
+import API from '../../utils/API';
 
 
-function StudentQuiz(props) {
+function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
     started: "",
-    timeLimitMin: 1,
-    timeLimitSec: 0,
+    timeLimit: 0,
     questions: [{
       id: 1,
       body: "",
@@ -20,76 +20,22 @@ function StudentQuiz(props) {
 
   // load quiz into state on page load
   useEffect(() => {
-    const myquiz = getQuiz();
-    let newQuestions = myquiz.questions;
-
-    newQuestions.map(item => {
-      item.stuAnswer = "";
-    });
-    setQuestionState({
-      ...questionState, questions: newQuestions, timeLimitMin: myquiz.timeLimit, started: false
-    });
+    getQuiz().then(res => {
+      console.log(res);
+      res.data.questions.map(item => {
+        item.stuAnswer = "";
+      });
+      setQuestionState({
+        ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, started: false, title: res.data.title
+      });
+    })
   }, []);
 
-
+  const {id} = useParams();
   // get quiz by ID
-  const getQuiz = () => {
+  const getQuiz = async () => {
+    const quiz = await API.getQuizById(id);
     return quiz;
-  }
-
-  const quiz = {
-    title: "Quiz 01",
-    timeLimit: 10,
-    questions: [
-      {
-        id: 1,
-        body: "This is question 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra pharetra ligula at vehicula. Integer accumsan sagittis diam ac scelerisque. Nunc nulla dolor, molestie non augue quis, tempus bibendum ante. Phasellus tincidunt, dui nec vehicula venenatis, turpis turpis vulputate felis, id elementum lorem dui id velit. Phasellus consequat ante vulputate suscipit imperdiet. Duis volutpat eget libero id aliquam? ",
-        choices: [
-          "Choice 11", "Choice 12", "Choice 13", "Choice 14"
-        ],
-        answer: 3
-      },
-      {
-        id: 2,
-        body: "This is question 2",
-        choices: [
-          "Choice 21", "Choice 22", "Choice 23", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra pharetra ligula at vehicula. Integer accumsan sagittis diam ac scelerisque. Nunc nulla dolor, molestie non augue quis, tempus bibendum ante. Phasellus tincidunt, dui nec vehicula venenatis, turpis turpis vulputate felis, id elementum lorem dui id velit. Phasellus consequat ante vulputate suscipit imperdiet. Duis volutpat eget libero id aliquam",
-        ],
-        answer: 2
-      },
-      {
-        id: 3,
-        body: "This is question 3",
-        choices: [
-          "Choice 31", "Choice 32", "Choice 33", "Choice 34"
-        ],
-        answer: 1
-      },
-      {
-        id: 4,
-        body: "This is question 4",
-        choices: [
-          "Choice 41", "Choice 42", "Choice 43", "Choice 44"
-        ],
-        answer: 3
-      },
-      {
-        id: 5,
-        body: "This is question 5",
-        choices: [
-          "Choice 51", "Choice 52", "Choice 53", "Choice 54"
-        ],
-        answer: 0
-      },
-      {
-        id: 6,
-        body: "This is question 6",
-        choices: [
-          "Choice 61", "Choice 62", "Choice 63", "Choice 64"
-        ],
-        answer: 0
-      }
-    ]
   }
 
 
@@ -177,15 +123,15 @@ function StudentQuiz(props) {
   return (
     <div>
       {questionState.started ? <div className="quiz-form-container">
-        <h4 className="uk-margin-large-bottom uk-margin-large-top">{quiz.title}</h4>
+        <h4 className="uk-margin-large-bottom uk-margin-large-top">{questionState.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
-              {quiz.title}
+              {questionState.title}
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
               <div>
-                Time Remaining: {questionState.timeLimitMin}:{questionState.timeLimitSec}
+                Time Remaining: {questionState.timeLimit}
               </div>
             </div>
           </div>
@@ -199,7 +145,7 @@ function StudentQuiz(props) {
             {questionState.questions[questionState.currentQuestion].choices.map(item => {
               let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
               return (
-                <div key={key + 1}>
+                <div key={key}>
                   <div className="uk-flex uk-flex-row uk-flex-middle uk-margin-small-bottom">
                     <input type="radio" checked={(key === questionState.questions[questionState.currentQuestion].stuAnswer)} name={"choice" + questionState.currentQuestion} onChange={() => handleRadio(key)} className="uk-radio uk-margin-right radio-choice"></input>
                     <div>{item}</div>
@@ -232,7 +178,7 @@ function StudentQuiz(props) {
 
 
       </div> : <div className="start-screen">
-        This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimitMin} minutes to complete this quiz.
+        This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimit} minutes to complete this quiz.
         <br/><br/>
         The timer will begin when you press the start button.
         <br/>

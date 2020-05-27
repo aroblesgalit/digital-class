@@ -47,9 +47,6 @@ function App() {
           <Route path="/results/:id">
             <QuizResults />
           </Route>
-          <PrivateRoute path="/test-member">
-            <TestMember />
-          </PrivateRoute>
         </Switch>
         <Footer/>
       </div>
