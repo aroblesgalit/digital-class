@@ -14,4 +14,8 @@ router
     .put(quizController.update)
     .delete(quizController.remove);
 
+router 
+    .route("/teacher")
+    .get(quizController.getQuizByTeacher);
+
     module.exports = router;

@@ -5,7 +5,7 @@ module.exports = {
     getQuizByTeacher: function(req, res) {
         db.Quiz
             .find({
-                teacher: req._id
+                teacher: req.user._id
             })
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
