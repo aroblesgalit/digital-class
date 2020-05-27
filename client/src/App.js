@@ -27,7 +27,7 @@ function App() {
           <Route exact path="/teachers/createquiz">
             <CreateQuiz />
           </Route>
-          <Route exact path='/teachers/signup'>
+          <Route exact path='/signup'>
             <SignUpForm />
           </Route>
           <Route exact path='/teachers/profile'>
