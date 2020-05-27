@@ -7,6 +7,8 @@ import API from '../../utils/API';
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
     started: "",
+    score: "",
+    page: "quiz",
     timeLimit: 0,
     questions: [{
       id: 1,
@@ -104,12 +106,13 @@ function StudentQuiz() {
       return a + b;
     }, 0);
     let score = (sum / questionState.questions.length) * 100;
-    console.log(score.toFixed(2));
+    return score.toFixed(2);
   }
 
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    gradeQuiz();
+    const score = gradeQuiz();
+    setQuestionState({...questionState, page: "feedback", score: score});
   }
 
   const handleStart = () => {
@@ -119,10 +122,10 @@ function StudentQuiz() {
     // timer();
   }
 
-
-  return (
-    <div>
-      {questionState.started ? <div className="quiz-form-container">
+  const myRender = (page) => {
+    if (page === "quiz") {
+    return (
+      <div className="quiz-form-container">
         <h4 className="uk-margin-large-bottom uk-margin-large-top">{questionState.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
@@ -153,13 +156,7 @@ function StudentQuiz() {
                 </div>
               )
             })}
-
-
           </div>
-
-
-
-
           <div className="uk-margin-top uk-flex uk-flex-right">
             {questionState.currentQuestion > 0 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handlePrevQuestion}>Previous</label> :
@@ -169,15 +166,32 @@ function StudentQuiz() {
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
               <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Submit</label>
             }
-
           </div>
-
-
         </form>
 
+      </div> 
+    )
+  }
+  else if (page === "feedback") {
+    return (
+      <div className="full-screen">
+        <div className="uk-card uk-card-body">
+          {questionState.score}%
+        </div>
+        <br/><br/>
+        Do you have any comments about this quiz for your teacher?
+        <br/>
+        <label className="uk-button uk-button-default my-button uk-margin-top" onClick={() => handleStart()}>Start</label>
+      </div>
+      
+    )
+  }
+}
 
 
-      </div> : <div className="start-screen">
+  return (
+    <div>
+      {questionState.started ? myRender(questionState.page) : <div className="full-screen">
         This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimit} minutes to complete this quiz.
         <br/><br/>
         The timer will begin when you press the start button.
