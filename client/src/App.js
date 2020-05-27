@@ -12,9 +12,10 @@ import SignUpForm from './components/SignUpForm';
 import Login from "./components/Login";
 import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
+import TakeQuiz from "./pages/TakeQuiz";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
-import StudentProfile from './pages/StudentProfile'
+import StudentProfile from './pages/StudentProfile';
 
 function App() {
   return (
@@ -40,12 +41,12 @@ function App() {
           <Route exact path='/login'>
             <Login/>
           </Route>
+          <Route path='/students/quiz/:id'>
+            <TakeQuiz />
+          </Route>
           <Route path="/results/:id">
             <QuizResults />
           </Route>
-          <PrivateRoute path="/test-member">
-            <TestMember />
-          </PrivateRoute>
         </Switch>
         <Footer/>
       </div>
