@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProfileLeftCol from '../components/ProfileLeftCol';
 import TeacherProfileContent from '../components/TeacherProfileContent';
 import API from '../utils/API';
+import StudentProfileContent from '../components/StudentProfileContent';
 
 
 
@@ -30,8 +31,11 @@ function StudentProfile() {
       teacherids: res.data.teachers
     });
   }).then(() => {
-    for (let i = 0; i<studentState.length; i++) {
-      API.getTeacherById(studentState.teachers[i]).then(res => 
+    // studentState.ids is empty here
+    console.log("ids: " + studentState.teacherids);
+    console.log("length: " + studentState.teacherids.length);
+    for (let i = 0; i<studentState.teacherids.length; i++) {
+      API.getTeacherById(studentState.teacherids[i]).then(res => 
         { 
           let subjects = studentState.subjects;
           subjects.push(res.data.subject);
@@ -52,7 +56,7 @@ function StudentProfile() {
  return(
    <div>
      <ProfileLeftCol email={studentState.email} name={studentState.name} school={studentState.school} teachers={studentState.teachernames} />
-     
+     <StudentProfileContent teachers={studentState.teachernames} quizzes={studentState.quizzes}/>
     </div>
  );
 }
