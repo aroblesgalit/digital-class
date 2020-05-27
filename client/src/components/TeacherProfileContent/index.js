@@ -25,53 +25,54 @@ useEffect(() => {
 
   // need to update to get by teacher id
   const getStudents = () => {
-    // API.getTeacher().then(res => {console.log(res)});
-    // API.getAllStudents().then(res => {
-    //   setTeacherProfileState({
-    //     ...teacherProfileState, students: res.data
-    //   })
+    API.getTeacher()
+    .then(res => API.getStudentsByTeacher(res.data.id)
+    .then(res => { 
+      console.log(res.data);
+      setTeacherProfileState({
+        ...teacherProfileState, students: res.data
+      })
+    }))};
+      
     // });
-    const students = [
-      {
-        id: 1,
-        name: "Cynthia Dominguez",
-        email: "email@email.com"
-      },
-      {
-        id: 2,
-        name: "Alvin Galit",
-        email: "email@email.com"
-      },
-      {
-        id: 3,
-        name: "Ryan Gautier",
-        email: "email@email.com"
-      },
-      {
-        id: 4,
-        name: "Jordan Roenitz",
-        email: "email@email.com"
-      },
-      {
-        id: 5,
-        name: "Michale Cassarro",
-        email: "email@email.com"
-      },
-      {
-        id: 6,
-        name: "Another Student",
-        email: "email@email.com"
-      },
-      {
-        id: 7,
-        name: "Ryan A",
-        email: "email@email.com"
-      }
-    ];
-    setTeacherProfileState({
-          ...teacherProfileState, students: students
-        })
-  }
+    // const students = [
+    //   {
+    //     id: 1,
+    //     name: "Cynthia Dominguez",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Alvin Galit",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 3,
+    //     name: "Ryan Gautier",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 4,
+    //     name: "Jordan Roenitz",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 5,
+    //     name: "Michale Cassarro",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 6,
+    //     name: "Another Student",
+    //     email: "email@email.com"
+    //   },
+    //   {
+    //     id: 7,
+    //     name: "Ryan A",
+    //     email: "email@email.com"
+    //   }
+    // ];
+  // }
 
   // need to update to get by teacher id
   const getQuizzes = () => {
