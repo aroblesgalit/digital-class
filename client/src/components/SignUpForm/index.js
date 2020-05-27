@@ -72,7 +72,7 @@ function SignUpForm() {
                 <div className='uk-margin'>
                     <label className='uk-form-label uk-text'>Password:</label>
                     <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='password' type='text' ref={passwordRef} />
+                        <input className='uk-input uk-form-width-medium' id='password' type='password' ref={passwordRef} />
                     </div>
                 </div>
                 <div className='uk-margin'>

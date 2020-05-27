@@ -14,7 +14,8 @@ function TeacherProfile() {
     email: "",
     name: "",
     school: "",
-    subject: ""
+    subject: "",
+    students: []
   })
 
   useEffect(() => {
@@ -26,7 +27,10 @@ function TeacherProfile() {
       school: res.data.school,
       subject: res.data.subject
     });
-  })}, []);
+  }).then(
+    API.getStudentsByTeacher(teacherState.id)
+  )
+}, []);
   
 
  return(
