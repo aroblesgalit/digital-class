@@ -51,12 +51,16 @@ export default {
     return axios.get("/api/teacher-login/quizzes");
   },
   // Get a quiz by its id
-  getQuizById: function (id) {
-    return axios.get("/api/quizzes" + id);
+  getQuizById: function(id) {
+    return axios.get("/api/quizzes/" + id);
   },
   // Get all quizzes
   getAllQuizzes: function () {
     return axios.get("/api/quizzes")
+  },
+  // get quizzes for student by teacher id
+  getQuizzesForStudent : function(id) {
+    return axios.get("/api/quizzes/teacher/" + id)
   },
   // Search for schools
   searchSchools: function (query, state) {
