@@ -7,32 +7,45 @@ import API from '../../utils/API';
 function TeacherProfileContent() {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
-    teacher: "",
     students: [],
     quizzes: []
   })
 
   useEffect(() => {
-    getTeacher();
-    getStudents();
-    // getQuizzes();
+    loadData();
   }, []);
 
-  const getTeacher = () => {
-    API.getTeacher().
-    then(res => {
-      const teacherid = res.data.id;
-      setTeacherProfileState({
-        ...teacherProfileState, teacher: teacherid
-      })
-    })
+  // const getTeacher = () => {
+  //   API.getTeacher().
+  //   then(res => {
+  //     const teacherid = res.data.id;
+  //     setTeacherProfileState({
+  //       ...teacherProfileState, teacher: teacherid
+  //     })
+  //   })
 
-  }
+  // }
 
   const handleTabChange = (selected) => {
     setTeacherProfileState({
-      ...teacherProfileState, tab: selected
+      ...teacherProfileState,
+      tab: selected
     })
+  }
+  
+  const loadData = () => {
+    API.getStudentsByTeacher()
+      .then(result => {
+        API.getQuizzesByTeacher()
+        .then(res => {
+          setTeacherProfileState({
+            ...teacherProfileState, 
+            quizzes: res.data, 
+            students: result.data
+          })
+        })
+      })
+      
   }
 
 
@@ -40,31 +53,35 @@ function TeacherProfileContent() {
   const getStudents = () => {
     // API.getTeacher()
     //   .then(res => 
-        console.log("teacher : " + teacherProfileState.teacher);
-        API.getStudentsByTeacher(teacherProfileState.teacher)
-        .then(res => {
-          console.log(res);
-          
-          setTeacherProfileState({
-            ...teacherProfileState, students: res.data
-          })
-          console.log("teacher 2: " + teacherProfileState.teacher);
+    // console.log("teacher : " + teacherProfileState.teacher);
+    API.getStudentsByTeacher()
+      .then(res => {
+        // console.log(res);
 
+        setTeacherProfileState({
+          ...teacherProfileState, students: res.data
         })
+        // console.log("teacher 2: " + teacherProfileState.teacher);
+
+      })
+    
+      
   };
 
 
   // need to update to get by teacher id
   const getQuizzes = () => {
     console.log("getting quizzes");
-    API.getTeacher()
-      .then(res => API.getQuizByTeacher(res.data.id)
-        .then(res => {
-          console.log(res);
-          setTeacherProfileState({
-            ...teacherProfileState, quizzes: res.data
-          })
-        }))
+    // API.getTeacher()
+    //   .then(res => 
+    API.getQuizByTeacher()
+      .then(res => {
+        console.log("Quizzes form call: " + res.data);
+        setTeacherProfileState({
+          ...teacherProfileState, quizzes: res.data
+        })
+      })
+    // )
   };
 
 
@@ -104,7 +121,7 @@ function TeacherProfileContent() {
         <li><a onClick={() => handleTabChange("Quizzes")}>Quizzes</a></li>
       </ul>
 
-      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.students} />}
+      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} />}
     </div>
 
   )
