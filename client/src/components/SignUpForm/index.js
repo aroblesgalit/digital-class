@@ -4,7 +4,6 @@ import API from "../../utils/API";
 import axios from "axios";
 require("dotenv").config();
 
-
 function SignUpForm() {
     //setting state for teacher and student singup
     const [signup, setSignup] = useState({tab:'teacher'});
@@ -13,7 +12,7 @@ function SignUpForm() {
         setSignup({tab: tabToggle});
         
     }
-
+    
     // Create references for all the necessary fields
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -22,6 +21,7 @@ function SignUpForm() {
     const schoolRef = useRef();
     const schoolQueryRef = useRef();
     const stateRef = useRef();
+    const teacherRef = useRef();
 
     const [schools, setSchools] = useState([]);
 
@@ -45,6 +45,28 @@ function SignUpForm() {
             .catch(function (err) {
                 console.log(err);
             });
+    }
+
+    function handleStudent(e) {
+        e.preventDefault();
+        // Student Data ----------------
+        API.signupStudent({
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            name: nameRef.current.value,
+            school: schoolRef.current.value,
+            teacher: teacherRef.current.value
+        })
+
+        //send to profile page 
+        .then(function (res) {
+            window.location.replace("/");
+            console.log(res);
+            console.log('Student is signed up');
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
     }
 
     function handleSearch(e) {
@@ -127,9 +149,7 @@ function SignUpForm() {
                     </div>
                 </div>
                 <button className='uk-button' id='signupBtn' onClick={handleSignup}>Sign up</button>
-            </form>
-            
-        
+            </form>      
 );
     }
 
@@ -158,35 +178,47 @@ function SignUpForm() {
                 <div>
                     <label className='uk-form-label uk-text'>Search For School:</label>
                     <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='School' type='text' />
+                        <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
                     </div>
                 </div>
                 <div className='stateSel'>
                     <label className='uk-form-label uk-text'>State:</label>
                     <div className='uk-form-controls'>
-                        <select className='uk-form-width-xsmall'>
+                        <select className='uk-form-width-xsmall' ref={stateRef}>
                             <option value='TX'>TX</option>
                             <option value='CA'>CA</option>
                         </select>
                     </div>
                 </div>
-            </div>
-            <div className="uk-margin">
-                <label className="uk-form-label">Results</label>
-                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mrs.Williams</label>
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mrs.Marr</label>
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mrs.Williams</label>
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mrs.Sullivan</label>
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mr.Hanh</label>
-                    <label><input class="uk-checkbox" type="checkbox"></input>Mr.Berry</label>
+                <div className="uk-margin">
+                    <label className="uk-form-label">Select</label>
+                    <div className="uk-form-controls">
+                        <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
+                            {
+                                schools.length >= 1 ? (
+                                    schools.map(school =>
+                                        <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
+                                    )
+                                ) : <option>--Select a School--</option>
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
-            <button className='uk-button' id='signupBtn' onClick={handleSignup}>Sign up</button>
-        </form>
-       
+            <div className="uk-margin">
+                <label className="uk-form-label">Results:</label>
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" ref={teacherRef}>
+                    <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
+                    <label>Mrs.Marr<input class="uk-checkbox" type="checkbox"   /></label>
+                    <label>Mrs.Williams<input class="uk-checkbox" type="checkbox"  /></label>
+                    <label>Mrs.Sullivan<input class="uk-checkbox" type="checkbox"  /></label>
+                    <label>Mr.Berry<input class="uk-checkbox" type="checkbox"   /></label>
+                    <label>Mr.Berry<input class="uk-checkbox" type="checkbox"  /></label>
+                </div>
+            </div>
+            <button className='uk-button' id='signupBtn' onClick={handleStudent}>Sign up</button>
+        </form>         
  );
-
 }
 
     return (
@@ -196,9 +228,7 @@ function SignUpForm() {
             <button className='uk-button' id='signupBtn' onClick={()=>handleToggle('student')}>Im a Student</button>
         {signup.tab === 'teacher' ? teacherSignup(): studentSignup()}
         </div>
-
     );
-
 }
 
 export default SignUpForm;
