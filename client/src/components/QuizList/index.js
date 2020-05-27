@@ -23,7 +23,7 @@ function QuizList(props) {
                 View Results 
               </Link>
               : ""}
-              {props.user === "student" ? <Link to={"/student/quiz" + item._id}>
+              {props.user === "student" ? <Link to={"/student/quiz/" + item._id}>
                 Take Quiz 
               </Link> : <div></div>}
             </div>
