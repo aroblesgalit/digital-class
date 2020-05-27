@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 function QuizList(props) {
+  console.log(props);
+  console.log("quizzes : " + JSON.stringify(props));
   return (
+    <div>
     <div className="uk-grid-column-small uk-grid-row-large uk-child-width-1-1" uk-grid="true">
-      {props.quizzes.map(item => {
+      {props.quizzes.length > 0 && props.quizzes[0].length!==0 ? (props.quizzes[0].map(item => {
         return(
           <div className="uk-card uk-card-small uk-card-body uk-card-default" key={item._id}>
             <div className="uk-card-title">
@@ -15,20 +18,25 @@ function QuizList(props) {
               {item.questions.length + " Questions"}
             </div>
             <div className="uk-margin-top">
-              {item.results ? 
+              {props.user === "teacher" ? 
               <Link to="/results/">
                 View Results 
               </Link>
               : ""}
+              {props.user === "student" ? <Link to={"/students/quiz/" + item._id}>
+                Take Quiz 
+              </Link> : <div></div>}
             </div>
 
           </div>
         )
-      })}
-        <Link to="/teachers/createquiz">
+      })) : <div>No quizzes to display</div>}  
+      {props.user === "teacher" ? <Link to="/teachers/createquiz">
           <label className="uk-button uk-button-default my-button uk-margin-small-right" >Add new...</label>
-        </Link>
+        </Link> : <div></div>}
+        
 
+    </div>
     </div>
 
 
