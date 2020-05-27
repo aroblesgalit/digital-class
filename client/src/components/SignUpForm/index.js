@@ -4,9 +4,15 @@ import API from "../../utils/API";
 import axios from "axios";
 require("dotenv").config();
 
-
 function SignUpForm() {
+    //setting state for teacher and student singup
+    const [signup, setSignup] = useState({tab:'teacher'});
 
+    function handleToggle(tabToggle){
+        setSignup({tab: tabToggle});
+        
+    }
+    
     // Create references for all the necessary fields
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -15,6 +21,7 @@ function SignUpForm() {
     const schoolRef = useRef();
     const schoolQueryRef = useRef();
     const stateRef = useRef();
+    const teacherRef = useRef();
 
     const [schools, setSchools] = useState([]);
 
@@ -40,28 +47,61 @@ function SignUpForm() {
             });
     }
 
+    function handleStudent(e) {
+        e.preventDefault();
+        // Student Data ----------------
+        API.signupStudent({
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            name: nameRef.current.value,
+            school: schoolRef.current.value,
+            teacher: teacherRef.current.value
+        })
+
+        //send to profile page 
+        .then(function (res) {
+            window.location.replace("/");
+            console.log(res);
+            console.log('Student is signed up');
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
+    }
+
     function handleSearch(e) {
         e.preventDefault();
-
-        const appId = process.env.REACT_APP_ID;
-        const appKey = process.env.REACT_APP_KEY;
 
         const schoolQuery = schoolQueryRef.current.value;
         const state = stateRef.current.value;
 
-        axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
+        API.searchSchools(schoolQuery, state)
             .then(res => {
-                console.log(res.data.schoolMatches);
-                setSchools(res.data.schoolMatches);
+                console.log(res);
+                setSchools(res);
             })
             .catch(err => {
                 console.log(err)
             })
+
+        // const appId = process.env.REACT_APP_ID;
+        // const appKey = process.env.REACT_APP_KEY;
+
+        // const schoolQuery = schoolQueryRef.current.value;
+        // const state = stateRef.current.value;
+
+        // axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
+        //     .then(res => {
+        //         console.log(res.data.schoolMatches);
+        //         setSchools(res.data.schoolMatches);
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
     }
 
-    return (
-        <div className='signupWrapper'>
-            <h3>SignUp:</h3>
+    function teacherSignup() {
+        return (
             <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
                 <div className='uk-margin'>
                     <label className='uk-form-label uk-text'>Email:</label>
@@ -110,23 +150,97 @@ function SignUpForm() {
                     <label className="uk-form-label">Select</label>
                     <div className="uk-form-controls">
                         <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
-                            {   
+                            {
                                 schools.length >= 1 ? (
                                     schools.map(school =>
                                         <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
                                     )
                                 ) : <option>--Select a School--</option>
-                            } 
+                            }
                         </select>
                     </div>
                 </div>
-                <button className='uk-button' id='loginBtn'>Log in</button>
                 <button className='uk-button' id='signupBtn' onClick={handleSignup}>Sign up</button>
-            </form>
-        </div>
-    );
+            </form>      
+);
+    }
 
+    function studentSignup() {
+        return(
+        <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
+            <div className='uk-margin'>
+                <label className='uk-form-label uk-text'>Email:</label>
+                <div className='uk-form-controls'>
+                    <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='kelseydoe@email.com' ref={emailRef} />
+                </div>
+            </div>
+            <div className='uk-margin'>
+                <label className='uk-form-label uk-text'>Password:</label>
+                <div className='uk-form-controls'>
+                    <input className='uk-input uk-form-width-medium' id='password' type='text' ref={passwordRef} />
+                </div>
+            </div>
+            <div className='uk-margin'>
+                <label className='uk-form-label uk-text'>Name:</label>
+                <div className='uk-form-controls'>
+                    <input className="uk-input uk-form-width-medium" id='name' type='text' ref={nameRef} />
+                </div>
+            </div>
+            <div className='uk-margin uk-flex'>
+                <div>
+                    <label className='uk-form-label uk-text'>Search For School:</label>
+                    <div className='uk-form-controls'>
+                        <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
+                    </div>
+                </div>
+                <div className='stateSel'>
+                    <label className='uk-form-label uk-text'>State:</label>
+                    <div className='uk-form-controls'>
+                        <select className='uk-form-width-xsmall' ref={stateRef}>
+                            <option value='TX'>TX</option>
+                            <option value='CA'>CA</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="uk-margin">
+                    <label className="uk-form-label">Select</label>
+                    <div className="uk-form-controls">
+                        <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
+                            {
+                                schools.length >= 1 ? (
+                                    schools.map(school =>
+                                        <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
+                                    )
+                                ) : <option>--Select a School--</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="uk-margin">
+                <label className="uk-form-label">Results:</label>
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" ref={teacherRef}>
+                    <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
+                    <label>Mrs.Marr<input class="uk-checkbox" type="checkbox"   /></label>
+                    <label>Mrs.Williams<input class="uk-checkbox" type="checkbox"  /></label>
+                    <label>Mrs.Sullivan<input class="uk-checkbox" type="checkbox"  /></label>
+                    <label>Mr.Berry<input class="uk-checkbox" type="checkbox"   /></label>
+                    <label>Mr.Berry<input class="uk-checkbox" type="checkbox"  /></label>
+                </div>
+            </div>
+            <button className='uk-button' id='signupBtn' onClick={handleStudent}>Sign up</button>
+        </form>         
+ );
 }
 
+    return (
+        <div className='signupWrapper'>
+            <h3>Signup Form:</h3>
+            <button className='uk-button' id='signupBtn' onClick={()=>handleToggle('teacher')}>Im a Teacher</button>
+            <button className='uk-button' id='signupBtn' onClick={()=>handleToggle('student')}>Im a Student</button>
+        {signup.tab === 'teacher' ? teacherSignup(): studentSignup()}
+        </div>
+    );
+}
 
 export default SignUpForm;
