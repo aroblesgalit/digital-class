@@ -72,20 +72,32 @@ function SignUpForm() {
     function handleSearch(e) {
         e.preventDefault();
 
-        const appId = process.env.REACT_APP_ID;
-        const appKey = process.env.REACT_APP_KEY;
-
         const schoolQuery = schoolQueryRef.current.value;
         const state = stateRef.current.value;
 
-        axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
+        API.searchSchools(schoolQuery, state)
             .then(res => {
-                console.log(res.data.schoolMatches);
-                setSchools(res.data.schoolMatches);
+                console.log(res);
+                setSchools(res);
             })
             .catch(err => {
                 console.log(err)
             })
+
+        // const appId = process.env.REACT_APP_ID;
+        // const appKey = process.env.REACT_APP_KEY;
+
+        // const schoolQuery = schoolQueryRef.current.value;
+        // const state = stateRef.current.value;
+
+        // axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
+        //     .then(res => {
+        //         console.log(res.data.schoolMatches);
+        //         setSchools(res.data.schoolMatches);
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
     }
 
     function teacherSignup() {
