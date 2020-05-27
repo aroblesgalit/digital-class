@@ -23,33 +23,34 @@ function StudentProfile() {
 
   useEffect(() => {
     API.getStudentData().then(res => {
+      console.log("teachers : " + (res.data.teachers));
+      console.log("length : " + res.data.teachers.length);
+      var subjects = [];
+      let teachernames = [];
+      for (let i = 0; i<res.data.teachers.length; i++) {
+        API.getTeacherById(res.data.teachers[i]).then(result => 
+          { 
+            console.log("teacher data : " + JSON.stringify(result.data));
+            subjects.push(result.data.subject);
+  
+            teachernames.push(result.data.name);
+            }
+          )
+  
+      }
+
     setStudentState({...studentState,
       id: res.data.id,
       email: res.data.email,
       name: res.data.name,
       school: res.data.school,
-      teacherids: res.data.teachers
+      teacherids: res.data.teachers,
+      subjects: subjects,
+      teachernames: teachernames
     });
-  }).then(() => {
-    // studentState.ids is empty here
-    console.log("ids: " + studentState.teacherids);
-    console.log("length: " + studentState.teacherids.length);
-    for (let i = 0; i<studentState.teacherids.length; i++) {
-      API.getTeacherById(studentState.teacherids[i]).then(res => 
-        { 
-          let subjects = studentState.subjects;
-          subjects.push(res.data.subject);
 
-          let teachernames = studentState.teachernames;
-          teachernames.push(res.data.name);
-
-          setStudentState({...studentState, subjects: subjects, teachernames: teachernames})
-        }
-        )
-
-    }
-  }
-  )
+    
+  })
 }, []);
   
 

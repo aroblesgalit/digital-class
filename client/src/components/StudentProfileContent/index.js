@@ -20,11 +20,7 @@ function StudentProfileContent(props) {
 
     <div className="content">
       <ul uk-tab="true">
-        {props.subjects.map(item => {
-        return (
-          <li className="uk-active" ><a>{item}</a></li>
-        )})}
-}
+        <li className="uk-active" ><a>Quizzes</a></li>
       </ul>
 
       {<QuizList quizzes={props.quizzes} />}
