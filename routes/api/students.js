@@ -6,6 +6,9 @@ router
     .route("/")
     .get(studentsController.findAll)
     .post(studentsController.create)
+
+router
+    .route("/teacher")
     .get(studentsController.getStudentsByTeacher);
 
 // Matches with "/api/students/:id"

@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const quizSchema = new Schema({
     title: { type: String, required: true },
-    timeLimitMin: { type: Number, required: true },
-    timeLimitSec: { type: Number, required: true },
+    timeLimit: { type: Number, required: true },
     questions: [
 
         {
