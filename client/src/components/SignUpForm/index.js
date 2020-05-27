@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import axios from "axios";
@@ -8,9 +8,17 @@ function SignUpForm() {
     //setting state for teacher and student singup
     const [signup, setSignup] = useState({tab:'teacher'});
 
+    const [schoolsDB, setSchoolsDB] = useState([]);
+
+    useEffect(() => {
+        API.getSchoolsFromDB()
+            .then(res => {
+                console.log(res);
+            })
+    }, [])
+
     function handleToggle(tabToggle){
         setSignup({tab: tabToggle});
-        
     }
     
     // Create references for all the necessary fields
@@ -69,11 +77,17 @@ function SignUpForm() {
         })
     }
 
-    function handleSearch(e) {
+    async function handleSearch(e) {
         e.preventDefault();
 
         const schoolQuery = schoolQueryRef.current.value;
         const state = stateRef.current.value;
+
+        for (let i = 0; i < schoolsDB.length; i++) {
+            if (schoolsDB[i].query === schoolQuery) {
+                setSchools(schoolsDB[i].results);
+            }
+        }
 
         API.searchSchools(schoolQuery, state)
             .then(res => {
@@ -83,21 +97,6 @@ function SignUpForm() {
             .catch(err => {
                 console.log(err)
             })
-
-        // const appId = process.env.REACT_APP_ID;
-        // const appKey = process.env.REACT_APP_KEY;
-
-        // const schoolQuery = schoolQueryRef.current.value;
-        // const state = stateRef.current.value;
-
-        // axios.get(`https://api.schooldigger.com/v1.2/autocomplete/schools?q=${schoolQuery}&st=${state}&appID=${appId}&appKey=${appKey}`)
-        //     .then(res => {
-        //         console.log(res.data.schoolMatches);
-        //         setSchools(res.data.schoolMatches);
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
     }
 
     function teacherSignup() {
