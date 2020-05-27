@@ -29,6 +29,10 @@ export default {
   getStudentData: function() {
     return axios.get("/api/student-login/user_data");
   },
+  // Get a teacher by id
+  getTeacherById: function(id) {
+    return axios.get("/api/teachers/" + id);
+  },
   // Get all students under the authenticated teacher
   getStudentsByTeacher: function(teacherId) {
     return axios.get("/api/students", teacherId);
