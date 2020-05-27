@@ -35,7 +35,7 @@ export default {
   },
   // Get all students under the authenticated teacher
   getStudentsByTeacher: function(teacherId) {
-    return axios.get("/api/students", teacherId);
+    return axios.get("/api/students/teacher", teacherId);
   },
   // Create a result
   createResult: function(resultData) {
