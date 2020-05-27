@@ -34,8 +34,8 @@ export default {
     return axios.get("/api/teachers/" + id);
   },
   // Get all students under the authenticated teacher
-  getStudentsByTeacher: function(teacherId) {
-    return axios.get("/api/students/teacher", teacherId);
+  getStudentsByTeacher: function() {
+    return axios.get("/api/teacher-login/students");
   },
   // Create a result
   createResult: function(resultData) {
@@ -46,11 +46,15 @@ export default {
     return axios.get("/api/results", quizId);
   },
   // Get all quizzes by teacher's id
-  getQuizByTeacher: function(teacherId) {
-    return axios.get("/api/quizzes/teacher", teacherId);
+  getQuizzesByTeacher: function() {
+    return axios.get("/api/teacher-login/quizzes");
   },
   // Get a quiz by its id
   getQuizById: function(id) {
     return axios.get("/api/quizzes" + id);
+  },
+  // Get all quizzes
+  getAllQuizzes: function() {
+    return axios.get("/api/quizzes")
   }
 };

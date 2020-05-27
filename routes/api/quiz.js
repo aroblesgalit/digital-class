@@ -16,6 +16,6 @@ router
 
 router 
     .route("/teacher")
-    .get(quizController.getQuizByTeacher);
+    .get(quizController.getQuizzesByTeacher);
 
     module.exports = router;
