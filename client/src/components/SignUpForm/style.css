@@ -4,22 +4,56 @@
     box-sizing: border-box;
 }
 
-h3 {
-    background-color: #7CEDAB;
+h2 {
+    /* background-color: #7CEDAB; */
     text-align: center;
-
+    padding: 10px;
 }
 
 .signupWrapper{
-max-width: 640px;
-margin: 40px auto;
-background-color: #E1E1E1;
-margin-bottom: 40%;
+    max-width: 640px;
+    margin: 40px auto;
+    /* background-color: #E1E1E1; */
+}
+
+.formTabs {
+    margin-bottom: 20px;
+}
+
+.formTabs button {
+    background-color: #fff;
+}
+
+.formTabs button:not(:first-child) {
+    margin-left: 20px;
+}
+
+.teacherForm {
+    padding: 0 20px;
+}
+
+.teacherForm input {
+    width: 100%;
+}
+
+.teacherForm select, .studentForm select {
+    height: 38px;
+}
+
+.studentForm {
+    padding: 0 20px;
+}
+
+.stuInput {
+    width: 100%;
 }
 
 .stateSel {
-    margin-left: 20%;
+    margin: 0 20px;
+}
 
+.schoolSelect {
+    width: 100%;
 }
 
 #loginBtn {
@@ -30,16 +64,65 @@ margin-bottom: 40%;
     letter-spacing: 1.2px;
 }
 
-#signupBtn {
+.primaryBtn {
     background-color: #7CEDAB;
     border: none;
     font-weight: 400;
     color: #FAF9F8;
-    letter-spacing: 1.2px; 
-    margin-left: 30px;
+    letter-spacing: 1.2px;
 }
 
-#signupBtn:hover, #loginBtn:hover {
-    background-color: #E1E1E1;
+.primaryBtn:hover, #loginBtn:hover {
+    background-color: #44BC74;
 }
 
+.secondaryBtn {
+    background-color: #d3d3d3;
+    border: none;
+    font-weight: 400;
+    color: #444;
+    letter-spacing: 1.2px;
+}
+
+.secondaryBtn:hover {
+    background-color: #b1b1b1;
+}
+
+.schoolSearchBtn {
+    height: 38px;
+}
+
+.loginText {
+    margin-top: 20px;
+}
+
+.loginLink {
+    color: #44BC74;
+}
+
+.loginLink:hover {
+    color: rgb(41, 175, 95);
+}
+
+.noTeacherText {
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 0
+}
+
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+    .signupContainer {
+        flex-direction: column;
+    }
+
+    .signupContainer > div:not(:first-child) {
+        width: 100%;
+    }
+
+    .signupContainer > div:first-child {
+        margin: 0 auto;
+    }
+}

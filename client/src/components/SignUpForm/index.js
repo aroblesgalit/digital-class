@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
+import manwithcat from "../../images/manwithcat.jpg";
+import { Link } from "react-router-dom";
 require("dotenv").config();
 
 function SignUpForm() {
@@ -154,41 +156,41 @@ function SignUpForm() {
 
     function teacherSignup() {
         return (
-            <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Email:</label>
-                    <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='kelseydoe@email.com' ref={emailRef} />
+            <form className="uk-form-stacked uk-position-relative teacherForm" uk-height-viewport="expand: true">
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Email</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium" id="email" type="text" placeholder="johndoe@email.com" ref={emailRef} />
                     </div>
                 </div>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Password:</label>
-                    <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='password' type='password' ref={passwordRef} />
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Password</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium" id="password" type="password" placeholder="******" ref={passwordRef} />
                     </div>
                 </div>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Name:</label>
-                    <div className='uk-form-controls'>
-                        <input className="uk-input uk-form-width-medium" id='name' type='text' ref={nameRef} />
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Name</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium" id="name" type="text" placeholder="John Doe" ref={nameRef} />
                     </div>
                 </div>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Subject:</label>
-                    <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='Subject' type='text' ref={subjectRef} />
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Subject</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium" id="subject" type="text" placeholder="Algebra" ref={subjectRef} />
                     </div>
                 </div>
-
-                <div className='uk-margin uk-flex'>
-                    <div>
-                        <label className='uk-form-label uk-text'>Search For School:</label>
-                        <div className='uk-form-controls'>
-                            <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
+                <hr />
+                <div className="uk-margin uk-flex uk-flex-bottom">
+                    <div className="uk-width-expand">
+                        <label className="uk-form-label uk-text">School Search</label>
+                        <div className="uk-form-controls">
+                            <input className="uk-input uk-form-width-medium" id="school" type="text" placeholder="Search for you school here" ref={schoolQueryRef} />
                         </div>
                     </div>
                     <div className='stateSel'>
-                        <label className='uk-form-label uk-text'>State:</label>
+                        <label className='uk-form-label uk-text'>State</label>
                         <div className='uk-form-controls'>
                             <select className='uk-form-width-xsmall' ref={stateRef}>
                                 {
@@ -201,12 +203,12 @@ function SignUpForm() {
                             </select>
                         </div>
                     </div>
-                    <button className='uk-button' onClick={handleSearch}>Search for school</button>
+                    <button className="uk-button secondaryBtn schoolSearchBtn" onClick={handleSearch}>SEARCH</button>
                 </div>
                 <div className="uk-margin">
-                    <label className="uk-form-label">Select</label>
+                    <label className="uk-form-label">School</label>
                     <div className="uk-form-controls">
-                        <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
+                        <select className="uk-select-medium schoolSelect" ref={schoolRef} >
                             {
                                 schools.length >= 1 ? (
                                     schools.map(school =>
@@ -217,43 +219,47 @@ function SignUpForm() {
                         </select>
                     </div>
                 </div>
-                <button className='uk-button' id='signupBtn' onClick={handleSignup}>Sign up</button>
+                <div className="uk-flex uk-flex-column uk-flex-middle">
+                    <button className="uk-button primaryBtn" onClick={handleSignup}>Sign up</button>
+                    <div className="loginText">Already have an account? <Link to="/login" className="loginLink">Log in here</Link></div>
+                </div>
             </form>
         );
     }
 
     function studentSignup() {
         return (
-            <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Email:</label>
-                    <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='kelseydoe@email.com' ref={emailRef} />
+            <form className="uk-form-stacked uk-position-relative studentForm" uk-height-viewport="expand: true">
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Email</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium stuInput" id="email" type="text" placeholder="kelseydoe@email.com" ref={emailRef} />
                     </div>
                 </div>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Password:</label>
-                    <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='password' type='text' ref={passwordRef} />
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Password</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium stuInput" id="password" type="password" placeholder="******" ref={passwordRef} />
                     </div>
                 </div>
-                <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Name:</label>
-                    <div className='uk-form-controls'>
-                        <input className="uk-input uk-form-width-medium" id='name' type='text' ref={nameRef} />
+                <div className="uk-margin">
+                    <label className="uk-form-label uk-text">Name</label>
+                    <div className="uk-form-controls">
+                        <input className="uk-input uk-form-width-medium stuInput" id="name" type="text" placeholder="Kelsey Doe" ref={nameRef} />
                     </div>
                 </div>
-                <div className='uk-margin uk-flex'>
-                    <div>
-                        <label className='uk-form-label uk-text'>Search For School:</label>
-                        <div className='uk-form-controls'>
-                            <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
+                <hr />
+                <div className="uk-margin uk-flex uk-flex-bottom">
+                    <div className="uk-width-expand">
+                        <label className="uk-form-label uk-text">School Search</label>
+                        <div className="uk-form-controls">
+                            <input className="uk-input uk-form-width-medium stuInput" id="school" type="text" placeholder="Search for you school here" ref={schoolQueryRef} />
                         </div>
                     </div>
-                    <div className='stateSel'>
-                        <label className='uk-form-label uk-text'>State:</label>
-                        <div className='uk-form-controls'>
-                            <select className='uk-form-width-xsmall' ref={stateRef}>
+                    <div className="stateSel">
+                        <label className="uk-form-label uk-text">State</label>
+                        <div className="uk-form-controls">
+                            <select className="uk-form-width-xsmall" ref={stateRef}>
                                 {
                                     states.length >= 1 ? (
                                         states.map(state =>
@@ -264,12 +270,12 @@ function SignUpForm() {
                             </select>
                         </div>
                     </div>
-                    <button className='uk-button' onClick={handleSearch}>Search for school</button>
+                    <button className="uk-button secondaryBtn schoolSearchBtn" onClick={handleSearch}>Search</button>
                 </div>
                 <div className="uk-margin">
-                    <label className="uk-form-label">Select</label>
+                    <label className="uk-form-label">School</label>
                     <div className="uk-form-controls">
-                        <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} onChange={handleSchoolSelect}>
+                        <select className="uk-select-medium stuInput" ref={schoolRef} onChange={handleSchoolSelect}>
                             {
                                 schools.length >= 1 ? (
                                     schools.map(school =>
@@ -281,29 +287,49 @@ function SignUpForm() {
                     </div>
                 </div>
                 <div className="uk-margin">
-                    <label className="uk-form-label">Results:</label>
-                    <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid" >
+                    <label className="uk-form-label">Teachers</label>
+                    <div className="uk-grid-small uk-child-width-auto uk-grid" >
                         {
-                            teachersSelect ? (
+                            teachersSelect.length > 0 ? (
                                 teachersSelect.map(teacher =>
-                                    <label key={teacher._id}><input name={teacher._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />{teacher.name}</label>
+                                    <label key={teacher._id}><input name={teacher._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} /> {teacher.name}</label>
                                 )
-                            ) : <p>Please search for a school first to view the teachers.</p>
+                            ) : <p className="noTeacherText">Please search for a school first to view the teachers.</p>
                         }
                     </div>
                 </div>
-                <button className='uk-button' id='signupBtn' onClick={handleStudent}>Sign up</button>
+                <div className="uk-flex uk-flex-column uk-flex-middle">
+                    <button className="uk-button primaryBtn" onClick={handleSignup}>Sign up</button>
+                    <div className="loginText">Already have an account? <Link to="/login" className="loginLink">Log in here</Link></div>
+                </div>
             </form>
         );
     }
 
 
     return (
-        <div className='signupWrapper'>
-            <h3>Signup Form:</h3>
-            <button className='uk-button' id='signupBtn' onClick={() => handleToggle('teacher')}>Im a Teacher</button>
-            <button className='uk-button' id='signupBtn' onClick={() => handleToggle('student')}>Im a Student</button>
-            {signup.tab === 'teacher' ? teacherSignup() : studentSignup()}
+        <div className="uk-flex uk-child-width-1-2 signupContainer">
+            <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
+            <div className="signupWrapper">
+                <h2>SIGNUP</h2>
+                <div className="uk-flex uk-flex-center formTabs" >
+                    <button
+                        className="uk-button"
+                        style={signup.tab === "teacher" ? { borderBottom: "2px solid #7CEDAB", color: "#44BC74", fontWeight: "500" } : { borderBottom: "2px solid #fff", color: "#A8A8A8" }}
+                        onClick={() => handleToggle("teacher")}
+                    >
+                        Im a Teacher
+                    </button>
+                    <button
+                        className="uk-button"
+                        style={signup.tab === "student" ? { borderBottom: "2px solid #7CEDAB", color: "#44BC74", fontWeight: "500" } : { borderBottom: "2px solid #fff", color: "#A8A8A8" }}
+                        onClick={() => handleToggle("student")}
+                    >
+                        Im a Student
+                    </button>
+                </div>
+                {signup.tab === "teacher" ? teacherSignup() : studentSignup()}
+            </div>
         </div>
     );
 }

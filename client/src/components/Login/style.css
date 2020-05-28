@@ -4,9 +4,55 @@
     box-sizing: border-box;
 }
 
+h2 {
+    text-align: center;
+    padding: 10px;
+}
+
 .loginWrapper{
     max-width: 640px;
     margin: 40px auto;
-    background-color: #E1E1E1;
-    margin-bottom: 40%;
-} 
+}
+
+.loginForm {
+    padding: 0 20px;
+}
+
+.loginForm input {
+    width: 100%;
+}
+
+.loginForm select {
+    height: 38px;
+    width: 100%;
+    max-width: 260px;
+    padding-left: 10px;
+}
+
+.signupText {
+    margin-top: 20px;
+}
+
+.signupLink {
+    color: #44BC74;
+}
+
+.signupLink:hover {
+    color: rgb(41, 175, 95);
+}
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+    .loginContainer {
+        flex-direction: column;
+    }
+
+    .loginContainer > div:not(:first-child) {
+        width: 100%;
+    }
+
+    .loginContainer > div:first-child {
+        margin: 0 auto;
+    }
+}
