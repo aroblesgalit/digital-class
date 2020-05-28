@@ -11,7 +11,7 @@ function StudentQuiz() {
     timeLimit: 0,
     questions: [{
       id: 1,
-      body: "",
+      question: "",
       choices: [],
       answer: 0,
       stuAnswer: ""
@@ -174,7 +174,7 @@ function StudentQuiz() {
           <div className="uk-margin-large-bottom">
             <div className="uk-width-auto uk-margin-bottom">
               <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
-              <div className="" >{questionState.questions[questionState.currentQuestion].body}</div>
+              <div className="" >{questionState.questions[questionState.currentQuestion].question}</div>
             </div>
             {questionState.questions[questionState.currentQuestion].choices.map(item => {
               let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
