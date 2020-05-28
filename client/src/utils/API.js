@@ -50,7 +50,7 @@ export default {
   },
   // Get all results for a quiz
   getResultsByQuiz: function (quizId) {
-    return axios.get("/api/results/" + quizId);
+    return axios.get("/api/results/quiz/"+ quizId);
   },
   // Get all quizzes by teacher's id
   getQuizzesByTeacher: function () {
@@ -95,6 +95,9 @@ export default {
   // Get school by query
   getSchoolByQuery: function (query) {
     return axios.get("/api/schools/" + query);
+  },
+  getStudentById: function (id) {
+    return axios.get("/api/students/" + id);
   },
   // Get all 50 states
   getStates: function () {

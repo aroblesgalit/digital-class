@@ -5,7 +5,7 @@ const resultsController = require("../../controllers/resultsController");
 router
     .route("/")
     .get(resultsController.findAll)
-    .post(resultsController.create)
+    .post(resultsController.create);
 
 // Match with "/api/results/:id"
 router 

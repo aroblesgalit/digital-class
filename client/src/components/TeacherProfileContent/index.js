@@ -4,7 +4,7 @@ import StudentList from '../StudentList';
 import QuizList from '../QuizList';
 import API from '../../utils/API';
 
-function TeacherProfileContent() {
+function TeacherProfileContent(props) {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
     students: [],
