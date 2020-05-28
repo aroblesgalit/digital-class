@@ -3,6 +3,7 @@ import './style.css'
 import { Link } from "react-router-dom"
 
 
+
 function Nav() {
   return (
 
@@ -22,6 +23,9 @@ function Nav() {
           </li>
           <li>
             <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to='/logout'>logout</Link>
           </li>
         </ul>
       </div>

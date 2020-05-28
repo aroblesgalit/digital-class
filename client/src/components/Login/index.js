@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import { Link } from 'react-router-dom';
+import LogoutNav from '../LogoutNav';
 
 
 
@@ -48,6 +49,8 @@ function StudentLogin() {
             }
        
     }
+
+    
 
     return (
         <div className='loginWrapper'>
