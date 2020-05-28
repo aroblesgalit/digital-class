@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
-import axios from "axios";
 require("dotenv").config();
 
 function SignUpForm() {
