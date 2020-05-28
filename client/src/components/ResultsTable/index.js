@@ -5,10 +5,12 @@ import API from '../../utils/API';
 
 function ResultsTable(props) {
   const [resultState, setResultState] = useState([{ _id: 1 }]);
+  const [quizState, setQuizState] = useState({});
   const [tabState, setTabState] = useState({ tab: "table" });
 
   useEffect(() => {
     getRestuls();
+    getQuiz();
   }, []);
   const getRestuls = async () => {
     await API.getResultsByQuiz(props.id).then(async (res) => {
@@ -19,6 +21,17 @@ function ResultsTable(props) {
 
     })
   };
+
+  const getQuiz = async () => {
+    await API.getQuizById(props.id).then(res => {
+      console.log(res);
+      const answers = [];
+      res.data.questions.map(item => {
+        answers.push(item.answer);
+      });
+      setQuizState(answers);
+    });
+  }
 
   const handleTabChange = (tab) => {
     setTabState({ ...tabState, tab: tab });
