@@ -42,10 +42,16 @@ teacherSchema.pre("save", async function save(next) {
   }
 });
 
-teacherSchema.methods.validatePassword = async function validatePassword(data) {
-  return bcrypt.compare(data, this.password);
-};
+// teacherSchema.methods.validatePassword = async function validatePassword(data) {
+//   return bcrypt.compare(data, this.password);
+// };
 
+teacherSchema.methods.validatePassword = function(candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+      if (err) return cb(err);
+      cb(null, isMatch);
+  });
+}
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
 module.exports = Teacher
