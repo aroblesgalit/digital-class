@@ -21,7 +21,7 @@ function Homepage() {
                                     <div>Jordan<br />Roenitz</div>
                                 </div></h3>
                                 <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <button className="uk-button uk-button-default">Teacher</button>
+                              
                             </div>
                         </div>
                         <div className="uk-width-1-2">
@@ -33,7 +33,7 @@ function Homepage() {
                                     <div>Jordan<br />Roenitz</div>
                                 </div></h3>
                                 <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <button className="uk-button uk-button-default">Student</button>
+                
                             </div>
                         </div>
                     </div>
