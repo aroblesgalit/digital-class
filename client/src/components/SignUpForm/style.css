@@ -95,3 +95,20 @@ h2 {
 .loginLink:hover {
     color: rgb(41, 175, 95);
 }
+
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+    .signupContainer {
+        flex-direction: column;
+    }
+
+    .signupContainer > div:not(:first-child) {
+        width: 100%;
+    }
+
+    .signupContainer > div:first-child {
+        margin: 0 auto;
+    }
+}
