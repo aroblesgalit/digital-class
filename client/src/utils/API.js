@@ -34,6 +34,10 @@ export default {
   getTeacherById: function (id) {
     return axios.get("/api/teachers/" + id);
   },
+  // Get teachers by school
+  getTeachersBySchool: function (school) {
+    return axios.get("/api/teachers/" + school);
+  },
   // Get all students under the authenticated teacher
   getStudentsByTeacher: function () {
     return axios.get("/api/teacher-login/students");
@@ -77,5 +81,17 @@ export default {
         })
         .catch(err => reject(err));
     })
+  },
+  // Get schools from search in db
+  getSchoolsFromDB: function () {
+    return axios.get("/api/schools");
+  },
+  // Add school search in db
+  addSchoolToDB: function (data) {
+    return axios.post("/api/schools", data);
+  },
+  // Get school by query
+  getSchoolByQuery: function (query) {
+    return axios.get("/api/schools/" + query);
   }
 };
