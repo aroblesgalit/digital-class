@@ -155,27 +155,27 @@ function SignUpForm() {
 
     function teacherSignup() {
         return (
-            <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
+            <form className="uk-form-stacked uk-position-relative teacherForm" uk-height-viewport="expand: true">
                 <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Email:</label>
+                    <label className='uk-form-label uk-text'>Email</label>
                     <div className='uk-form-controls'>
                         <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='kelseydoe@email.com' ref={emailRef} />
                     </div>
                 </div>
                 <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Password:</label>
+                    <label className='uk-form-label uk-text'>Password</label>
                     <div className='uk-form-controls'>
                         <input className='uk-input uk-form-width-medium' id='password' type='password' ref={passwordRef} />
                     </div>
                 </div>
                 <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Name:</label>
+                    <label className='uk-form-label uk-text'>Name</label>
                     <div className='uk-form-controls'>
                         <input className="uk-input uk-form-width-medium" id='name' type='text' ref={nameRef} />
                     </div>
                 </div>
                 <div className='uk-margin'>
-                    <label className='uk-form-label uk-text'>Subject:</label>
+                    <label className='uk-form-label uk-text'>Subject</label>
                     <div className='uk-form-controls'>
                         <input className='uk-input uk-form-width-medium' id='Subject' type='text' ref={subjectRef} />
                     </div>
@@ -183,13 +183,13 @@ function SignUpForm() {
 
                 <div className='uk-margin uk-flex'>
                     <div>
-                        <label className='uk-form-label uk-text'>Search For School:</label>
+                        <label className='uk-form-label uk-text'>Search For School</label>
                         <div className='uk-form-controls'>
                             <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
                         </div>
                     </div>
                     <div className='stateSel'>
-                        <label className='uk-form-label uk-text'>State:</label>
+                        <label className='uk-form-label uk-text'>State</label>
                         <div className='uk-form-controls'>
                             <select className='uk-form-width-xsmall' ref={stateRef}>
                                 {
@@ -302,25 +302,28 @@ function SignUpForm() {
     return (
         <div className="uk-flex uk-child-width-1-2">
             <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
-            <div className='signupWrapper'>
+            <div className="signupWrapper">
                 <h2>SIGNUP</h2>
-                <button 
-                    className='uk-button' 
-                    id='signupBtn' 
-                    style={signup.tab === "teacher" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#8e8e8e"}} 
-                    onClick={() => handleToggle('teacher')}
-                >
-                    Im a Teacher
-                </button>
-                <button 
-                    className='uk-button' 
-                    id='signupBtn' 
-                    style={signup.tab === "student" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#8e8e8e"}} 
-                    onClick={() => handleToggle('student')}
-                >
-                    Im a Student
-                </button>
-                {signup.tab === 'teacher' ? teacherSignup() : studentSignup()}
+                <div className="uk-flex uk-flex-center formTabs">
+                    <button 
+                    className="uk-button" 
+                    id="signupBtn" 
+                    style={signup.tab === "teacher" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#b5b5b5"}} 
+                    onClick={() => handleToggle("teacher")}
+                    >
+                        Im a Teacher
+                    </button>
+                    <button 
+                        className="uk-button" 
+                        id="signupBtn" 
+                        style={signup.tab === "student" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#b5b5b5"}} 
+                        onClick={() => handleToggle("student")}
+                    >
+                        Im a Student
+                    </button>
+                </div>
+
+                {signup.tab === "teacher" ? teacherSignup() : studentSignup()}
             </div>
         </div>
     );

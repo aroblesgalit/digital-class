@@ -11,14 +11,25 @@ h2 {
 }
 
 .signupWrapper{
-max-width: 640px;
-margin: 40px auto;
-background-color: #E1E1E1;
+    max-width: 640px;
+    margin: 40px auto;
+    background-color: #E1E1E1;
+}
+
+.formTabs {
+    margin-bottom: 20px;
+}
+
+.teacherForm {
+    padding: 0 20px;
+}
+
+.teacherForm input {
+    width: 100%;
 }
 
 .stateSel {
     margin-left: 20%;
-
 }
 
 #loginBtn {
