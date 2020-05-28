@@ -21,10 +21,20 @@ function ResultsTable(props) {
 
   return (
     <div className="result-wrapper">
-      <div>
-        <Link to="teachers/profile">
-          {"< Back"}
-        </Link>
+      <div className="uk-flex uk-flex-between">
+        <div>
+          <Link to="teachers/profile">
+            {"< Back"}
+          </Link>
+        </div>
+        <div>
+          <div className="nav-icon">
+            <i class="fas fa-table"></i>
+          </div>
+          <div className="nav-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+        </div>        
       </div>
       <table className="uk-table">
         <thead>

@@ -25,6 +25,12 @@ td {
   overflow: auto;
 }
 
+.nav-icon {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 24px;
+}
+
 @media screen and (max-width: 900px) {
   .result-wrapper {
     max-width: unset;
