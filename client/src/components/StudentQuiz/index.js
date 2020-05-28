@@ -7,6 +7,7 @@ import API from '../../utils/API';
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
     started: "",
+    page: "quiz",
     timeLimit: 0,
     questions: [{
       id: 1,
@@ -15,7 +16,9 @@ function StudentQuiz() {
       answer: 0,
       stuAnswer: ""
     }],
-    currentQuestion: 0
+    currentQuestion: 0,
+    score: "",
+    feedback: ""
   });
 
   // load quiz into state on page load
@@ -23,7 +26,7 @@ function StudentQuiz() {
     getQuiz().then(res => {
       console.log(res);
       res.data.questions.map(item => {
-        item.stuAnswer = "";
+        return item.stuAnswer = "";
       });
       setQuestionState({
         ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, started: false, title: res.data.title
@@ -65,6 +68,36 @@ function StudentQuiz() {
     });
   }
 
+  const handleFeedbackChange = (event) => {
+    const feedback = event.target.value;
+    setQuestionState({
+      ...questionState, feedback: feedback
+    })
+  }
+
+  const handleSubmitClick = async () => {
+    // build result for sending to db
+    const answers = [];
+    questionState.questions.map(item => {
+      return answers.push(item.stuAnswer);
+    });
+
+    const student = await API.getStudentData();
+    const result = {
+      answers: answers,
+      quiz: id,
+      student: student.data.id,
+      feedback: questionState.feedback,
+      score: questionState.score
+    }
+    
+    await API.createResult(result).then(console.log("Result Submitted!"));
+    window.location.replace("/students/profile");
+
+  }
+
+  
+
   // const timer = () => {
   //   let interval = setTimeout(() => {
   //     let min = questionState.timeLimitmMin;
@@ -104,12 +137,13 @@ function StudentQuiz() {
       return a + b;
     }, 0);
     let score = (sum / questionState.questions.length) * 100;
-    console.log(score.toFixed(2));
+    return score.toFixed(2);
   }
 
-  const handleSubmitClick = (event) => {
+  const handleDoneClick = (event) => {
     event.preventDefault();
-    gradeQuiz();
+    const score = gradeQuiz();
+    setQuestionState({...questionState, page: "feedback", score: score});
   }
 
   const handleStart = () => {
@@ -119,10 +153,10 @@ function StudentQuiz() {
     // timer();
   }
 
-
-  return (
-    <div>
-      {questionState.started ? <div className="quiz-form-container">
+  const myRender = (page) => {
+    if (page === "quiz") {
+    return (
+      <div className="quiz-form-container">
         <h4 className="uk-margin-large-bottom uk-margin-large-top">{questionState.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
@@ -153,13 +187,7 @@ function StudentQuiz() {
                 </div>
               )
             })}
-
-
           </div>
-
-
-
-
           <div className="uk-margin-top uk-flex uk-flex-right">
             {questionState.currentQuestion > 0 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handlePrevQuestion}>Previous</label> :
@@ -167,17 +195,40 @@ function StudentQuiz() {
             }
             {questionState.currentQuestion < questionState.questions.length - 1 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
-              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Submit</label>
+              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleDoneClick} >Done</label>
             }
-
           </div>
-
-
         </form>
 
+      </div> 
+    )
+  }
+  else if (page === "feedback") {
+    return (
+      <div className="full-screen">
+        <div className="uk-card uk-card-body uk-card-small uk-card-secondary my-card">
+          <div className="uk-text-large score">
+            {questionState.score}%
+          </div>
+        </div>
+        <br/><br/>
+        Do you have any comments about this quiz for your teacher?
+        <br/><br/>
+        <b>IMPORTANT:</b> Your score will not be submitted until you click submit below.
+        <br/>
+        <textarea className="uk-textarea uk-margin-top my-feedback" id="feedback" type="textarea" placeholder="Feedback..." onChange={(event) => handleFeedbackChange(event)}/>
+        <br/>
+        <label className="uk-button uk-button-default my-button-submit uk-margin-top" onClick={() => handleSubmitClick()}>Submit</label>
+      </div>
+      
+    )
+  }
+}
 
 
-      </div> : <div className="start-screen">
+  return (
+    <div>
+      {questionState.started ? myRender(questionState.page) : <div className="full-screen">
         This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimit} minutes to complete this quiz.
         <br/><br/>
         The timer will begin when you press the start button.
