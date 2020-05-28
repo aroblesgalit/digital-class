@@ -16,6 +16,7 @@ function SignUpForm() {
     useEffect(() => {
         loadSchoolsDB();
     }, [])
+    
 
     // Create references for all the necessary fields
     const emailRef = useRef();
@@ -54,12 +55,13 @@ function SignUpForm() {
     function handleStudent(e) {
         e.preventDefault();
         // Student Data ----------------
+        console.log(checkTeachers);
         API.signupStudent({
             email: emailRef.current.value,
             password: passwordRef.current.value,
             name: nameRef.current.value,
             school: schoolRef.current.value,
-            teacher: teacherRef.current.value
+            teachers: checkTeachers
         })
 
             //send to profile page 
@@ -82,6 +84,27 @@ function SignUpForm() {
             setSchoolsDB(res.data);
         })
     }
+
+    const [checkTeachers, setcheckTeachers] = useState([]);
+ // Teacher checkbox
+   function handleCheckbox(e) {
+    console.log('checked', e.target.checked);
+    console.log('name',e.target.name);
+
+    const newTeachers = [...checkTeachers];
+     if (e.target.checked) {
+         newTeachers.push(e.target.name);   
+    }
+    else {
+        const index = newTeachers.indexOf(e.target.name)
+        newTeachers.splice(index,1);
+    }
+    setcheckTeachers(newTeachers);
+    
+    
+    
+   }
+    
     
     // Handle search
     async function handleSearch(e) {
@@ -235,19 +258,20 @@ function SignUpForm() {
                 </div>
                 <div className="uk-margin">
                     <label className="uk-form-label">Results:</label>
-                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" ref={teacherRef}>
-                        <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Marr<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Sullivan<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mr.Berry<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mr.Berry<input class="uk-checkbox" type="checkbox" /></label>
+                    <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid" >
+                        <label><input name= 'teacherName' className="uk-checkbox" type="checkbox" onChange={handleCheckbox}/>teachersName</label>
+                        <label><input className="uk-checkbox" type="checkbox"  name='Cynthia Dominguez' onChange={handleCheckbox}/>Cynthia Dominguez</label>
+                        {/* <input class="uk-checkbox" type="checkbox" value='teacher1'/>
+                        <input class="uk-checkbox" type="checkbox" value='teacher2'/>
+                        <input class="uk-checkbox" type="checkbox" value='teacher3'/>
+                        <input class="uk-checkbox" type="checkbox" value='teacher4'/> */}
                     </div>
                 </div>
                 <button className='uk-button' id='signupBtn' onClick={handleStudent}>Sign up</button>
             </form>
         );
     }
+
 
     return (
         <div className='signupWrapper'>
