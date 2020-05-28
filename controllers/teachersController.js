@@ -2,6 +2,14 @@ const db = require("../models");
 
 // Defining methods for the teacherssController
 module.exports = {
+    getTeachersBySchool: function(req, res) {
+        db.Teacher
+            .find({
+                school: req.params.school
+            })
+            .then(dbModels => res.json(dbModels))
+            .catch(err => res.status(422).json(err));
+    },
     findAll: function(req, res) {
         db.Teacher
             .find(req.query)
@@ -10,7 +18,7 @@ module.exports = {
     },
     findById: function(req, res) {
         db.Teacher
-            .findById(req.params.id)
+            .findById({ _id: req.params.id })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -28,7 +36,7 @@ module.exports = {
     },
     remove: function(req, res) {
         db.Teacher
-            .findById({ _id: req.params })
+            .findById({ _id: req.params.id })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
