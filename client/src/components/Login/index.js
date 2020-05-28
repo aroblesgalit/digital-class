@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.css';
 import API from "../../utils/API";
+import { Link } from 'react-router-dom';
 
 
 function StudentLogin() {
@@ -21,7 +22,7 @@ function StudentLogin() {
         })
             // Send user to profile page
             .then(function (res) {
-                window.location.replace("/test-member");
+                window.location.replace("/students/profile");
                 console.log(res);
                 console.log("Login worked!");
             })
@@ -35,7 +36,7 @@ function StudentLogin() {
             })
                 // Send user to profile page
                 .then(function (res) {
-                    window.location.replace("/");
+                    window.location.replace("/teachers/profile");
                     console.log(res);
                     console.log("Login worked!");
                 })
@@ -47,9 +48,17 @@ function StudentLogin() {
        
     }
 
+    function handleLogOut() {
+        const [logout, setLogout] = useState({tab: 'login'});
+
+        function handleToggle(tabToggle) {
+            setLogout({tab: tabToggle});
+        }
+    }
+
     return (
         <div className='loginWrapper'>
-            <h3> Student Login:</h3>
+            <h3> Login:</h3>
             <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
                 <div className='uk-margin'>
                 <select className='uk-form-width-xsmall' ref={userRef}>
@@ -68,9 +77,15 @@ function StudentLogin() {
                     </div>
                 </div>
                 <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
+                <button className='uk-button' id='logoutBtn' onClick={handleLogOut}>Log out</button>
             </form>
+            <div className='singup'>
+                <h4 className='uk-text-meta'>Don't have an account?</h4>
+            <Link to="/signup">Sign up Now</Link>
+            </div>
         </div>
     );
+
 }
 
 export default StudentLogin;

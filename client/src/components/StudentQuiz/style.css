@@ -1,0 +1,36 @@
+.time-limit {
+  display: block;
+}
+
+.my-button-submit {
+  background-color: #2a598f;
+  color: #fefefe;
+}
+
+.radio-choice {
+  min-width: 16px;
+}
+
+.full-screen {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.my-card {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.score {
+  margin: 0 auto;
+  padding: 15px;
+  font-weight: 800;
+  font-size: 42px;
+  text-align: center;
+  color: #fff !important;
+}
+
+.my-feedback {
+  max-width: 600px;
+}
