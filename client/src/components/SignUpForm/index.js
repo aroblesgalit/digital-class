@@ -5,13 +5,15 @@ import axios from "axios";
 require("dotenv").config();
 
 function SignUpForm() {
-    //setting state for teacher and student singup
+    // Setting tab state for teacher and student singup
     const [signup, setSignup] = useState({ tab: 'teacher' });
 
+    // Handle toggle
     function handleToggle(tabToggle) {
         setSignup({ tab: tabToggle });
     }
 
+    // Load School Database
     useEffect(() => {
         loadSchoolsDB();
     }, [])
@@ -77,40 +79,41 @@ function SignUpForm() {
     function loadSchoolsDB() {
         API.getSchoolsFromDB()
         .then(res => {
-            console.log(res.data);
+            console.log("Loading Schools DB: ", res.data);
             setSchoolsDB(res.data);
         })
     }
     
-
-    function handleSearch(e) {
+    // Handle search
+    async function handleSearch(e) {
         e.preventDefault();
+        // Set schools state to empty array
         setSchools([]);
-
+        // Get references for the school search query as well as the state selected
         const schoolQuery = schoolQueryRef.current.value.toLowerCase();
         const state = stateRef.current.value;
-
-        for (let i = 0; i < schoolsDB.length; i++) {
-            if (schoolsDB[i].query === schoolQuery && schoolsDB[i].state === state) {
-                setSchools(schoolsDB[i].results);
-                console.log("Ran ForLoop");
-            }
-        }
-
-        if (schools.length < 1) {
+        // Get the school from db that matches the schoolQuery
+        const schoolDbResult = await API.getSchoolByQuery(schoolQuery)
+        // If there's a match along with the state
+        if (schoolDbResult.data && schoolDbResult.data.state === state) {
+            console.log("schooldDbResult.data: ", schoolDbResult.data);
+            // Then set school state to the results
+            setSchools(schoolDbResult.data.results);
+            // If there's no match from the database
+        } else {
             console.log("Ran third-party API");
-            API.searchSchools(schoolQuery, state)
-                .then((res) => {
-                    setSchools(res);
-                    API.addSchoolToDB({
-                        query: schoolQuery,
-                        state: state,
-                        results: res,
-                    })
-                        .then(() => console.log(schoolQuery + " added to school db"))
-                        .catch(err => console.log(err));
-                })
-                .catch(err => console.log(err));
+            // Then run the third-party API to do the search
+            const searchRes = await API.searchSchools(schoolQuery, state);
+            console.log("3rd-party API searchRes: ", searchRes);
+            // Set the school state to the result
+            setSchools(searchRes);
+            // Add the new school to the database
+            await API.addSchoolToDB({
+                query: schoolQuery,
+                state: state,
+                results: searchRes
+            });
+            console.log("Added School to DB: ", searchRes);
         }
     }
 
