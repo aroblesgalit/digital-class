@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
+import manwithcat from "../../images/manwithcat.jpg";
 require("dotenv").config();
 
 function SignUpForm() {
@@ -299,11 +300,14 @@ function SignUpForm() {
 
 
     return (
-        <div className='signupWrapper'>
-            <h3>Signup Form:</h3>
-            <button className='uk-button' id='signupBtn' onClick={() => handleToggle('teacher')}>Im a Teacher</button>
-            <button className='uk-button' id='signupBtn' onClick={() => handleToggle('student')}>Im a Student</button>
-            {signup.tab === 'teacher' ? teacherSignup() : studentSignup()}
+        <div className="uk-flex uk-child-width-1-2">
+            <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
+            <div className='signupWrapper'>
+                <h3>Signup Form:</h3>
+                <button className='uk-button' id='signupBtn' onClick={() => handleToggle('teacher')}>Im a Teacher</button>
+                <button className='uk-button' id='signupBtn' onClick={() => handleToggle('student')}>Im a Student</button>
+                {signup.tab === 'teacher' ? teacherSignup() : studentSignup()}
+            </div>
         </div>
     );
 }
