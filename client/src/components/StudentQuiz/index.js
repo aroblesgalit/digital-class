@@ -75,6 +75,27 @@ function StudentQuiz() {
     })
   }
 
+  const handleSubmitClick = async () => {
+    // build result for sending to db
+    const answers = [];
+    questionState.questions.map(item => {
+      return answers.push(item.stuAnswer);
+    });
+
+    const student = await API.getStudentData();
+    const result = {
+      answers: answers,
+      quiz: id,
+      student: student.data.id,
+      feedback: questionState.feedback,
+      score: questionState.score
+    }
+    
+    await API.createResult(result).then(console.log("Result Submitted!"));
+    window.location.replace("/students/profile");
+
+  }
+
   
 
   // const timer = () => {
@@ -119,7 +140,7 @@ function StudentQuiz() {
     return score.toFixed(2);
   }
 
-  const handleSubmitClick = (event) => {
+  const handleDoneClick = (event) => {
     event.preventDefault();
     const score = gradeQuiz();
     setQuestionState({...questionState, page: "feedback", score: score});
@@ -174,7 +195,7 @@ function StudentQuiz() {
             }
             {questionState.currentQuestion < questionState.questions.length - 1 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
-              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Done</label>
+              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleDoneClick} >Done</label>
             }
           </div>
         </form>
@@ -197,7 +218,7 @@ function StudentQuiz() {
         <br/>
         <textarea className="uk-textarea uk-margin-top my-feedback" id="feedback" type="textarea" placeholder="Feedback..." onChange={(event) => handleFeedbackChange(event)}/>
         <br/>
-        <label className="uk-button uk-button-default my-button-submit uk-margin-top" onClick={() => handleStart()}>Submit</label>
+        <label className="uk-button uk-button-default my-button-submit uk-margin-top" onClick={() => handleSubmitClick()}>Submit</label>
       </div>
       
     )
