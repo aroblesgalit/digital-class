@@ -5,6 +5,8 @@ import API from '../../utils/API';
 
 function ResultsTable(props) {
   const [resultState, setResultState] = useState([{_id: 1}]);
+  const [tabState, setTabState] = useState({tab: "table"});
+
   useEffect(() => {
     getRestuls();
   }, []);
@@ -18,6 +20,9 @@ function ResultsTable(props) {
   })
 };
 
+const handleTabChange = (tab) => {
+  setTabState({...tabState, tab: tab});
+}
 
   return (
     <div className="result-wrapper">
@@ -28,11 +33,11 @@ function ResultsTable(props) {
           </Link>
         </div>
         <div>
-          <div className="nav-icon">
-            <i class="fas fa-table"></i>
+          <div className="nav-icon" onClick={() => handleTabChange("table")}>
+            <i className="fas fa-table"></i>
           </div>
-          <div className="nav-icon">
-            <i class="fas fa-chart-bar"></i>
+          <div className="nav-icon" onClick={() => handleTabChange("chart")}>
+            <i className="fas fa-chart-bar"></i>
           </div>
         </div>        
       </div>
