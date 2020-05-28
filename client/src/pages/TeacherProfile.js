@@ -36,7 +36,7 @@ function TeacherProfile() {
  return(
    <div>
      <ProfileLeftCol email={teacherState.email} name={teacherState.name} school={teacherState.school} subject={teacherState.subject} />
-     <TeacherProfileContent />
+     <TeacherProfileContent id={teacherState.id} />
     </div>
  );
 }
