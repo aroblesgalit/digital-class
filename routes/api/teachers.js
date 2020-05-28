@@ -15,7 +15,7 @@ router
     .delete(teachersController.remove);
 
 router 
-    .route("/:school")
+    .route("/school/:school")
     .get(teachersController.getTeachersBySchool);
 
 module.exports = router;

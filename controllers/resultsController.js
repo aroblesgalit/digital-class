@@ -5,7 +5,7 @@ module.exports = {
     getResultsByQuiz: function(req, res) {
         db.Result
             .find({
-                quiz: req._id
+                quiz: req.params.quiz
             })
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
