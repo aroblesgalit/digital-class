@@ -47,4 +47,22 @@ router.get("/user_data", function (req, res) {
     }
 });
 
+router.get("/quizzes", function (req, res) {
+    db.Quiz
+        .find({
+            teacher: req.user._id
+        })
+        .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
+
+router.get("/students", function (req, res) {
+    db.Student
+        .find({
+            teachers: req.user._id
+        })
+        .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
+
 module.exports = router;

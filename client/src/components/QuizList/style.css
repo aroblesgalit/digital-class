@@ -1,0 +1,15 @@
+.my-button, .uk-button-default:focus {
+  background-color: #7cebad;
+  border-color: transparent;
+  width: unset !important;
+}
+
+.uk-link, a {
+  color: #555;
+  text-decoration: none;
+}
+
+.uk-link, a:hover {
+  color: #111;
+  text-decoration: none;
+}

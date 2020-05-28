@@ -6,8 +6,7 @@ function QuizForm() {
   const [newQuizState, setNewQuizState] = useState({
     title: "",
     teacher: "",
-    timeLimitMin: 0,
-    timeLimitSec: 0,
+    timeLimit: 0,
     questions: [
       {
         id: 1,
@@ -20,6 +19,13 @@ function QuizForm() {
 
   // console.log("newQuizState:  " + JSON.stringify(newQuizState))
 
+  useEffect(() => {
+    API.getTeacher().then(res => {
+      setNewQuizState({
+        ...newQuizState, teacher: res.data.id
+      })
+    })
+  }, [])
 
   const addQuestion = event => {
     event.preventDefault();
@@ -44,13 +50,7 @@ function QuizForm() {
 
   const handleMinutesChange = (event) => {
     setNewQuizState({
-      ...newQuizState, timeLimitMin: event.target.value
-    })
-  }
-
-  const handleSecondsChange = (event) => {
-    setNewQuizState({
-      ...newQuizState, timeLimitSec: event.target.value
+      ...newQuizState, timeLimit: event.target.value
     })
   }
 
@@ -99,15 +99,12 @@ function QuizForm() {
 
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    API.getTeacher().then(res => {
-      setNewQuizState({
-        ...newQuizState, teacher: res.data.id
+    API.createQuiz(newQuizState)
+      .then(res => {
+        console.log(res);
+        window.location.replace("/teachers/profile");
       })
-    }).then(() => {
-      API.createQuiz(newQuizState);
-      console.log("submitted");
-    });
-  
+      .catch(err => console.log(err));
   }
 
   return (
@@ -121,13 +118,9 @@ function QuizForm() {
               <input className="uk-input" id="quiz-title" type="text" onChange={(event) => handleTitleChange(event)} />
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
-              <div className="uk-width-1-2">
-                <label htmlFor="minutes" className="uk-form-label">Minutes</label>
+              <div className="uk-width-1-1">
+                <label htmlFor="minutes" className="uk-form-label">Time Limit (Minutes)</label>
                 <input className="uk-input" id="minutes" type="number" min="0" onChange={(event) => handleMinutesChange(event)} placeholder="00" />
-              </div>
-              <div className="uk-width-1-2">
-                <label htmlFor="seconds" className="uk-form-label">Seconds</label>
-                <input className="uk-input" id="seconds" type="number" min="0" max="59" onChange={(event) => handleSecondsChange(event)} placeholder=":00" />
               </div>
             </div>
           </div>
