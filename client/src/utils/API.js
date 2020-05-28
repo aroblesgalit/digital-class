@@ -38,7 +38,7 @@ export default {
   },
   // Get teachers by school
   getTeachersBySchool: function (school) {
-    return axios.get("/api/teachers/" + school);
+    return axios.get("/api/teachers/school/" + school);
   },
   // Get all students under the authenticated teacher
   getStudentsByTeacher: function () {
