@@ -83,6 +83,8 @@ function ResultsTable(props) {
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [{
             ticks: {
@@ -145,7 +147,7 @@ function ResultsTable(props) {
             </tbody>
           </table>
 
-        ) : <div>
+        ) : <div className="chart-container">
             <canvas id="myChart"></canvas>
           </div>}
       </div>

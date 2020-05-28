@@ -35,10 +35,9 @@ td {
   cursor: pointer;
 }
 
-#myChart {
-  width: 60vw;
-  height: 500px;
-  margin: 20px auto;
+.chart-container {
+  height: 60vh;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 900px) {
