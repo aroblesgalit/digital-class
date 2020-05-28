@@ -1,6 +1,8 @@
 import axios from "axios";
 require("dotenv").config();
 
+const statesSelect = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"];
+
 export default {
   // Log student in
   loginStudent: function (credentials) {
@@ -55,7 +57,7 @@ export default {
     return axios.get("/api/teacher-login/quizzes");
   },
   // Get a quiz by its id
-  getQuizById: function(id) {
+  getQuizById: function (id) {
     return axios.get("/api/quizzes/" + id);
   },
   // Get all quizzes
@@ -63,7 +65,7 @@ export default {
     return axios.get("/api/quizzes")
   },
   // get quizzes for student by teacher id
-  getQuizzesForStudent : function(id) {
+  getQuizzesForStudent: function (id) {
     return axios.get("/api/quizzes/teacher/" + id)
   },
   // Search for schools
@@ -93,5 +95,9 @@ export default {
   // Get school by query
   getSchoolByQuery: function (query) {
     return axios.get("/api/schools/" + query);
+  },
+  // Get all 50 states
+  getStates: function () {
+    return statesSelect;
   }
 };

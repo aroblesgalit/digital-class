@@ -16,6 +16,7 @@ function SignUpForm() {
     // Load School Database
     useEffect(() => {
         loadSchoolsDB();
+        loadStates();
     }, [])
 
     // Create references for all the necessary fields
@@ -75,6 +76,11 @@ function SignUpForm() {
     }
 
     const [schoolsDB, setSchoolsDB] = useState([]);
+    const [states, setStates] = useState([]);
+
+    function loadStates() {
+        setStates(API.getStates());
+    }
 
     function loadSchoolsDB() {
         API.getSchoolsFromDB()
@@ -156,8 +162,13 @@ function SignUpForm() {
                         <label className='uk-form-label uk-text'>State:</label>
                         <div className='uk-form-controls'>
                             <select className='uk-form-width-xsmall' ref={stateRef}>
-                                <option value='TX'>TX</option>
-                                <option value='CA'>CA</option>
+                                {
+                                    states.length >= 1 ? (
+                                        states.map(state => 
+                                            <option key={state} value={state}>{state}</option>
+                                        )
+                                    ) : <option>--Select a State--</option>
+                                }
                             </select>
                         </div>
                     </div>
