@@ -36,8 +36,16 @@ h2 {
     width: 100%;
 }
 
-.teacherForm select {
+.teacherForm select, .studentForm select {
     height: 38px;
+}
+
+.studentForm {
+    padding: 0 20px;
+}
+
+.stuInput {
+    width: 100%;
 }
 
 .stateSel {
@@ -94,6 +102,12 @@ h2 {
 
 .loginLink:hover {
     color: rgb(41, 175, 95);
+}
+
+.noTeacherText {
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 0
 }
 
 
