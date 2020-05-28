@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import { Link } from 'react-router-dom';
 
 
+
 function StudentLogin() {
    
     // Create references for the email and password inputs
@@ -18,7 +19,7 @@ function StudentLogin() {
              // Make a post request to the login route and pass in the email and password
         API.loginStudent({
             email: emailRef.current.value,
-            password: passwordRef.current.value
+            password: passwordRef.current.value,
         })
             // Send user to profile page
             .then(function (res) {
@@ -43,17 +44,9 @@ function StudentLogin() {
                 .catch(function (err) {
                     console.log(err);
                 });
-        }
-        
+               
+            }
        
-    }
-
-    function handleLogOut() {
-        const [logout, setLogout] = useState({tab: 'login'});
-
-        function handleToggle(tabToggle) {
-            setLogout({tab: tabToggle});
-        }
     }
 
     return (
@@ -77,7 +70,6 @@ function StudentLogin() {
                     </div>
                 </div>
                 <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
-                <button className='uk-button' id='logoutBtn' onClick={handleLogOut}>Log out</button>
             </form>
             <div className='singup'>
                 <h4 className='uk-text-meta'>Don't have an account?</h4>
