@@ -9,11 +9,15 @@ function ResultsTable(props) {
     getRestuls();
   }, []);
   const getRestuls = async () => {
-    await API.getResultsByQuiz(props.id).then(res => {
-      console.log(res);
+    await API.getResultsByQuiz(props.id).then(async (res) => {
+      for (let i = 0; i<res.data.length; i++) {
+        await API.getStudentById(res.data[i].student).then(student => res.data[i].name = student.data.name);
+      }
       setResultState(res.data);
-    })
-  }
+    
+  })
+};
+
 
   return (
     <div className="result-wrapper">
@@ -36,7 +40,7 @@ function ResultsTable(props) {
               <tr key={item._id}>
                 <td>
                   <div className="name">
-                    {item.student}
+                    {item.name}
                   </div>
                 </td>
                 <td>{item.score}</td>

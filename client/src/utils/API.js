@@ -93,5 +93,8 @@ export default {
   // Get school by query
   getSchoolByQuery: function (query) {
     return axios.get("/api/schools/" + query);
+  },
+  getStudentById: function (id) {
+    return axios.get("/api/students/" + id);
   }
 };
