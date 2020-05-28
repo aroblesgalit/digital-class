@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import axios from "axios";
@@ -132,7 +132,7 @@ function SignUpForm() {
                             </select>
                         </div>
                     </div>
-                    <button className='uk-button' onClick={handleSearch}>Search for school</button>
+                    {/* <button className='uk-button' onClick={handleSearch}>Search for school</button> */}
                 </div>
                 <div className="uk-margin">
                     <label className="uk-form-label">Select</label>
@@ -176,7 +176,6 @@ function SignUpForm() {
             </div>
             <div className='uk-margin uk-flex'>
                 <div>
-                    <label className='uk-form-label uk-text'>Search For School:</label>
                     <div className='uk-form-controls'>
                         <input className='uk-input uk-form-width-medium' id='School' type='text' ref={schoolQueryRef} />
                     </div>
@@ -220,6 +219,7 @@ function SignUpForm() {
         </form>         
  );
 }
+
 
     return (
         <div className='signupWrapper'>
