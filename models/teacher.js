@@ -17,7 +17,12 @@ const teacherSchema = new Schema({
     trim: true,
     required: "Password is Required",
     validate: [({ length }) => length >= 6, "Password should be longer."]
-  }
+  },
+  // phoneNumner: {
+  //   type: Number,
+  //   match: [/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Please enter a valid Phone Number"],
+  //   validate: [({ length }) => length >= 10, "Please include the area code"] 
+  // }
 })
 
 
