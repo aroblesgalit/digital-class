@@ -58,34 +58,35 @@ function StudentLogin() {
     }
 
     return (
-        <div className="uk-flex uk-child-width-1-2">
-        <div><img src={womenoncomp} alt="Woman on laptop" uk-img="true" /></div>
-            <div className='loginWrapper'>
-                <h3> Login:</h3>
-                <form className='uk-form-stacked uk-position-relative ' uk-height-viewport='expand: true'>
+        <div className="uk-flex uk-child-width-1-2 loginContainer">
+            <div><img src={womenoncomp} alt="Woman on laptop" uk-img="true" /></div>
+            <div className="loginWrapper">
+                <h2>LOGIN</h2>
+                <form className='uk-form-stacked uk-position-relative loginForm' uk-height-viewport='expand: true'>
                     <div className='uk-margin'>
-                        <select className='uk-form-width-xsmall' ref={userRef}>
-                            <option value='teacher'>Teacher Login</option>
-                            <option value='student'>Student Login</option>
+                        <label className="uk-form-label uk-text">User Type</label>
+                        <select ref={userRef}>
+                            <option value='teacher'>I'm a teacher</option>
+                            <option value='student'>I'm a student</option>
                         </select>
-                        <label className='uk-form-label uk-text'>Email:</label>
+                    </div>
+                    <div className="uk-margin">
+                        <label className='uk-form-label uk-text'>Email</label>
                         <div className='uk-form-controls'>
-                            <input className='uk-input uk-form-width-medium' id='email' type='text' placeholder='student@email.com' ref={emailRef} />
+                            <input className='uk-input' id='email' type='text' placeholder='johndoe@email.com' ref={emailRef} />
                         </div>
                     </div>
                     <div className='uk-margin'>
-                        <label className='uk-form-label uk-text'>Password:</label>
+                        <label className='uk-form-label uk-text'>Password</label>
                         <div className='uk-form-controls'>
-                            <input className='uk-input uk-form-width-medium' id='password' type='password' ref={passwordRef} />
+                            <input className='uk-input' id='password' type='password' placeholder="******" ref={passwordRef} />
                         </div>
                     </div>
-                    <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
-                    <button className='uk-button' id='logoutBtn' onClick={handleLogOut}>Log out</button>
+                    <div className="uk-flex uk-flex-column uk-flex-middle">
+                        <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
+                        <div className="signupText">Don't have an account? <Link to="/signup" className="signupLink">Sign up here</Link></div>
+                    </div>
                 </form>
-                <div className='singup'>
-                    <h4 className='uk-text-meta'>Don't have an account?</h4>
-                    <Link to="/signup">Sign up Now</Link>
-                </div>
             </div>
         </div>
     );
