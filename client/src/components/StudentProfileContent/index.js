@@ -4,6 +4,7 @@ import QuizList from '../QuizList';
 
 function StudentProfileContent(props) {
 
+  console.log("student profile content props : " + props);
   return (
 
     <div className="content">
@@ -11,7 +12,7 @@ function StudentProfileContent(props) {
         <li className="uk-active" ><a>Quizzes</a></li>
       </ul>
 
-      {<QuizList quizzes={props.quizzes} user={"student"} />}
+      {<QuizList quizzes={props.quizzes[0]} user={"student"} />}
     </div>
 
   )
