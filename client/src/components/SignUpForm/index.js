@@ -15,7 +15,9 @@ function SignUpForm() {
     // Load School Database
     useEffect(() => {
         loadSchoolsDB();
+        loadStates();
     }, [])
+
 
     // Create references for all the necessary fields
     const emailRef = useRef();
@@ -25,7 +27,6 @@ function SignUpForm() {
     const schoolRef = useRef();
     const schoolQueryRef = useRef();
     const stateRef = useRef();
-    const teacherRef = useRef();
 
     const [schools, setSchools] = useState([]);
 
@@ -54,12 +55,13 @@ function SignUpForm() {
     function handleStudent(e) {
         e.preventDefault();
         // Student Data ----------------
+        console.log(checkTeachers);
         API.signupStudent({
             email: emailRef.current.value,
             password: passwordRef.current.value,
             name: nameRef.current.value,
             school: schoolRef.current.value,
-            teacher: teacherRef.current.value
+            teachers: checkTeachers
         })
 
             //send to profile page 
@@ -74,15 +76,48 @@ function SignUpForm() {
     }
 
     const [schoolsDB, setSchoolsDB] = useState([]);
+    const [states, setStates] = useState([]);
+
+    function loadStates() {
+        setStates(API.getStates());
+    }
 
     function loadSchoolsDB() {
         API.getSchoolsFromDB()
-        .then(res => {
-            console.log("Loading Schools DB: ", res.data);
-            setSchoolsDB(res.data);
-        })
+            .then(res => {
+                console.log("Loading Schools DB: ", res.data);
+                setSchoolsDB(res.data);
+            })
     }
-    
+
+    const [checkTeachers, setcheckTeachers] = useState([]);
+    // Handle for checking checkboxes for teachers
+    function handleCheckbox(e) {
+        console.log('checked', e.target.checked);
+        console.log('name', e.target.name);
+
+        const newTeachers = [...checkTeachers];
+        if (e.target.checked) {
+            newTeachers.push(e.target.name);
+        }
+        else {
+            const index = newTeachers.indexOf(e.target.name)
+            newTeachers.splice(index, 1);
+        }
+        setcheckTeachers(newTeachers);
+    }
+
+    const [teachersSelect, setTeachersSelect] = useState([]);
+
+    // Handle for when a school is selected
+    function handleSchoolSelect() {
+        API.getTeachersBySchool(schoolRef.current.value)
+            .then(res => {
+                console.log("Res.data from handleSchoolSelect: ", res.data)
+                setTeachersSelect(res.data);
+            })
+    };
+
     // Handle search
     async function handleSearch(e) {
         e.preventDefault();
@@ -114,6 +149,7 @@ function SignUpForm() {
             });
             console.log("Added School to DB: ", searchRes);
         }
+        handleSchoolSelect();
     }
 
     function teacherSignup() {
@@ -155,8 +191,13 @@ function SignUpForm() {
                         <label className='uk-form-label uk-text'>State:</label>
                         <div className='uk-form-controls'>
                             <select className='uk-form-width-xsmall' ref={stateRef}>
-                                <option value='TX'>TX</option>
-                                <option value='CA'>CA</option>
+                                {
+                                    states.length >= 1 ? (
+                                        states.map(state =>
+                                            <option key={state} value={state}>{state}</option>
+                                        )
+                                    ) : <option>--Select a State--</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -213,41 +254,49 @@ function SignUpForm() {
                         <label className='uk-form-label uk-text'>State:</label>
                         <div className='uk-form-controls'>
                             <select className='uk-form-width-xsmall' ref={stateRef}>
-                                <option value='TX'>TX</option>
-                                <option value='CA'>CA</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="uk-margin">
-                        <label className="uk-form-label">Select</label>
-                        <div className="uk-form-controls">
-                            <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} >
                                 {
-                                    schools.length >= 1 ? (
-                                        schools.map(school =>
-                                            <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
+                                    states.length >= 1 ? (
+                                        states.map(state =>
+                                            <option key={state} value={state}>{state}</option>
                                         )
-                                    ) : <option>--Select a School--</option>
+                                    ) : <option>--Select a State--</option>
                                 }
                             </select>
                         </div>
                     </div>
+                    <button className='uk-button' onClick={handleSearch}>Search for school</button>
+                </div>
+                <div className="uk-margin">
+                    <label className="uk-form-label">Select</label>
+                    <div className="uk-form-controls">
+                        <select className="uk-select-medium" id="form-stacked-select" ref={schoolRef} onChange={handleSchoolSelect}>
+                            {
+                                schools.length >= 1 ? (
+                                    schools.map(school =>
+                                        <option key={school.schoolid} value={school.schoolName}>{school.schoolName}</option>
+                                    )
+                                ) : <option>--Select a School--</option>
+                            }
+                        </select>
+                    </div>
                 </div>
                 <div className="uk-margin">
                     <label className="uk-form-label">Results:</label>
-                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid" ref={teacherRef}>
-                        <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Marr<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Williams<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mrs.Sullivan<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mr.Berry<input class="uk-checkbox" type="checkbox" /></label>
-                        <label>Mr.Berry<input class="uk-checkbox" type="checkbox" /></label>
+                    <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid" >
+                        {
+                            teachersSelect ? (
+                                teachersSelect.map(teacher =>
+                                    <label key={teacher._id}><input name={teacher._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />{teacher.name}</label>
+                                )
+                            ) : <p>Please search for a school first to view the teachers.</p>
+                        }
                     </div>
                 </div>
                 <button className='uk-button' id='signupBtn' onClick={handleStudent}>Sign up</button>
             </form>
         );
     }
+
 
     return (
         <div className='signupWrapper'>

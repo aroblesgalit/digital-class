@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import { Link } from 'react-router-dom';
@@ -48,6 +48,14 @@ function StudentLogin() {
        
     }
 
+    function handleLogOut() {
+        const [logout, setLogout] = useState({tab: 'login'});
+
+        function handleToggle(tabToggle) {
+            setLogout({tab: tabToggle});
+        }
+    }
+
     return (
         <div className='loginWrapper'>
             <h3> Login:</h3>
@@ -69,6 +77,7 @@ function StudentLogin() {
                     </div>
                 </div>
                 <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
+                <button className='uk-button' id='logoutBtn' onClick={handleLogOut}>Log out</button>
             </form>
             <div className='singup'>
                 <h4 className='uk-text-meta'>Don't have an account?</h4>
@@ -76,6 +85,7 @@ function StudentLogin() {
             </div>
         </div>
     );
+
 }
 
 export default StudentLogin;

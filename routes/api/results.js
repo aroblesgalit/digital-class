@@ -14,6 +14,7 @@ router
     .put(resultsController.update)
     .delete(resultsController.remove);
 
+// Match with "/api/results/:quiz"
 router
     .route("/quiz/:quiz")
     .get(resultsController.getResultsByQuiz);
