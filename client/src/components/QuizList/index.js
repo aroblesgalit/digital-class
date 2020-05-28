@@ -19,7 +19,7 @@ function QuizList(props) {
               </div>
               <div className="uk-margin-top">
                 {props.user === "teacher" ?
-                  <Link to="/results/">
+                  <Link to={"/results/" + item._id}>
                     View Results
             </Link>
                   : ""}

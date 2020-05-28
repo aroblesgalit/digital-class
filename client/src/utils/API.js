@@ -48,7 +48,7 @@ export default {
   },
   // Get all results for a quiz
   getResultsByQuiz: function (quizId) {
-    return axios.get("/api/results", quizId);
+    return axios.get("/api/results/quiz/"+ quizId);
   },
   // Get all quizzes by teacher's id
   getQuizzesByTeacher: function () {
