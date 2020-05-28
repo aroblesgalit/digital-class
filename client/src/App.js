@@ -39,7 +39,7 @@ function App() {
           <Route path='/students/quiz/:id'>
             <TakeQuiz />
           </Route>
-          <Route path="/results/:id">
+          <Route path="/teachers/results/:id">
             <QuizResults />
           </Route>
         </Switch>

@@ -109,10 +109,8 @@ function ResultsTable(props) {
     <div>
       <div className="result-wrapper">
         <div className="uk-flex uk-flex-between">
-          <div>
-            <Link to="teachers/profile">
-              {"< Back"}
-            </Link>
+          <div className="back" onClick={() => {window.location.replace("/teachers/profile")}}>
+            {"< Back"}
           </div>
           <div>
             <div className="nav-icon" onClick={() => handleTabChange("table")}>

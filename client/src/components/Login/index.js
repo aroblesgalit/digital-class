@@ -73,7 +73,7 @@ function StudentLogin() {
                 <div className='uk-margin'>
                     <label className='uk-form-label uk-text'>Password:</label>
                     <div className='uk-form-controls'>
-                        <input className='uk-input uk-form-width-medium' id='password' type='text' ref={passwordRef} />
+                        <input className='uk-input uk-form-width-medium' id='password' type='password' ref={passwordRef} />
                     </div>
                 </div>
                 <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
