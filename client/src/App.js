@@ -14,7 +14,7 @@ import TestMember from "./pages/TestMember";
 import PrivateRoute from "./components/PrivateRoute";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
-import homepage from "./pages/homepage";
+import Homepage from "./pages/homepage";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <SignUpForm />
+            <Homepage />
           </Route>
           <Route exact path="/teachers/createquiz">
             <CreateQuiz />
