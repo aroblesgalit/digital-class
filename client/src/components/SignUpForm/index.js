@@ -303,9 +303,23 @@ function SignUpForm() {
         <div className="uk-flex uk-child-width-1-2">
             <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
             <div className='signupWrapper'>
-                <h3>Signup Form:</h3>
-                <button className='uk-button' id='signupBtn' onClick={() => handleToggle('teacher')}>Im a Teacher</button>
-                <button className='uk-button' id='signupBtn' onClick={() => handleToggle('student')}>Im a Student</button>
+                <h2>SIGNUP</h2>
+                <button 
+                    className='uk-button' 
+                    id='signupBtn' 
+                    style={signup.tab === "teacher" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#8e8e8e"}} 
+                    onClick={() => handleToggle('teacher')}
+                >
+                    Im a Teacher
+                </button>
+                <button 
+                    className='uk-button' 
+                    id='signupBtn' 
+                    style={signup.tab === "student" ? {backgroundColor:"#7CEDAB"} : {backgroundColor:"#8e8e8e"}} 
+                    onClick={() => handleToggle('student')}
+                >
+                    Im a Student
+                </button>
                 {signup.tab === 'teacher' ? teacherSignup() : studentSignup()}
             </div>
         </div>

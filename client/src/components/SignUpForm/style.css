@@ -4,10 +4,10 @@
     box-sizing: border-box;
 }
 
-h3 {
+h2 {
     background-color: #7CEDAB;
     text-align: center;
-
+    padding: 10px;
 }
 
 .signupWrapper{
@@ -39,6 +39,5 @@ background-color: #E1E1E1;
 }
 
 #signupBtn:hover, #loginBtn:hover {
-    background-color: #E1E1E1;
+    background-color: rgb(79, 194, 127);
 }
-
