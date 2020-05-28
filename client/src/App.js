@@ -10,6 +10,7 @@ import TakeQuiz from "./pages/TakeQuiz";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
 import StudentProfile from './pages/StudentProfile';
+import Homepage from "./pages/homepage";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/">
-            <SignUpForm />
+            <Homepage />
           </Route>
           <Route exact path="/teachers/createquiz">
             <CreateQuiz />
@@ -38,7 +39,7 @@ function App() {
           <Route path='/students/quiz/:id'>
             <TakeQuiz />
           </Route>
-          <Route path="/results/:id">
+          <Route path="/teachers/results/:id">
             <QuizResults />
           </Route>
         </Switch>

@@ -3,7 +3,6 @@ import './style.css'
 import { Link } from "react-router-dom"
 
 
-
 function Nav() {
   return (
 
@@ -15,7 +14,6 @@ function Nav() {
           </li>
         </ul>
       </div>
-
       <div className="uk-navbar-right">
         <ul className="uk-navbar-nav">
           <li className="uk-active">
