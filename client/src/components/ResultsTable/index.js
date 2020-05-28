@@ -52,7 +52,7 @@ function ResultsTable(props) {
   // set up chart
   const renderChart = () => {
     var ctx = document.getElementById('myChart');
-    const labels = [];
+    const labels = []
     const bgColors = [];
     const data = [];
     const borderColors = [];
@@ -70,6 +70,12 @@ function ResultsTable(props) {
       }
       data.push(thisans);
     }
+
+    // if there are more than 12 questions, add responsive styling to chart and nav-icons
+    if (data.length > 12) {
+      document.getElementById("chart-container").classList.add("chart-container-responsive");
+    }
+
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -147,7 +153,7 @@ function ResultsTable(props) {
             </tbody>
           </table>
 
-        ) : <div className="chart-container">
+        ) : <div id="chart-container">
             <canvas id="myChart"></canvas>
           </div>}
       </div>

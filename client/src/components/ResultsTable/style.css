@@ -35,7 +35,7 @@ td {
   cursor: pointer;
 }
 
-.chart-container {
+#chart-container {
   height: 60vh;
   margin: 0 auto;
 }
@@ -43,5 +43,11 @@ td {
 @media screen and (max-width: 900px) {
   .result-wrapper {
     max-width: unset;
+    overflow: auto;
+  }
+
+  .chart-container-responsive {
+    width: 600px;
+    padding: 0 20px;
   }
 }
