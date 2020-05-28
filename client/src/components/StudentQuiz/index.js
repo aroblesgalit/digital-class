@@ -11,7 +11,7 @@ function StudentQuiz() {
     timeLimit: 0,
     questions: [{
       id: 1,
-      body: "",
+      question: "",
       choices: [],
       answer: 0,
       stuAnswer: ""

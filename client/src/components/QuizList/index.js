@@ -8,7 +8,7 @@ function QuizList(props) {
   return (
     <div>
     <div className="uk-grid-column-small uk-grid-row-large uk-child-width-1-1" uk-grid="true">
-      {props.quizzes.length > 0 && props.quizzes[0].length!==0 ? (props.quizzes[0].map(item => {
+      {props.quizzes.length > 0 ? (props.quizzes.map(item => {
         return(
           <div className="uk-card uk-card-small uk-card-body uk-card-default" key={item._id}>
             <div className="uk-card-title">
