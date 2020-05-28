@@ -5,8 +5,11 @@ import API from '../../utils/API';
 const Chart = require('chart.js');
 
 function ResultsTable(props) {
+  // result state is an array of objects where each object is an individual result
   const [resultState, setResultState] = useState([{ _id: 1 }]);
+  // Quiz State is an array of correct answers
   const [quizState, setQuizState] = useState({});
+  // tab state contains the active tab
   const [tabState, setTabState] = useState({ tab: "table" });
 
   useEffect(() => {
@@ -49,29 +52,33 @@ function ResultsTable(props) {
   // set up chart
   const renderChart = () => {
     var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
+    const labels = [];
+    const bgColors = [];
+    const data = [];
+    const borderColors = [];
+    for (let i = 0; i<quizState.length; i++) {
+      labels.push("Q" + (i+1));
+      bgColors.push('rgb(42, 89, 143, 0.2)');
+      borderColors.push('rgb(42, 89, 143, 1)');
+      // for each student
+      let thisans = 0;
+      for (let j=0; j<resultState.length; j++) {
+        // if they answered correctly, increment data[i];
+        if (quizState[i] === resultState[j].answers[i]){
+          thisans++;
+        }
+      }
+      data.push(thisans);
+    }
+    new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          label: '# Correct Students',
+          data: data,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
           borderWidth: 1
         }]
       },
@@ -79,7 +86,8 @@ function ResultsTable(props) {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              stepSize: 1
             }
           }]
         }
