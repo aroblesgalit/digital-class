@@ -26,7 +26,7 @@ function StudentQuiz() {
     getQuiz().then(res => {
       console.log(res);
       res.data.questions.map(item => {
-        item.stuAnswer = "";
+        return item.stuAnswer = "";
       });
       setQuestionState({
         ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, started: false, title: res.data.title
