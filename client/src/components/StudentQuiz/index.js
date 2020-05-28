@@ -7,7 +7,6 @@ import API from '../../utils/API';
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
     started: "",
-    score: "",
     page: "quiz",
     timeLimit: 0,
     questions: [{
@@ -17,7 +16,9 @@ function StudentQuiz() {
       answer: 0,
       stuAnswer: ""
     }],
-    currentQuestion: 0
+    currentQuestion: 0,
+    score: "",
+    feedback: ""
   });
 
   // load quiz into state on page load
@@ -66,6 +67,15 @@ function StudentQuiz() {
       ...questionState, currentQuestion: questionState.currentQuestion - 1
     });
   }
+
+  const handleFeedbackChange = (event) => {
+    const feedback = event.target.value;
+    setQuestionState({
+      ...questionState, feedback: feedback
+    })
+  }
+
+  
 
   // const timer = () => {
   //   let interval = setTimeout(() => {
@@ -164,7 +174,7 @@ function StudentQuiz() {
             }
             {questionState.currentQuestion < questionState.questions.length - 1 ?
               <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={handleNextQuestion}>Next</label> :
-              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Submit</label>
+              <label className="uk-button uk-button-default my-button-submit uk-margin-small-right" onClick={handleSubmitClick} >Done</label>
             }
           </div>
         </form>
@@ -175,13 +185,19 @@ function StudentQuiz() {
   else if (page === "feedback") {
     return (
       <div className="full-screen">
-        <div className="uk-card uk-card-body">
-          {questionState.score}%
+        <div className="uk-card uk-card-body uk-card-small uk-card-secondary my-card">
+          <div className="uk-text-large score">
+            {questionState.score}%
+          </div>
         </div>
         <br/><br/>
         Do you have any comments about this quiz for your teacher?
+        <br/><br/>
+        <b>IMPORTANT:</b> Your score will not be submitted until you click submit below.
         <br/>
-        <label className="uk-button uk-button-default my-button uk-margin-top" onClick={() => handleStart()}>Start</label>
+        <textarea className="uk-textarea uk-margin-top my-feedback" id="feedback" type="textarea" placeholder="Feedback..." onChange={(event) => handleFeedbackChange(event)}/>
+        <br/>
+        <label className="uk-button uk-button-default my-button-submit uk-margin-top" onClick={() => handleStart()}>Submit</label>
       </div>
       
     )
