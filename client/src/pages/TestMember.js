@@ -19,7 +19,8 @@ function TestMember() {
                     email: res.data.email,
                     name: res.data.name,
                     teachers: res.data.teachers,
-                    school: res.data.school
+                    school: res.data.school,
+                    id: res.data.id
                 })
 
             })

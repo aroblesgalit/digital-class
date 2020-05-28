@@ -2,10 +2,10 @@ const db = require("../models");
 
 // Defining methods for the teacherssController
 module.exports = {
-    getQuizByTeacher: function(req, res) {
+    getQuizzesForStudent: function(req, res) {
         db.Quiz
             .find({
-                teacher: req.user._id
+                teacher: req.params.id
             })
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));

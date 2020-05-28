@@ -11,7 +11,7 @@ function ProfileLeftCol(props) {
       <div className="uk-text-small uk-margin-bottom">
         {props.school}
       </div>
-      <img src="https://via.placeholder.com/300x300" alt="Profile Picture" className="profile-picture" />
+      <img src="https://via.placeholder.com/300x300" alt="Profile Avatar" className="profile-picture" />
       {props.teachers ? (<div className="uk-text-small uk-margin-top">
         {props.teachers.join(", ")}
       </div>) : <div></div> }
