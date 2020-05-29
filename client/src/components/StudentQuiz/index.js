@@ -6,7 +6,7 @@ import API from '../../utils/API';
 
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
-    started: "",
+    started: false,
     page: "quiz",
     timeLimit: 0,
     questions: [{
@@ -21,16 +21,21 @@ function StudentQuiz() {
     feedback: ""
   });
 
+  const [timerState, setTimerState] = useState({
+    minutes: 0,
+    seconds: 0
+  })
+
   // load quiz into state on page load
   useEffect(() => {
     getQuiz().then(res => {
-      console.log(res);
       res.data.questions.map(item => {
         return item.stuAnswer = "";
       });
       setQuestionState({
-        ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, started: false, title: res.data.title
+        ...questionState, questions: res.data.questions, timeLimit: 1, title: res.data.title
       });
+      setTimerState({...timerState, minutes: 1});
     })
   }, []);
 
@@ -97,30 +102,29 @@ function StudentQuiz() {
   }
 
   
+var interval;
+  const timer = () => {
+    var min = timerState.minutes;
+    var sec = timerState.seconds;
 
-  // const timer = () => {
-  //   let interval = setTimeout(() => {
-  //     let min = questionState.timeLimitmMin;
-  //     let sec = questionState.timeLimitSec;
-  //     if (sec === 0 && min !== 0) {
-  //       min--;
-  //       sec = 59;
-  //     }
-  //     else if (sec === 0 && min === 0) {
-  //       clearTimeout(interval);
-  //       alert("end");
-  //     }
-  //     else {
-  //       sec--;
-  //     }
-  //     setQuestionState({
-  //       ...questionState, timeLimitSec: sec
-  //     });
-  //     setQuestionState({
-  //       ...questionState, timeLimitMin: min
-  //     });
-  //   }, 1000)
-  // }
+    interval = setInterval(() => {  
+      console.log("min " + min);
+      console.log("sec " + sec);
+      if (sec === 0 && min !== 0) {
+        min--;
+        sec = 59;
+      }
+      else if (sec === 0 && min === 0) {
+        clearInterval(interval);
+      }
+      else {
+        sec--;
+      }
+      setTimerState({
+        ...timerState, seconds: sec, minutes: min
+      });
+    }, 1000)
+  }
 
 
   const gradeQuiz = () => {
@@ -143,6 +147,7 @@ function StudentQuiz() {
   const handleDoneClick = (event) => {
     event.preventDefault();
     const score = gradeQuiz();
+    clearInterval(interval);
     setQuestionState({...questionState, page: "feedback", score: score});
   }
 
@@ -150,7 +155,7 @@ function StudentQuiz() {
     setQuestionState({
       ...questionState, started: true
     });
-    // timer();
+    timer();
   }
 
   const myRender = (page) => {
@@ -165,7 +170,7 @@ function StudentQuiz() {
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
               <div>
-                Time Remaining: {questionState.timeLimit}
+                Time Remaining: {timerState.minutes}:{timerState.seconds}
               </div>
             </div>
           </div>
