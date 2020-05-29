@@ -19,4 +19,8 @@ router
     .route("/quiz/:quiz")
     .get(resultsController.getResultsByQuiz);
 
+router
+    .route("/result")
+    .get(resultsController.getResultsByQuizAndStudent);
+
 module.exports = router;

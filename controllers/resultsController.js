@@ -2,6 +2,17 @@ const db = require("../models");
 
 // Defining methods for the resultsController
 module.exports = {
+    getResultsByQuizAndStudent: function(req, res) {
+        db.Result
+            .find({
+                $and: [
+                    {quiz: req.body.quiz},
+                    {student: req.body.student}
+                ]
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
     getResultsByQuiz: function(req, res) {
         db.Result
             .find({

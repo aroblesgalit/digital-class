@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import "./style.css";
 import API from "../../utils/API";
 import studentImg from "../../images/studentAvatar.svg";
@@ -6,19 +6,21 @@ import teacherImg from "../../images/teacherAvatar.svg";
 
 function ProfileLeftCol(props) {
 
-  let newImageUrl = props.imageUrl;
+  // let newImageUrl = props.imageUrl;
+
+  const [image, setImage] = useState(props.imageUrl);
 
   const imageUrlRef = useRef();
 
   const handleSave = async (e) => {
     e.preventDefault();
-    const imageUrl = imageUrlRef.current.value;
-    newImageUrl = imageUrl;
+    
+    setImage(imageUrlRef.current.value);
 
     // Make a put request to update user's data with the image
     if (props.type === "teacher") {
       await API.updateTeacher(props.id, {
-        imageUrl: imageUrl
+        imageUrl: imageUrlRef.current.value
       })
       .then(() => {
         window.location.replace("/teachers/profile");
@@ -27,7 +29,7 @@ function ProfileLeftCol(props) {
   
     } else if (props.type === "student") {
       await API.updateStudent(props.id, {
-        imageUrl: imageUrl
+        imageUrl: imageUrlRef.current.value
       })
       .then(() => {
         window.location.replace("/students/profile");
@@ -47,8 +49,8 @@ function ProfileLeftCol(props) {
       </div>
       <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
         <img src={ props.type === "teacher" ?
-          newImageUrl || teacherImg
-          : newImageUrl || studentImg
+          image || teacherImg
+          : image || studentImg
         } alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>

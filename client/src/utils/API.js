@@ -109,5 +109,9 @@ export default {
   // Get all 50 states
   getStates: function () {
     return statesSelect;
+  },
+  // Get result by quiz id and student id
+  getResultsByQuizAndStudent: function(data) {
+    return axios.get("/api/results/result", data);
   }
 };
