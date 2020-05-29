@@ -49,6 +49,12 @@ studentSchema.methods.validatePassword = async function validatePassword(data) {
     return bcrypt.compare(data, this.password); 
 };
 
+// studentSchema.methods.validatePassword = function(candidatePassword, cb) {
+//     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+//         if (err) return cb(err);
+//         cb(null, isMatch);
+//     });
+//   }
 
 const Student = mongoose.model("Student", studentSchema);
 
