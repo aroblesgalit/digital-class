@@ -7,7 +7,6 @@ import API from '../../utils/API';
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
     started: false,
-    page: "quiz",
     timeLimit: 0,
     questions: [{
       id: 1,
@@ -17,7 +16,6 @@ function StudentQuiz() {
       stuAnswer: ""
     }],
     currentQuestion: 0,
-    score: "",
     feedback: ""
   });
 
@@ -26,6 +24,12 @@ function StudentQuiz() {
     seconds: 0
   })
 
+  const [intervalID, setIntervalID] = useState();
+
+  const [pageState, setPageState] = useState("quiz");
+
+  const [scoreState, setScoreState] = useState();
+
   // load quiz into state on page load
   useEffect(() => {
     getQuiz().then(res => {
@@ -33,9 +37,9 @@ function StudentQuiz() {
         return item.stuAnswer = "";
       });
       setQuestionState({
-        ...questionState, questions: res.data.questions, timeLimit: 1, title: res.data.title
+        ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, title: res.data.title
       });
-      setTimerState({...timerState, minutes: 1});
+      setTimerState({...timerState, minutes: res.data.timeLimit});
     })
   }, []);
 
@@ -45,7 +49,6 @@ function StudentQuiz() {
     const quiz = await API.getQuizById(id);
     return quiz;
   }
-
 
   // takes answer choice (0-3) as input, and updates the 
   // state to reflect the index of the correct answer
@@ -93,7 +96,7 @@ function StudentQuiz() {
       quiz: id,
       student: student.data.id,
       feedback: questionState.feedback,
-      score: questionState.score
+      score: scoreState
     }
     
     await API.createResult(result).then(console.log("Result Submitted!"));
@@ -102,28 +105,33 @@ function StudentQuiz() {
   }
 
   
-var interval;
   const timer = () => {
     var min = timerState.minutes;
     var sec = timerState.seconds;
-
-    interval = setInterval(() => {  
-      console.log("min " + min);
-      console.log("sec " + sec);
-      if (sec === 0 && min !== 0) {
+    clearInterval(intervalID);
+    var interval = setInterval(() => {  
+      if (sec === 0 && min === 0) {
+        endQuiz();
+      }
+      else if (sec === 0 && min !== 0) {
         min--;
         sec = 59;
-      }
-      else if (sec === 0 && min === 0) {
-        clearInterval(interval);
       }
       else {
         sec--;
       }
       setTimerState({
-        ...timerState, seconds: sec, minutes: min
+          ...timerState, seconds: sec, minutes: min
       });
+      
     }, 1000)
+    setIntervalID(interval);
+  }
+
+  const endQuiz = () => {
+    clearInterval(intervalID);
+    setIntervalID(null);
+    goToFeedback();
   }
 
 
@@ -146,9 +154,13 @@ var interval;
 
   const handleDoneClick = (event) => {
     event.preventDefault();
+    endQuiz();
+  }
+
+  const goToFeedback = () => {
     const score = gradeQuiz();
-    clearInterval(interval);
-    setQuestionState({...questionState, page: "feedback", score: score});
+    setPageState("feedback");
+    setScoreState(score);
   }
 
   const handleStart = () => {
@@ -213,7 +225,7 @@ var interval;
       <div className="full-screen">
         <div className="uk-card uk-card-body uk-card-small uk-card-secondary my-card">
           <div className="uk-text-large score">
-            {questionState.score}%
+            {scoreState}%
           </div>
         </div>
         <br/><br/>
@@ -233,7 +245,7 @@ var interval;
 
   return (
     <div>
-      {questionState.started ? myRender(questionState.page) : <div className="full-screen">
+      {questionState.started ? myRender(pageState) : <div className="full-screen">
         This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimit} minutes to complete this quiz.
         <br/><br/>
         The timer will begin when you press the start button.
