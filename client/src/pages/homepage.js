@@ -10,7 +10,7 @@ function Homepage() {
 
                 <div className="uk-width-1-2">
                     <h1 className="uk-text-large uk-text-center">Digtal Class</h1>
-                    <p className="uk-text-center">lorim nfdsjakm
+                    <p className="uk-text-center">Digital class is a great place for teacher to create quizzes and see analytics as to how their students did. As well as a convienent place for students to take quizzes and see their grade instantly.
                 </p> <div className="uk-grid">
                         <div className="uk-width-1-2">
                             <div className="uk-card uk-card-default uk-card-body">
@@ -44,7 +44,7 @@ function Homepage() {
                     <div className="uk-margin-large-top uk-card uk-card-default uk-card-body"><div className="uk-grid"><div className="uk-width-1-6 uk-background-secondary"></div><div className="uk-width-5-6"> <h3 className="uk-card-title"> Feature 1 </h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div></div></div>
                     <div className="uk-margin-large-top uk-card uk-card-default uk-card-body"><div className="uk-grid"><div className="uk-width-1-6 uk-background-secondary"></div><div className="uk-width-5-6"> <h3 className="uk-card-title"> Feature 2 </h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div></div></div>
                     <div className="uk-margin-large-top uk-card uk-card-default uk-card-body"><div className="uk-grid"><div className="uk-width-1-6 uk-background-secondary"></div><div className="uk-width-5-6"> <h3 className="uk-card-title"> Feature 3 </h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div></div></div>
-                    <div className="uk-margin-large-top uk-card uk-card-default uk-card-body"><div className="uk-grid"><div className="uk-width-1-6 uk-background-secondary"></div><div className="uk-width-5-6"> <h3 className="uk-card-title"> Feature 4 </h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div></div></div>
+                    <div className="uk-margin-large-top uk-card uk-card-default uk-card-body"><div className="uk-grid"><div className="uk-width-1-6 uk-background-secondary"></div><div className="uk-width-5-6" src="../images/manwithcat.jpg"><h3 className="uk-card-title"> Feature 4 </h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div></div></div>
                 </div>
                 <div className="uk-width-1-2"><h2 className="uk-title uk-text-center">Features</h2><div className="uk-margin-large"><div className="uk-background-secondary" style={{ height: "400px" }}></div></div></div>
 
