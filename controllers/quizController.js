@@ -36,6 +36,14 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    findByIdAndUpdate: function(req,res) {
+        db.Quiz
+            .findByIdAndUpdate(req.params.quizid, { 
+                $push: { students: req.params.studentid}
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
     remove: function(req, res) {
         db.Quiz
             .findById({ _id: req.params })

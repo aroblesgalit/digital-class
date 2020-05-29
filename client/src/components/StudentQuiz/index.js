@@ -101,6 +101,12 @@ function StudentQuiz() {
     }
     
     await API.createResult(result).then(console.log("Result Submitted!"));
+    // console.log("quizid : ", result.quiz);
+    // console.log("studentid : ", result.student);
+    // const resultData = await API.getResultsByQuizAndStudent(result.quiz, result.student);
+    // console.log("getResultByQuizAndStudent" , resultData);
+    // console.log("result id: ", resultData.data[0]._id);
+    await API.updateQuizStudents(result.quiz, result.student);
     window.location.replace("/students/profile");
 
   }

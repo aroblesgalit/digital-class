@@ -54,7 +54,7 @@ export default {
   },
   // Get all results for a quiz
   getResultsByQuiz: function (quizId) {
-    return axios.get("/api/results/quiz/"+ quizId);
+    return axios.get("/api/results/quiz/" + quizId);
   },
   // Get all quizzes by teacher's id
   getQuizzesByTeacher: function () {
@@ -71,6 +71,9 @@ export default {
   // get quizzes for student by teacher id
   getQuizzesForStudent: function (id) {
     return axios.get("/api/quizzes/teacher/" + id)
+  },
+  updateQuizStudents: function (quizid, studentid) {
+    return axios.put("/api/quizzes/" + quizid + "/" + studentid);
   },
   // Search for schools
   searchSchools: function (query, state) {
@@ -104,14 +107,18 @@ export default {
     return axios.get("/api/students/" + id);
   },
 
-  updateStudent: function(id, data){
+  updateStudent: function (id, data) {
     return axios.put("/api/students/" + id, data);
   },
-  updateTeacher: function(id, data){
+  updateTeacher: function (id, data) {
     return axios.put("/api/teachers/" + id, data);
   },
   // Get all 50 states
   getStates: function () {
     return statesSelect;
+  },
+  // Get result by quiz id and student id
+  getResultsByQuizAndStudent: function (quiz, student) {
+    return axios.get("/api/results/" + quiz + "/" + student);
   }
 };
