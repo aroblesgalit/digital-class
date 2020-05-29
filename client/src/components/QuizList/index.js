@@ -10,25 +10,28 @@ function QuizList(props) {
         return (
           (props.quizzes.map(item => {
             return (
-            <div className="uk-card uk-card-small uk-card-body uk-card-default" key={item._id}>
-              <div className="uk-card-title">
-                {item.title}
+              <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
+                <div className="uk-flex uk-flex-column uk-flex-middle card-top">
+                  <div className="uk-card-title card-title">
+                    {item.title}
+                  </div>
+                  <div className="card-subtitle">
+                    {item.questions.length + " Questions"}
+                  </div>
+                </div>
+                <div className="card-bottom uk-flex uk-flex-center">
+                  {props.user === "teacher" ?
+                    <Link to={"/teachers/results/" + item._id} className="result-link">
+                      View Results
+                    </Link>
+                    : ""}
+                  {props.user === "student" ?
+                    <Link to={"/students/quiz/" + item._id} className="quiz-link">
+                      Take Quiz
+                    </Link>
+                    : <div></div>}
+                </div>
               </div>
-              <div className="uk-card-badge uk-label">
-                {item.questions.length + " Questions"}
-              </div>
-              <div className="uk-margin-top">
-                {props.user === "teacher" ?
-                  <Link to={"/teachers/results/" + item._id}>
-                    View Results
-            </Link>
-                  : ""}
-                {props.user === "student" ? <Link to={"/students/quiz/" + item._id}>
-                  Take Quiz
-            </Link> : <div></div>}
-              </div>
-
-            </div>
             )
           }))
         )
@@ -42,18 +45,19 @@ function QuizList(props) {
   }
 
   return (
-    <div>
-      <div className="uk-grid-column-small uk-grid-row-large uk-child-width-1-1" uk-grid="true">
+    <div className="uk-flex uk-flex-row-reverse">
+      {props.user === "teacher" ?
+        <div className="uk-flex uk-flex-right createBtnContainer">
+          <Link to="/teachers/createquiz">
+            <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
+          </Link>
+        </div>
+        : <div></div>
+      }
+      <div className="uk-flex uk-flex-wrap">
         {myRender(props)}
-        {props.user === "teacher" ? <Link to="/teachers/createquiz">
-          <label className="uk-button uk-button-default my-button uk-margin-small-right" >Add new...</label>
-        </Link> : <div></div>}
-
-
       </div>
     </div>
-
-
   )
 }
 
