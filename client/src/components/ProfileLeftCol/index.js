@@ -22,19 +22,19 @@ function ProfileLeftCol(props) {
       await API.updateTeacher(props.id, {
         imageUrl: imageUrlRef.current.value
       })
-      .then(() => {
-        window.location.replace("/teachers/profile");
-      })
-      .catch(err => console.log(err))
+      // .then(() => {
+      //   window.location.replace("/teachers/profile");
+      // })
+      // .catch(err => console.log(err))
   
     } else if (props.type === "student") {
       await API.updateStudent(props.id, {
         imageUrl: imageUrlRef.current.value
       })
-      .then(() => {
-        window.location.replace("/students/profile");
-      })
-      .catch(err => console.log(err))
+      // .then(() => {
+      //   window.location.replace("/students/profile");
+      // })
+      // .catch(err => console.log(err))
     }
   }
 
@@ -48,10 +48,7 @@ function ProfileLeftCol(props) {
         {props.school}
       </div>
       <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
-        <img src={ props.type === "teacher" ?
-          image || teacherImg
-          : image || studentImg
-        } alt="Profile Avatar" className="profile-picture" />
+        <img src={image} alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>
         </div>
