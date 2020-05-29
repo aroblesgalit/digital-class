@@ -45,11 +45,11 @@ function QuizList(props) {
   }
 
   return (
-    <div>
+    <div className="uk-flex uk-flex-row-reverse">
       {props.user === "teacher" ?
         <div className="uk-flex uk-flex-right createBtnContainer">
           <Link to="/teachers/createquiz">
-            <button className="uk-button uk-button-default my-button uk-margin-small-right primaryBtn">Create</button>
+            <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
           </Link>
         </div>
         : <div></div>

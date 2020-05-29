@@ -63,17 +63,17 @@
   color: #FAF9F8;
 }
 
-.primaryBtn {
+.createBtn {
   background-color: #7CEDAB;
-  border: none;
-  font-weight: 400;
   color: #FAF9F8;
-  letter-spacing: 1.2px;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
 }
 
-.primaryBtn:hover {
+.createBtn:hover {
   background-color: #44BC74;
-  color: #FAF9F8;
 }
 
 .createBtnContainer {
