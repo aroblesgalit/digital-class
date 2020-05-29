@@ -4,7 +4,7 @@ import StudentList from '../StudentList';
 import QuizList from '../QuizList';
 import API from '../../utils/API';
 
-function TeacherProfileContent() {
+function TeacherProfileContent(props) {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
     students: [],
@@ -44,7 +44,7 @@ function TeacherProfileContent() {
         <li><a onClick={() => handleTabChange("Quizzes")}>Quizzes</a></li>
       </ul>
 
-      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} />}
+      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} />}
     </div>
 
   )

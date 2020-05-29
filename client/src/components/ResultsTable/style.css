@@ -1,0 +1,57 @@
+.result-wrapper {
+  padding: 20px;
+  max-width: 70vw;
+}
+
+.result-row {
+  border-bottom: 1px solid #444;
+  padding: 20px 40px;
+}
+
+.feedback {
+  height: 4rem;
+  overflow: auto;
+}
+
+tr {
+  border-bottom: 1px solid #aaa;
+}
+
+td {
+  max-width: 33vw;
+}
+
+.my-row {
+  max-height: 2rem;
+}
+
+.name {
+  overflow: auto;
+}
+
+.nav-icon {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 24px;
+}
+
+.nav-icon, .back {
+  cursor: pointer;
+}
+
+#chart-container {
+  height: 60vh;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .result-wrapper {
+    max-width: unset;
+    overflow: auto;
+  }
+
+  .chart-container-responsive {
+    width: 600px;
+    padding: 0 20px;
+  }
+}

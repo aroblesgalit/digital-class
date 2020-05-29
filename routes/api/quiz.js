@@ -15,7 +15,7 @@ router
     .delete(quizController.remove);
 
 router 
-    .route("/teacher")
-    .get(quizController.getQuizzesByTeacher);
+    .route("/teacher/:id")
+    .get(quizController.getQuizzesForStudent);
 
     module.exports = router;

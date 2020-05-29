@@ -1,7 +1,8 @@
 import React from "react";
 import './style.css'
-
 import { Link } from "react-router-dom"
+import Auth from '../../config/middleware/isAuthenticated';
+
 
 function Nav() {
   return (
@@ -14,7 +15,6 @@ function Nav() {
           </li>
         </ul>
       </div>
-
       <div className="uk-navbar-right">
         <ul className="uk-navbar-nav">
           <li className="uk-active">
@@ -23,10 +23,13 @@ function Nav() {
           <li>
             <Link to="/login">Login</Link>
           </li>
-          <li>
-            <Link to='/teachers/signup'>Signup</Link>
-            
-          </li>
+          {Auth ? 
+           <li>
+           <Link to='/logout'>logout</Link>
+         </li>
+         : ''
+        } 
+         
         </ul>
       </div>
     </nav>
