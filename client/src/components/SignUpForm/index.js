@@ -299,7 +299,7 @@ function SignUpForm() {
                     </div>
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-middle">
-                    <button className="uk-button primaryBtn" onClick={handleSignup}>Sign up</button>
+                    <button className="uk-button primaryBtn" onClick={handleStudent}>Sign up</button>
                     <div className="loginText">Already have an account? <Link to="/login" className="loginLink">Log in here</Link></div>
                 </div>
             </form>
