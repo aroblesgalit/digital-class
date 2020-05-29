@@ -13,9 +13,13 @@ function ProfileLeftCol(props) {
 
     // Set image url state
     setImage(imageUrlRef.current.value);
-    console.log("imageUrlRef.current.value = ", imageUrlRef.current.value);
-    console.log("image = ", image);
+
     // Make a put request to update user's data with the image
+    if (props.type === "teacher") {
+      console.log("I'm a teacher. My ID is: ", props.id);
+    } else if (props.type === "student") {
+      console.log("I'm a student. My ID is: ", props.id);
+    }
   }
 
   return (
@@ -27,7 +31,7 @@ function ProfileLeftCol(props) {
       <div className="uk-text-small uk-margin-bottom">
         {props.school}
       </div>
-      <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabindex="0">
+      <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
         <img src="https://via.placeholder.com/300x300" alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>

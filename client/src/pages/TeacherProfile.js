@@ -32,7 +32,7 @@ function TeacherProfile() {
 
   return (
     <div>
-      <ProfileLeftCol email={teacherState.email} name={teacherState.name} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} />
+      <ProfileLeftCol email={teacherState.email} name={teacherState.name} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} type="teacher" />
       <TeacherProfileContent id={teacherState.id} />
     </div>
   );
