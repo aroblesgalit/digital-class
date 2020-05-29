@@ -106,9 +106,14 @@ function Homepage() {
                 </div>
 
 
-                <div className="uk-width-1-2"><h2 className="uk-title uk-text-center">Features</h2><div className="uk-margin-large"><div className="img" style={{ height: "400px" }}><img src={mainfeature}></img></div></div></div>
-
-
+                <div className="uk-width-1-2">
+                    <h2 className="uk-title uk-text-center">Features</h2>
+                    <div className="uk-margin-large">
+                        <div className="img" style={{ height: "400px" }}>
+                            <img src={mainfeature} />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
