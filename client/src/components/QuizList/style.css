@@ -49,23 +49,23 @@
   font-size: 14px;
 }
 
-.quiz-link {
+.quiz-link, .result-link {
   background-color: #7CEDAB;
   border: none;
   font-weight: 400;
-  color: #FAF9F8;
+  color: rgb(56, 68, 62);
   letter-spacing: 1.2px;
   padding: 10px 20px;
 }
 
-.quiz-link:hover {
+.quiz-link:hover, .result-link:hover {
   background-color: #44BC74;
   color: #FAF9F8;
 }
 
 .createBtn {
   background-color: #7CEDAB;
-  color: #FAF9F8;
+  color: rgb(56, 68, 62);
   font-size: 24px;
   width: 44px;
   height: 44px;
@@ -74,6 +74,7 @@
 
 .createBtn:hover {
   background-color: #44BC74;
+  color: #FAF9F8;
 }
 
 .createBtnContainer {

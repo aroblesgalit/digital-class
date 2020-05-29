@@ -21,7 +21,7 @@ function QuizList(props) {
                 </div>
                 <div className="card-bottom uk-flex uk-flex-center">
                   {props.user === "teacher" ?
-                    <Link to={"/teachers/results/" + item._id}>
+                    <Link to={"/teachers/results/" + item._id} className="result-link">
                       View Results
                     </Link>
                     : ""}
