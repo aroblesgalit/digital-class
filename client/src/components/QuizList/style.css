@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
 .my-button, .uk-button-default:focus {
   background-color: #7cebad;
   border-color: transparent;
@@ -12,4 +18,58 @@
 .uk-link, a:hover {
   color: #111;
   text-decoration: none;
+}
+
+.quizCard {
+  border: 1px solid #c0c0c0;
+  box-shadow: none;
+  min-width: 200px;
+  padding: 0 !important;
+}
+
+.quizCard:not(:last-child) {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.card-top {
+  background-color: rgb(56, 68, 62);
+  padding: 20px;
+}
+
+.card-bottom {
+  padding: 20px;
+}
+
+.card-title {
+  color: #f2f2f2 !important;
+  font-size: 24px !important;
+}
+
+.card-subtitle {
+  color: #bdbdbd;
+  margin-top: 10px;
+}
+
+.quiz-link {
+  background-color: #7CEDAB;
+  border: none;
+  font-weight: 400;
+  color: #FAF9F8;
+  letter-spacing: 1.2px;
+  padding: 10px 20px;
+}
+
+.quiz-link:hover {
+  background-color: #44BC74;
+  color: #FAF9F8;
+}
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+  .quizCard {
+    min-width: none;
+    width: 100%;
+  }
 }
