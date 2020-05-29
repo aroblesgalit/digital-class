@@ -4,23 +4,33 @@ import API from "../../utils/API";
 
 function ProfileLeftCol(props) {
 
+  let newImageUrl = props.imageUrl;
+
   const imageUrlRef = useRef();
 
   const handleSave = async (e) => {
     e.preventDefault();
     const imageUrl = imageUrlRef.current.value;
+    newImageUrl = imageUrl;
 
     // Make a put request to update user's data with the image
     if (props.type === "teacher") {
-      const teacherData = await API.updateTeacher(props.id, {
+      await API.updateTeacher(props.id, {
         imageUrl: imageUrl
       })
-      console.log(teacherData);
+      .then(() => {
+        window.location.replace("/teachers/profile");
+      })
+      .catch(err => console.log(err))
+  
     } else if (props.type === "student") {
-      const studentData = await API.updateStudent(props.id, {
+      await API.updateStudent(props.id, {
         imageUrl: imageUrl
       })
-      console.log(studentData);
+      .then(() => {
+        window.location.replace("/students/profile");
+      })
+      .catch(err => console.log(err))
     }
   }
 
@@ -34,7 +44,7 @@ function ProfileLeftCol(props) {
         {props.school}
       </div>
       <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
-        <img src="https://via.placeholder.com/300x300" alt="Profile Avatar" className="profile-picture" />
+        <img src={newImageUrl || "https://via.placeholder.com/300x300"} alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>
         </div>
