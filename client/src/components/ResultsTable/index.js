@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './style.css';
 import API from '../../utils/API';
 const Chart = require('chart.js');
@@ -35,7 +34,6 @@ function ResultsTable(props) {
 
   const getQuiz = async () => {
     await API.getQuizById(props.id).then(res => {
-      console.log(res);
       const answers = [];
       res.data.questions.map(item => {
         answers.push(item.answer);
@@ -146,6 +144,7 @@ function ResultsTable(props) {
                       </div>
                     </td>
                   </tr>
+                  
                 )
               })}
             </tbody>

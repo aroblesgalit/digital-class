@@ -1,8 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
+.profile-pic-container {
+  cursor: pointer;
+}
+
 .profile-picture {
   max-width: 200px;
 }
 
-@media screen and (max-width: 640px) {
+.edit-pic-btn {
+  background-color: #7CEDAB;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.edit-pic-btn:hover {
+  background-color: #44BC74;
+}
+
+
+@media screen and (max-width: 768px) {
   .left-col-container {
     width: 100%;
   }
