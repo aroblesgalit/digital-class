@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css'
 import { Link } from "react-router-dom"
+import Auth from '../../config/middleware/isAuthenticated';
 
 
 function Nav() {
@@ -22,9 +23,13 @@ function Nav() {
           <li>
             <Link to="/login">Login</Link>
           </li>
-          <li>
-            <Link to='/logout'>logout</Link>
-          </li>
+          {Auth ? 
+           <li>
+           <Link to='/logout'>logout</Link>
+         </li>
+         : ''
+        } 
+         
         </ul>
       </div>
     </nav>

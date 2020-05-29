@@ -3,10 +3,6 @@ import './style.css';
 import API from "../../utils/API";
 import { Link } from 'react-router-dom';
 import womenoncomp from "../../images/womanoncomp.jpg";
-import {useHistory } from "react-router-dom";
-
-const history = useHistory();
-
 
 function StudentLogin() {
     // Create references for the email and password inputs
@@ -47,6 +43,7 @@ function StudentLogin() {
                     console.log(err);
                 });
         }
+    }
         
     return (
         <div className="uk-flex uk-child-width-1-2 loginContainer">
