@@ -100,11 +100,11 @@ export default {
     return axios.get("/api/students/" + id);
   },
 
-  updateStudent: function(id){
-    return axios.put("/api/students/" + id);
+  updateStudent: function(id, data){
+    return axios.put("/api/students/" + id, data);
   },
-  updateTeacher: function(id){
-    return axios.put("/api/teachers/" + id);
+  updateTeacher: function(id, data){
+    return axios.put("/api/teachers/" + id, data);
   },
   // Get all 50 states
   getStates: function () {
