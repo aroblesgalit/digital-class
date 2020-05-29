@@ -8,6 +8,13 @@
   border-color: transparent;
 }
 
+.quiz-image {
+  max-width: 100%;
+  max-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (max-width: 840px) {
   .quiz-form-container {
     max-width: 100%;
