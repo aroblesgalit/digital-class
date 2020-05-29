@@ -25,9 +25,13 @@ router.post("/signup", function (req, res) {
 
 // Route for logging user out
 router.get("/logout", function (req, res) {
+    console.log('logout was clicked');
     req.logout();
-    res.redirect("/");
-});
+   req.session.destroy(function (err) {
+    res.json({})
+   });
+   
+  })
 
 // Route for getting some data about our user to be used client side
 router.get("/user_data", function (req, res) {
