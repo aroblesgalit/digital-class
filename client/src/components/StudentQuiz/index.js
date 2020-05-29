@@ -12,6 +12,7 @@ function StudentQuiz() {
       id: 1,
       question: "",
       choices: [],
+      imageUrl: "",
       answer: 0,
       stuAnswer: ""
     }],
@@ -177,9 +178,6 @@ function StudentQuiz() {
         <h4 className="uk-margin-large-bottom uk-margin-large-top">{questionState.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
-            <div className="uk-width-3-4@s">
-              {questionState.title}
-            </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
               <div>
                 Time Remaining: {timerState.minutes}:{timerState.seconds}
@@ -192,6 +190,12 @@ function StudentQuiz() {
             <div className="uk-width-auto uk-margin-bottom">
               <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
               <div className="" >{questionState.questions[questionState.currentQuestion].question}</div>
+              <br/>
+              {questionState.questions[questionState.currentQuestion].imageUrl !== "" ? 
+              <div>
+                <img src={questionState.questions[questionState.currentQuestion].imageUrl} alt="Could not be loaded" className="quiz-image"/>
+              </div> : <div></div> }
+              
             </div>
             {questionState.questions[questionState.currentQuestion].choices.map(item => {
               let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
