@@ -10,7 +10,8 @@ const quizSchema = new Schema({
             id: { type: Number },
             question: { type: String },
             choices: { type: Array },
-            answer: { type: Number }
+            answer: { type: Number },
+            imageUrl: {type: String}
 
         }
     ],
