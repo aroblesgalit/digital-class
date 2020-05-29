@@ -12,7 +12,7 @@ function StudentProfileContent(props) {
         <li className="uk-active" ><a>Quizzes</a></li>
       </ul>
 
-      {<QuizList quizzes={props.quizzes[0]} user={"student"} />}
+      {<QuizList quizzes={props.quizzes} user={"student"} />}
     </div>
 
   )
