@@ -29,7 +29,7 @@ function StudentProfile() {
         teachernames.push(result.data.name);
 
         const quiz = await API.getQuizzesForStudent(res.data.teachers[i])
-        quizzes.push(quiz.data);
+        quizzes.push(...quiz.data);
 
       }
 
