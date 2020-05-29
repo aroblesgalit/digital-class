@@ -46,11 +46,16 @@ function QuizList(props) {
 
   return (
     <div>
+      {props.user === "teacher" ?
+        <div className="uk-flex uk-flex-right createBtnContainer">
+          <Link to="/teachers/createquiz">
+            <button className="uk-button uk-button-default my-button uk-margin-small-right primaryBtn">Create</button>
+          </Link>
+        </div>
+        : <div></div>
+      }
       <div className="uk-flex uk-flex-wrap">
         {myRender(props)}
-        {props.user === "teacher" ? <Link to="/teachers/createquiz">
-          <label className="uk-button uk-button-default my-button uk-margin-small-right" >Add new...</label>
-        </Link> : <div></div>}
       </div>
     </div>
   )
