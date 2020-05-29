@@ -5,8 +5,7 @@ const resultsController = require("../../controllers/resultsController");
 router
     .route("/")
     .get(resultsController.findAll)
-    .post(resultsController.create)
-    .get(resultsController.getResultsByQuiz);
+    .post(resultsController.create);
 
 // Match with "/api/results/:id"
 router 
@@ -14,5 +13,10 @@ router
     .get(resultsController.findById)
     .put(resultsController.update)
     .delete(resultsController.remove);
+
+// Match with "/api/results/:quiz"
+router
+    .route("/quiz/:quiz")
+    .get(resultsController.getResultsByQuiz);
 
 module.exports = router;
