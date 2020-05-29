@@ -100,7 +100,7 @@ export default {
     return axios.get("/api/students/" + id);
   },
 
-  updateStudent: function(id){
+  updateStudent: function(id,){
     return axios.put("/api/students/" + id);
   },
   updateTeacher: function(id){
