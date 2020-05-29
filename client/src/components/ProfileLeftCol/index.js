@@ -1,11 +1,22 @@
-import React, { useState, useRef } from 'react';
-import './style.css';
+import React, { useState, useRef } from "react";
+import "./style.css";
+import API from "../../utils/API";
 
 function ProfileLeftCol(props) {
 
   const imageUrlRef = useRef();
 
   const [image, setImage] = useState("");
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    // Set image url state
+    setImage(imageUrlRef.current.value);
+    console.log("imageUrlRef.current.value = ", imageUrlRef.current.value);
+    console.log("image = ", image);
+    // Make a put request to update user's data with the image
+  }
 
   return (
 
@@ -35,7 +46,7 @@ function ProfileLeftCol(props) {
             </div>
             <p className="uk-text-right">
               <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-              <button className="uk-button uk-button-primary" type="button">Save</button>
+              <button className="uk-button uk-button-primary uk-modal-close" type="button" onClick={handleSave}>Save</button>
             </p>
           </form>
         </div>

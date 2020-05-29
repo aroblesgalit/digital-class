@@ -4,10 +4,6 @@ import TeacherProfileContent from '../components/TeacherProfileContent';
 import API from '../utils/API';
 
 
-
-
-
-
 function TeacherProfile() {
   const [teacherState, setTeacherState] = useState({
     id: 0,
@@ -20,25 +16,26 @@ function TeacherProfile() {
 
   useEffect(() => {
     API.getTeacher().then(res => {
-    setTeacherState({...teacherState,
-      id: res.data.id,
-      email: res.data.email,
-      name: res.data.name,
-      school: res.data.school,
-      subject: res.data.subject
-    });
-  }).then(
-    API.getStudentsByTeacher(teacherState.id)
-  )
-}, []);
-  
+      setTeacherState({
+        ...teacherState,
+        id: res.data.id,
+        email: res.data.email,
+        name: res.data.name,
+        school: res.data.school,
+        subject: res.data.subject
+      });
+    }).then(
+      API.getStudentsByTeacher(teacherState.id)
+    )
+  }, []);
 
- return(
-   <div>
-     <ProfileLeftCol email={teacherState.email} name={teacherState.name} school={teacherState.school} subject={teacherState.subject} />
-     <TeacherProfileContent id={teacherState.id} />
+
+  return (
+    <div>
+      <ProfileLeftCol email={teacherState.email} name={teacherState.name} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} />
+      <TeacherProfileContent id={teacherState.id} />
     </div>
- );
+  );
 }
 
 export default TeacherProfile;
