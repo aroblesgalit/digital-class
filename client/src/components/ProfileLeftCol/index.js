@@ -15,8 +15,8 @@ function ProfileLeftCol(props) {
       {props.teachers ? (<div className="uk-text-small uk-margin-top">
         {props.teachers.join(", ")}
       </div>) : <div></div> }
-      {props.subject ? (<div className="uk-text-small uk-margin-top">
-        {props.subject}
+      {props.subjects ? (<div className="uk-text-small uk-margin-top">
+        {props.subjects.join(", ")}
       </div>) : <div></div> }
       {props.email ? (<div className="uk-text-small uk-margin-bottom">
         {props.email}
