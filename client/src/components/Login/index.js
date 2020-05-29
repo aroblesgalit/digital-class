@@ -4,9 +4,7 @@ import API from "../../utils/API";
 import { Link } from 'react-router-dom';
 import womenoncomp from "../../images/womanoncomp.jpg";
 
-
 function StudentLogin() {
-
     // Create references for the email and password inputs
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -45,18 +43,8 @@ function StudentLogin() {
                     console.log(err);
                 });
         }
-
-
     }
-
-    function handleLogOut() {
-        const [logout, setLogout] = useState({ tab: 'login' });
-
-        function handleToggle(tabToggle) {
-            setLogout({ tab: tabToggle });
-        }
-    }
-
+        
     return (
         <div className="uk-flex uk-child-width-1-2 loginContainer">
             <div><img src={womenoncomp} alt="Woman on laptop" uk-img="true" /></div>
