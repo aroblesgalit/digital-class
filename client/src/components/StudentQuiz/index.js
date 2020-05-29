@@ -6,31 +6,41 @@ import API from '../../utils/API';
 
 function StudentQuiz() {
   const [questionState, setQuestionState] = useState({
-    started: "",
-    page: "quiz",
+    started: false,
     timeLimit: 0,
     questions: [{
       id: 1,
       question: "",
       choices: [],
+      imageUrl: "",
       answer: 0,
       stuAnswer: ""
     }],
     currentQuestion: 0,
-    score: "",
     feedback: ""
   });
+
+  const [timerState, setTimerState] = useState({
+    minutes: 0,
+    seconds: 0
+  })
+
+  const [intervalID, setIntervalID] = useState();
+
+  const [pageState, setPageState] = useState("quiz");
+
+  const [scoreState, setScoreState] = useState();
 
   // load quiz into state on page load
   useEffect(() => {
     getQuiz().then(res => {
-      console.log(res);
       res.data.questions.map(item => {
         return item.stuAnswer = "";
       });
       setQuestionState({
-        ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, started: false, title: res.data.title
+        ...questionState, questions: res.data.questions, timeLimit: res.data.timeLimit, title: res.data.title
       });
+      setTimerState({...timerState, minutes: res.data.timeLimit});
     })
   }, []);
 
@@ -40,7 +50,6 @@ function StudentQuiz() {
     const quiz = await API.getQuizById(id);
     return quiz;
   }
-
 
   // takes answer choice (0-3) as input, and updates the 
   // state to reflect the index of the correct answer
@@ -88,7 +97,7 @@ function StudentQuiz() {
       quiz: id,
       student: student.data.id,
       feedback: questionState.feedback,
-      score: questionState.score
+      score: scoreState
     }
     
     await API.createResult(result).then(console.log("Result Submitted!"));
@@ -97,30 +106,34 @@ function StudentQuiz() {
   }
 
   
+  const timer = () => {
+    var min = timerState.minutes;
+    var sec = timerState.seconds;
+    clearInterval(intervalID);
+    var interval = setInterval(() => {  
+      if (sec === 0 && min === 0) {
+        endQuiz();
+      }
+      else if (sec === 0 && min !== 0) {
+        min--;
+        sec = 59;
+      }
+      else {
+        sec--;
+      }
+      setTimerState({
+          ...timerState, seconds: sec, minutes: min
+      });
+      
+    }, 1000)
+    setIntervalID(interval);
+  }
 
-  // const timer = () => {
-  //   let interval = setTimeout(() => {
-  //     let min = questionState.timeLimitmMin;
-  //     let sec = questionState.timeLimitSec;
-  //     if (sec === 0 && min !== 0) {
-  //       min--;
-  //       sec = 59;
-  //     }
-  //     else if (sec === 0 && min === 0) {
-  //       clearTimeout(interval);
-  //       alert("end");
-  //     }
-  //     else {
-  //       sec--;
-  //     }
-  //     setQuestionState({
-  //       ...questionState, timeLimitSec: sec
-  //     });
-  //     setQuestionState({
-  //       ...questionState, timeLimitMin: min
-  //     });
-  //   }, 1000)
-  // }
+  const endQuiz = () => {
+    clearInterval(intervalID);
+    setIntervalID(null);
+    goToFeedback();
+  }
 
 
   const gradeQuiz = () => {
@@ -142,15 +155,20 @@ function StudentQuiz() {
 
   const handleDoneClick = (event) => {
     event.preventDefault();
+    endQuiz();
+  }
+
+  const goToFeedback = () => {
     const score = gradeQuiz();
-    setQuestionState({...questionState, page: "feedback", score: score});
+    setPageState("feedback");
+    setScoreState(score);
   }
 
   const handleStart = () => {
     setQuestionState({
       ...questionState, started: true
     });
-    // timer();
+    timer();
   }
 
   const myRender = (page) => {
@@ -160,12 +178,9 @@ function StudentQuiz() {
         <h4 className="uk-margin-large-bottom uk-margin-large-top">{questionState.title}</h4>
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
-            <div className="uk-width-3-4@s">
-              {questionState.title}
-            </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse uk-text-right@s time-limit">
               <div>
-                Time Remaining: {questionState.timeLimit}
+                Time Remaining: {timerState.minutes}:{timerState.seconds}
               </div>
             </div>
           </div>
@@ -175,6 +190,12 @@ function StudentQuiz() {
             <div className="uk-width-auto uk-margin-bottom">
               <div className="uk-margin-small-bottom uk-text-large">Question {questionState.questions[questionState.currentQuestion].id}</div>
               <div className="" >{questionState.questions[questionState.currentQuestion].question}</div>
+              <br/>
+              {questionState.questions[questionState.currentQuestion].imageUrl !== "" ? 
+              <div>
+                <img src={questionState.questions[questionState.currentQuestion].imageUrl} alt="Could not be loaded" className="quiz-image"/>
+              </div> : <div></div> }
+              
             </div>
             {questionState.questions[questionState.currentQuestion].choices.map(item => {
               let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
@@ -208,7 +229,7 @@ function StudentQuiz() {
       <div className="full-screen">
         <div className="uk-card uk-card-body uk-card-small uk-card-secondary my-card">
           <div className="uk-text-large score">
-            {questionState.score}%
+            {scoreState}%
           </div>
         </div>
         <br/><br/>
@@ -228,7 +249,7 @@ function StudentQuiz() {
 
   return (
     <div>
-      {questionState.started ? myRender(questionState.page) : <div className="full-screen">
+      {questionState.started ? myRender(pageState) : <div className="full-screen">
         This quiz has {questionState.questions.length} questions. You will have {questionState.timeLimit} minutes to complete this quiz.
         <br/><br/>
         The timer will begin when you press the start button.
