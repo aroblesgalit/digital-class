@@ -5,7 +5,6 @@ const quizSchema = new Schema({
     title: { type: String, required: true },
     timeLimit: { type: Number, required: true },
     questions: [
-
         {
             id: { type: Number },
             question: { type: String },
@@ -19,10 +18,10 @@ const quizSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Teacher"
     },
-    results: [
+    students: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Result"
+            ref: "Student"
         }
     ],
     imageUrl: {

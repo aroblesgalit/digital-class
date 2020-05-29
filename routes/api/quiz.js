@@ -18,4 +18,8 @@ router
     .route("/teacher/:id")
     .get(quizController.getQuizzesForStudent);
 
+router
+    .route("/:quizid/:studentid")
+    .put(quizController.findByIdAndUpdate);
+
     module.exports = router;
