@@ -12,6 +12,7 @@ function SignUpForm() {
     // Handle toggle
     function handleToggle(tabToggle) {
         setSignup({ tab: tabToggle });
+        setSchools([]);
     }
 
     // Load School Database

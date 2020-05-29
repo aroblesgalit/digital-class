@@ -29,7 +29,7 @@ function StudentProfile() {
         teachernames.push(result.data.name);
 
         const quiz = await API.getQuizzesForStudent(res.data.teachers[i])
-        quizzes.push(quiz.data);
+        quizzes.push(...quiz.data);
 
       }
 
@@ -50,7 +50,7 @@ function StudentProfile() {
 
   return (
     <div>
-      <ProfileLeftCol email={studentState.email} name={studentState.name} school={studentState.school} />
+      <ProfileLeftCol email={studentState.email} name={studentState.name} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
       <StudentProfileContent quizzes={studentState.quizzes} />
     </div>
   );
