@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -9,10 +9,12 @@ import Login from "./components/Login";
 import TakeQuiz from "./pages/TakeQuiz";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
-import StudentProfile from './pages/StudentProfile';
 import Homepage from "./pages/homepage";
+import API from "./utils/API";
+
 
 function App() {
+  
   return (
     <Router>
       <div>

@@ -12,6 +12,10 @@ export default {
   loginTeacher: function (credentials) {
     return axios.post("/api/teacher-login/login", credentials);
   },
+  //Log out
+  checkAuth: function (){
+    return axios.get("/api/student-login/logout");
+  },
   // Sign student up
   signupStudent: function (studentData) {
     return axios.post("/api/student-login/signup", studentData);
