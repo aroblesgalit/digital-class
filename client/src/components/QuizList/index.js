@@ -45,18 +45,18 @@ function QuizList(props) {
   }
 
   return (
-    <div className="uk-flex uk-flex-row-reverse">
-      {props.user === "teacher" ?
-        <div className="uk-flex uk-flex-right createBtnContainer">
-          <Link to="/teachers/createquiz">
-            <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
-          </Link>
-        </div>
-        : <div></div>
-      }
+    <div className="uk-flex uk-flex-between">
       <div className="uk-flex uk-flex-wrap">
         {myRender(props)}
       </div>
+      {props.user === "teacher" ?
+      <div className="createBtnContainer">
+        <Link to="/teachers/createquiz">
+          <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
+        </Link>
+      </div>
+      : <div></div>
+    }
     </div>
   )
 }

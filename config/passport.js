@@ -20,14 +20,22 @@ passport.use("studentLocal", new LocalStrategy(
                 return done(null, false, {
                     message: "Incorrect email."
                 });
-                // If there is a Student with the given email, but the password does not match
-            } else if (!dbStudent.validatePassword(password)) {
-                return done(null, false, {
-                    message: "Incorrect password."
-                });
+                // If there is a Student with the given email
+            } else {
+                // Check if the password matches the one stored
+                dbStudent.validatePassword(password)
+                    .then((valid) => {
+                        // If its valid, then log them in
+                        if (valid) {
+                            return done(null, dbStudent)
+                            // If the password isn't valid, then return incorrect message
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password."
+                            })
+                        }
+                    })
             }
-            // If credentials are valid
-            return done(null, dbStudent);
         })
     }
 ));
@@ -49,14 +57,23 @@ passport.use("teacherLocal", new LocalStrategy(
                 return done(null, false, {
                     message: "Incorrect email."
                 });
-                // If there is a Student with the given email, but the password does not match
-            } else if (!dbTeacher.validatePassword(password)) {
-                return done(null, false, {
-                    message: "Incorrect password."
-                });
+                // If there is a teacher with the given email
+            } else {
+                // Check if the password matches the one stored
+                dbTeacher.validatePassword(password)
+                    .then(valid => {
+                        // If its valid, then log them in
+                        if (valid) {
+                            return done(null, dbTeacher);
+                            // If the password isn't valid, then return incorrect message
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password."
+                            })
+                        }
+                        
+                    })
             }
-            // If credentials are valid
-            return done(null, dbTeacher);
         })
     }
 ));
