@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "./style.css";
 import API from "../../utils/API";
+import studentImg from "../../images/studentAvatar.svg";
+import teacherImg from "../../images/teacherAvatar.svg";
 
 function ProfileLeftCol(props) {
 
@@ -44,7 +46,10 @@ function ProfileLeftCol(props) {
         {props.school}
       </div>
       <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
-        <img src={newImageUrl || "https://via.placeholder.com/300x300"} alt="Profile Avatar" className="profile-picture" />
+        <img src={ props.type === "teacher" ?
+          newImageUrl || teacherImg
+          : newImageUrl || studentImg
+        } alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>
         </div>

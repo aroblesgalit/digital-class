@@ -13,10 +13,12 @@
     margin-bottom: 20px;
 }
 
-.studentCard img {
+.img-container {
     height: 100px;
     width: 100px;
+    overflow: hidden;
     margin-bottom: 20px;
+    border-radius: 50px;
 }
 
 .studentName {
