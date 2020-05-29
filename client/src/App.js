@@ -9,7 +9,6 @@ import Login from "./components/Login";
 import TakeQuiz from "./pages/TakeQuiz";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
-import StudentProfile from './pages/StudentProfile';
 import Homepage from "./pages/homepage";
 import API from "./utils/API";
 
