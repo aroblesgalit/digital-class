@@ -100,10 +100,10 @@ export default {
     return axios.get("/api/students/" + id);
   },
 
-  getPictureForStudent: function(id){
+  updateStudent: function(id){
     return axios.put("/api/students/" + id);
   },
-  getPictureForTeachers: function(id){
+  updateTeacher: function(id){
     return axios.put("/api/teachers/" + id);
   },
   // Get all 50 states
