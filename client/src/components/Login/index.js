@@ -89,7 +89,7 @@ function StudentLogin() {
                         </div>
                     </div>
                     <div className="uk-flex uk-flex-column uk-flex-middle">
-                        <button className='uk-button' id='loginBtn' onClick={handleLogin}>Log in</button>
+                        <button className='uk-button primaryBtn' onClick={handleLogin}>Log in</button>
                         <div className="signupText">Don't have an account? <Link to="/signup" className="signupLink">Sign up here</Link></div>
                     </div>
                 </form>
