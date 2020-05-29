@@ -21,13 +21,25 @@ passport.use("studentLocal", new LocalStrategy(
                     message: "Incorrect email."
                 });
                 // If there is a Student with the given email, but the password does not match
-            } else if (!dbStudent.validatePassword(password)) {
-                return done(null, false, {
-                    message: "Incorrect password."
-                });
+            } else {
+                dbStudent.validatePassword(password)
+                    .then((valid) => {
+                        if (valid) {
+                            return done(null, dbStudent)
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password."
+                            })
+                        }
+                    })
             }
-            // If credentials are valid
-            return done(null, dbStudent);
+    
+                // return done(null, false, {
+                //     message: "Incorrect password."
+                // });
+            // }
+            // // If credentials are valid
+            // return done(null, dbStudent);
         })
     }
 ));
@@ -50,13 +62,19 @@ passport.use("teacherLocal", new LocalStrategy(
                     message: "Incorrect email."
                 });
                 // If there is a Student with the given email, but the password does not match
-            } else if (!dbTeacher.validatePassword(password)) {
-                return done(null, false, {
-                    message: "Incorrect password."
-                });
+            } else {
+                dbTeacher.validatePassword(password)
+                    .then(valid => {
+                        if (valid) {
+                            return done(null, dbTeacher);
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password."
+                            })
+                        }
+                        
+                    })
             }
-            // If credentials are valid
-            return done(null, dbTeacher);
         })
     }
 ));
