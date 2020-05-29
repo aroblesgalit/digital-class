@@ -307,7 +307,6 @@ function SignUpForm() {
         );
     }
 
-
     return (
         <div className="uk-flex uk-child-width-1-2 signupContainer">
             <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
