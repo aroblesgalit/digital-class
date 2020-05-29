@@ -25,6 +25,9 @@ const studentSchema = new Schema({
         type: String,
         required: true,
         validate: [({ length }) => length >= 6, "Password should be longer."]
+    },
+    imageUrl: {
+        type: String
     }
 
 });
@@ -48,7 +51,6 @@ studentSchema.pre("save", async function save(next) {
 studentSchema.methods.validatePassword = async function validatePassword(data) {
     return bcrypt.compare(data, this.password); 
 };
-
 
 const Student = mongoose.model("Student", studentSchema);
 

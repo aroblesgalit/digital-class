@@ -18,6 +18,9 @@ const teacherSchema = new Schema({
     required: "Password is Required",
     validate: [({ length }) => length >= 6, "Password should be longer."]
   },
+  imageUrl: {
+    type: String
+}
   // phoneNumber: {
   //   type: Number,
   //   match: [/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Please enter a valid Phone Number"],

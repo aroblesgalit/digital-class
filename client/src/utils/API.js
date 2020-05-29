@@ -99,6 +99,13 @@ export default {
   getStudentById: function (id) {
     return axios.get("/api/students/" + id);
   },
+
+  updateStudent: function(id){
+    return axios.put("/api/students/" + id);
+  },
+  updateTeacher: function(id){
+    return axios.put("/api/teachers/" + id);
+  },
   // Get all 50 states
   getStates: function () {
     return statesSelect;
