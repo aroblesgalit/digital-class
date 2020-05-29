@@ -6,19 +6,21 @@ function ProfileLeftCol(props) {
 
   const imageUrlRef = useRef();
 
-  const [image, setImage] = useState("");
-
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-
-    // Set image url state
-    setImage(imageUrlRef.current.value);
+    const imageUrl = imageUrlRef.current.value;
 
     // Make a put request to update user's data with the image
     if (props.type === "teacher") {
-      console.log("I'm a teacher. My ID is: ", props.id);
+      const teacherData = await API.updateTeacher(props.id, {
+        imageUrl: imageUrl
+      })
+      console.log(teacherData);
     } else if (props.type === "student") {
-      console.log("I'm a student. My ID is: ", props.id);
+      const studentData = await API.updateStudent(props.id, {
+        imageUrl: imageUrl
+      })
+      console.log(studentData);
     }
   }
 
