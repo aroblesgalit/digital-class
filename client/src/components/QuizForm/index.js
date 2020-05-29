@@ -3,6 +3,9 @@ import API from '../../utils/API'
 import './style.css';
 
 function QuizForm() {
+
+  // initialize quiz state with one empty question
+  // this quiz state is updated with user input and sent to DB as-is on submit
   const [newQuizState, setNewQuizState] = useState({
     title: "",
     teacher: "",
@@ -11,14 +14,14 @@ function QuizForm() {
       {
         id: 1,
         question: "",
+        imageUrl: "",
         choices: ["", "", "", ""],
         answer: ""
       }
     ]
   });
 
-  // console.log("newQuizState:  " + JSON.stringify(newQuizState))
-
+// set the teacher in quiz state equal to logged-in teacher's id
   useEffect(() => {
     API.getTeacher().then(res => {
       setNewQuizState({
@@ -27,6 +30,7 @@ function QuizForm() {
     })
   }, [])
 
+  // add new empty question to questions array in quizstate
   const addQuestion = event => {
     event.preventDefault();
 
@@ -34,6 +38,7 @@ function QuizForm() {
     newQuestions.push({
       id: newQuizState.questions.length + 1,
       question: "",
+      imageUrl: "",
       choices: ["", "", "", ""],
       answer: ""
     });
@@ -42,12 +47,14 @@ function QuizForm() {
     })
   }
 
+  // add text from title input field to quizstate
   const handleTitleChange = (event) => {
     setNewQuizState({
       ...newQuizState, title: event.target.value
     })
   }
 
+  // add text from time limit input field to quizstate
   const handleMinutesChange = (event) => {
     setNewQuizState({
       ...newQuizState, timeLimit: event.target.value
@@ -93,12 +100,25 @@ function QuizForm() {
     })
   }
 
+  // when image url is changed...
+  // takes event for targeting input text
+  // takes id for updating target question in state
+  const handleImageChange = (event, id) => {
+    const newQuestions = newQuizState.questions;
+    newQuestions[id-1].imageUrl = event.target.value;
+    setNewQuizState({
+      ...newQuizState, questions: newQuestions
+    })
+  }
+
   const preventFormSubmit = (event) => {
     event.preventDefault();
   }
 
+  // when quiz is submitted
   const handleSubmitClick = (event) => {
     event.preventDefault();
+    // send quizstate to db
     API.createQuiz(newQuizState)
       .then(res => {
         console.log(res);
@@ -134,6 +154,17 @@ function QuizForm() {
                   <label htmlFor="question" className="uk-form-label">Question {item.id}</label>
                   <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" onChange={(event) => handleBodyChange(event, item.id)}/>
                 </div>
+                <div className="uk-margin-bottom">
+                  <label htmlFor="imaage-url" className="uk-form-label">Add image url here...</label>
+                  <input className="uk-input" id="image-url" type="text" onChange={(event) => handleImageChange(event, item.id)} />
+                </div>
+                {(newQuizState.questions[item.id-1].imageUrl !== "") ? 
+                (<div>
+                  Preview image here
+                  <br/>
+                  <img src={newQuizState.questions[item.id-1].imageUrl} alt={"Figure for question " +  item.id} className="quiz-image uk-margin-bottom uk-margin-top" />
+                </div>) : (<div></div>)}
+                
                 <div>Choice 1</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 1)} className="uk-radio uk-margin-right"></input>
