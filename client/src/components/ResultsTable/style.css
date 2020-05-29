@@ -13,6 +13,10 @@
   overflow: auto;
 }
 
+tr {
+  border-bottom: 1px solid #aaa;
+}
+
 td {
   max-width: 33vw;
 }
