@@ -25,6 +25,9 @@ const studentSchema = new Schema({
         type: String,
         required: true,
         validate: [({ length }) => length >= 6, "Password should be longer."]
+    },
+    imageUrl: {
+        type: String
     }
 
 });
