@@ -1,21 +1,44 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import API from "../../utils/API";
 import studentImg from "../../images/studentAvatar.svg";
 import teacherImg from "../../images/teacherAvatar.svg";
+import TeacherProfile from "../../pages/TeacherProfile";
 
 function ProfileLeftCol(props) {
 
-  // let newImageUrl = props.imageUrl;
+  // const [image, setImage] = useState(props.imageUrl);
 
-  const [image, setImage] = useState(props.imageUrl);
+  const [userState, setUserState] = useState({
+    type: "",
+    imageUrl: ""
+  });
+
+  useEffect(() => {
+    async function loadData() {
+      if (props.type === "teacher") {
+        const data = await API.getTeacher();
+        setUserState({
+          type: props.type,
+          imageUrl: data.data.imageUrl
+        })
+      } else {
+        const data = await API.getStudentData();
+        setUserState({
+          type: props.type,
+          imageUrl: data.data.imageUrl
+        })
+      }
+    }
+    loadData();  
+  }, []);
 
   const imageUrlRef = useRef();
 
   const handleSave = async (e) => {
     e.preventDefault();
     
-    setImage(imageUrlRef.current.value);
+    // setImage(imageUrlRef.current.value);
 
     // Make a put request to update user's data with the image
     if (props.type === "teacher") {
@@ -36,6 +59,10 @@ function ProfileLeftCol(props) {
       // })
       // .catch(err => console.log(err))
     }
+    setUserState({
+      ...userState,
+      imageUrl: imageUrlRef.current.value
+    })
   }
 
   return (
@@ -48,7 +75,7 @@ function ProfileLeftCol(props) {
         {props.school}
       </div>
       <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container" tabIndex="0">
-        <img src={image} alt="Profile Avatar" className="profile-picture" />
+        <img src={ props.type === "teacher" ? userState.imageUrl || teacherImg : userState.imageUrl || studentImg } alt="Profile Avatar" className="profile-picture" />
         <div className="uk-position-center">
           <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>
         </div>

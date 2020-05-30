@@ -5,15 +5,7 @@ import API from '../utils/API';
 
 
 function TeacherProfile() {
-  const [teacherState, setTeacherState] = useState({
-    id: 0,
-    email: "",
-    name: "",
-    imageUrl: "",
-    school: "",
-    subject: "",
-    students: []
-  })
+  const [teacherState, setTeacherState] = useState({});
 
   useEffect(() => {
     API.getTeacher().then(res => {

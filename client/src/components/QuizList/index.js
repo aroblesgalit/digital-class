@@ -42,7 +42,7 @@ useEffect(() => {
                     <Link to={"/students/quiz/" + item._id} className="quiz-link">
                       Take Quiz
                     </Link>
-                    : <div className="uk-button uk-button-default" disabled="true">Quiz Taken</div>}
+                    : <div className="uk-button uk-button-default" disabled={true}>Quiz Taken</div>}
                 </div>
               </div>
             )
