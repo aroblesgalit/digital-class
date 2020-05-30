@@ -49,6 +49,7 @@ function Footer() {
           </div>
 
         </div>
+        <a className="credit-text" href="https://www.freepik.com/free-photos-vectors/background">Vectors created by freepik</a>
       </div>
     </footer>
   )

@@ -8,6 +8,7 @@ function StudentProfile() {
     id: 0,
     email: "",
     name: "",
+    imageUrl: "",
     school: "",
     teacherids: [],
     teachernames: [],
@@ -42,7 +43,8 @@ function StudentProfile() {
         teacherids: res.data.teachers,
         subjects: subjects,
         teachernames: teachernames,
-        quizzes: quizzes
+        quizzes: quizzes,
+        imageUrl: res.data.imageUrl
       });
 
     })
@@ -50,7 +52,7 @@ function StudentProfile() {
 
   return (
     <div>
-      <ProfileLeftCol email={studentState.email} name={studentState.name} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
+      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} teachers={studentState.teachernames} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
       <StudentProfileContent quizzes={studentState.quizzes} />
     </div>
   );

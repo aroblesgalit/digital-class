@@ -48,7 +48,8 @@ router.get("/user_data", function (req, res) {
       id: req.user._id,
       name: req.user.name,
       teachers: req.user.teachers,
-      school: req.user.school
+      school: req.user.school,
+      imageUrl: req.user.imageUrl
     });
   }
 });

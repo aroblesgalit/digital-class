@@ -6,10 +6,13 @@
 
 .profile-pic-container {
   cursor: pointer;
+  max-width: 200px;
+  max-height: 200px;
+  overflow: hidden;
 }
 
 .profile-picture {
-  max-width: 200px;
+  width: 100%;
 }
 
 .edit-pic-btn {
@@ -29,5 +32,16 @@
   }
   .profile-picture {
     max-width: 150px;
+  }
+  .image-and-info {
+    flex-direction: row;
+  }
+  .profile-pic-container {
+    margin-right: 20px;
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .user-info {
+    margin-top: 0 !important;
   }
 }
