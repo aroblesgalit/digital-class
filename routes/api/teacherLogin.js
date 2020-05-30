@@ -15,23 +15,20 @@ router.post("/signup", function (req, res) {
         subject: req.body.subject
     })
         .then(function (dbTeacher) {
-            res.json(dbTeacher);
+            res.redirect(307, "/api/teacher-login/login");
         })
         .catch(function (err) {
-            console.log(err);
             res.status(401).json(err);
         });
 });
 
 // Route for logging user out
 router.get("/logout", function (req, res) {
-    console.log('logout was clicked');
     req.logout();
-   req.session.destroy(function (err) {
-    res.json({})
-   });
-   
-  })
+    req.session.destroy(function (err) {
+        res.json({})
+    });
+});
 
 // Route for getting some data about our user to be used client side
 router.get("/user_data", function (req, res) {

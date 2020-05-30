@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import './style.css'
 import { Link } from "react-router-dom"
-import axios from 'axios';
+import API from "../../utils/API";
 
 
 function Nav() {
   const [islogin, setisLogin] = useState(false);
-  
+
   function handleLogout() {
-    axios.get('api/student-login/logout')
+    API.logoutUser()
       .then(() => {
         setisLogin(false)
       })
   }
-  
+
   useEffect(() => {
-    axios.get('api/student-login/userdata')
+    API.getStudentData()
       .then((res) => {
         console.log(res.status)
         setisLogin(true)
@@ -39,14 +39,16 @@ function Nav() {
           <li className="uk-active">
             <Link to="/">About</Link>
           </li>
-          {islogin ?
-            <li>
-              <Link to='' onClick={handleLogout} >logout</Link>
-            </li>
-            :
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+          { islogin ?
+              <li>
+                <Link to="" onClick={handleLogout} >Logout</Link>
+              </li>
+              :
+              <li>
+                <Link to="/login">
+                  <button className='uk-button loginBtn'>Log in</button>
+                </Link>
+              </li>
           }
         </ul>
       </div>

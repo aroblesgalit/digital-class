@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import API from "../../utils/API";
-import manwithcat from "../../images/manwithcat.jpg";
+import signupImg from "../../images/signupImg.svg";
 import { Link } from "react-router-dom";
 require("dotenv").config();
 
@@ -46,7 +46,7 @@ function SignUpForm() {
         })
             // Send user to profile page
             .then(function (res) {
-                window.location.replace("/");
+                window.location.replace("/teachers/profile");
                 console.log(res);
                 console.log("Teacher signed up.");
             })
@@ -69,7 +69,7 @@ function SignUpForm() {
 
             //send to profile page 
             .then(function (res) {
-                window.location.replace("/");
+                window.location.replace("/students/profile");
                 console.log(res);
                 console.log('Student is signed up');
             })
@@ -308,8 +308,8 @@ function SignUpForm() {
     }
 
     return (
-        <div className="uk-flex uk-child-width-1-2 signupContainer">
-            <div><img src={manwithcat} alt="Man on laptop" uk-img="true" /></div>
+        <div className="uk-flex uk-child-width-1-2@s signupContainer">
+            <div className="uk-margin-top"><img src={signupImg} alt="Woman leaning against a large mobile phone" uk-img="true" /></div>
             <div className="signupWrapper">
                 <h2>SIGNUP</h2>
                 <div className="uk-flex uk-flex-center formTabs" >

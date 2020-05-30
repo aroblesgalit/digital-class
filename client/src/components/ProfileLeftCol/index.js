@@ -60,7 +60,7 @@ function ProfileLeftCol(props) {
       </div>
       <div className="uk-flex uk-flex-column image-and-info">
         <div className="uk-inline-clip uk-transition-toggle uk-light profile-pic-container uk-flex uk-flex-center uk-flex-middle" tabIndex="0">
-          <img src={props.type === "teacher" ? userState.imageUrl || teacherImg : userState.imageUrl || studentImg} alt="Profile Avatar" className="profile-picture" />
+          <img src={userState.imageUrl || (props.type === "teacher" ? teacherImg : studentImg)} alt="Profile Avatar" className="profile-picture" />
           <div className="uk-position-center">
             <span className="uk-transition-fade edit-pic-btn" uk-icon="icon: pencil" uk-toggle="target: #image-url-input"></span>
           </div>
@@ -77,8 +77,8 @@ function ProfileLeftCol(props) {
                 </div>
               </div>
               <p className="uk-text-right">
-                <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                <button className="uk-button uk-button-primary uk-modal-close" type="button" onClick={handleSave}>Save</button>
+                <button className="uk-button uk-modal-close uk-margin-small-right secondaryBtn" type="button">Cancel</button>
+                <button className="uk-button uk-modal-close primaryBtn" type="button" onClick={handleSave}>Save</button>
               </p>
             </form>
           </div>
