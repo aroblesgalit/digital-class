@@ -26,8 +26,10 @@
     box-shadow: none;
     max-width: 260px;
     padding: 20px;
+}
+
+.user-card:first-child {
     margin-right: 20px;
-    margin-bottom: 20px;
 }
 
 .avi-container {
@@ -77,6 +79,11 @@
 
     .user-card {
         max-width: 100%;
+    }
+
+    .user-card:first-child {
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 
     .about-section {
