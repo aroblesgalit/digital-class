@@ -28,7 +28,6 @@ router.get("/logout", function (req, res) {
     req.session.destroy(function (err) {
         res.json({})
     });
-    res.redirect("/");
 });
 
 // Route for getting some data about our user to be used client side
