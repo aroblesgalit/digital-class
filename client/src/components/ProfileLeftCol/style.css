@@ -41,4 +41,7 @@
     max-width: 150px;
     max-height: 150px;
   }
+  .user-info {
+    margin-top: 0 !important;
+  }
 }

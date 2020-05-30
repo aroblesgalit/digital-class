@@ -83,23 +83,26 @@ function ProfileLeftCol(props) {
             </form>
           </div>
         </div>
-        {props.teachers ? (
-          <div className="uk-text-small uk-margin-top">
-            {props.teachers.join(", ")}
-          </div>
-        ) : <div></div>}
-        {props.subjects ? (
-          <div className="uk-margin-top">
-            <div className="uk-text-small">Subjects</div>
-            {props.subjects.join(", ")}
-          </div>
-        ) : <div></div>}
-        {props.email ? (
-          <div className="uk-margin-small-top">
-            <div className="uk-text-small">Email</div>
-            {props.email}
-          </div>
-        ) : <div></div>}
+        <div className="uk-flex uk-flex-column">
+          {props.teachers ? (
+            <div className="uk-text-small uk-margin-top user-info">
+            <div className="uk-text-small">Teachers</div>
+              {props.teachers.join(", ")}
+            </div>
+          ) : <div></div>}
+          {props.subjects ? (
+            <div className="uk-margin-top">
+              <div className="uk-text-small">Subjects</div>
+              {props.subjects.join(", ")}
+            </div>
+          ) : <div></div>}
+          {props.email ? (
+            <div className="uk-margin-small-top">
+              <div className="uk-text-small">Email</div>
+              {props.email}
+            </div>
+          ) : <div></div>}
+        </div>
       </div>
     </div>
   )

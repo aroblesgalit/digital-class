@@ -52,7 +52,7 @@ function StudentProfile() {
 
   return (
     <div>
-      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
+      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} teachers={studentState.teachernames} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
       <StudentProfileContent quizzes={studentState.quizzes} />
     </div>
   );
