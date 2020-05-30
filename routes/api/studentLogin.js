@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("studentLocal"), function (req, res) {
   res.json(req.user);
-  res.render('login');
+  // res.render('login');
 });
 
 router.post("/signup", function (req, res) {
@@ -16,24 +16,21 @@ router.post("/signup", function (req, res) {
     teachers: req.body.teachers
   })
     .then(function (dbStudent) {
-      // res.redirect(307, "/student/login");
-      res.json(dbStudent);
+      res.redirect(307, "/api/student-login/login");
     })
     .catch(function (err) {
-      console.log(err);
       res.status(401).json(err);
     });
 });
 
 // Route for logging user out
- router.get("/logout", function (req, res) {
-    console.log('logout was clicked');
-    req.logout();
-   req.session.destroy(function (err) {
+router.get("/logout", function (req, res) {
+  req.logout();
+  req.session.destroy(function (err) {
     res.json({})
-   });
-   
-  })
+  });
+  res.redirect("/");
+});
 
 // Route for getting some data about our user to be used client side
 router.get("/user_data", function (req, res) {

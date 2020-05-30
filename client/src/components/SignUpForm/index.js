@@ -46,7 +46,7 @@ function SignUpForm() {
         })
             // Send user to profile page
             .then(function (res) {
-                window.location.replace("/");
+                window.location.replace("/teachers/profile");
                 console.log(res);
                 console.log("Teacher signed up.");
             })
@@ -69,7 +69,7 @@ function SignUpForm() {
 
             //send to profile page 
             .then(function (res) {
-                window.location.replace("/");
+                window.location.replace("/students/profile");
                 console.log(res);
                 console.log('Student is signed up');
             })
