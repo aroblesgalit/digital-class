@@ -8,7 +8,7 @@ import stugrade from "../images/checkgrade.svg";
 import quizimage from "../images/takequiz.svg";
 import grading from "../images/gradequiz.svg";
 import makequiz from "../images/createquiz.svg";
-import headphones from "../images/headphones.jpg";
+import aboutImg from "../images/about.svg";
 
 function Homepage() {
     return (
@@ -48,7 +48,7 @@ function Homepage() {
                 </div>
 
                 <div className="uk-flex uk-flex-center uk-flex-middle">
-                    <img src={headphones} alt="Girl on laptop" className="about-img" uk-img={true} />
+                    <img src={aboutImg} alt="Girl on laptop" className="about-img" uk-img={true} />
                 </div>
 
             </div>
