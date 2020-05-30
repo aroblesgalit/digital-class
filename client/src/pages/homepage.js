@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 //images
 import "./homepage.css"
 import studentImg from "../images/studentAvatar.svg";
@@ -16,13 +17,16 @@ function Homepage() {
 
             <div className="uk-flex uk-child-width-1-2@m about-section">
 
-                <div className="uk-margin-top">
+                <div className="uk-margin-top uk-flex uk-flex-column uk-flex-middle">
                     <h1 className="uk-text-center">Digital Class</h1>
                     <p className="uk-text-center">
                         Digital Class is an improved way for teacher to create and assign quizzes all
                         at the touch of the keyboard. Students will be able to take quizzes and see their
                         grades where ever they are as long as they have internet access.
                     </p>
+                    <Link to="/signup">
+                        <button className='uk-button primaryBtn'>Sign up</button>
+                    </Link>
                     <div className="uk-flex uk-flex-around user-cards-wrapper">
                         <div className="user-card uk-card uk-card-small uk-card-body uk-card-default uk-text-center uk-flex uk-flex-column uk-flex-middle">
                             <div className="uk-flex uk-flex-middle avi-container">

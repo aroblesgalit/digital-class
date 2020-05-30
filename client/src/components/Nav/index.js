@@ -6,14 +6,14 @@ import axios from 'axios';
 
 function Nav() {
   const [islogin, setisLogin] = useState(false);
-  
+
   function handleLogout() {
     axios.get('api/student-login/logout')
       .then(() => {
         setisLogin(false)
       })
   }
-  
+
   useEffect(() => {
     axios.get('api/student-login/userdata')
       .then((res) => {
@@ -39,14 +39,17 @@ function Nav() {
           <li className="uk-active">
             <Link to="/">About</Link>
           </li>
-          {islogin ?
-            <li>
-              <Link to='' onClick={handleLogout} >logout</Link>
-            </li>
-            :
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+          {
+            islogin ?
+              <li>
+                <Link to="" onClick={handleLogout} >Logout</Link>
+              </li>
+              :
+              <li>
+                <Link to="/login">
+                  <button className='uk-button loginBtn'>Log in</button>
+                </Link>
+              </li>
           }
         </ul>
       </div>
