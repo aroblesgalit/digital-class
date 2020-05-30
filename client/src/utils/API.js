@@ -16,6 +16,10 @@ export default {
   checkAuth: function (){
     return axios.get("/api/student-login/logout");
   },
+  // Log student out
+  logoutUser: function() {
+    return axios.get("/api/student-login/logout");
+  },
   // Sign student up
   signupStudent: function (studentData) {
     return axios.post("/api/student-login/signup", studentData);

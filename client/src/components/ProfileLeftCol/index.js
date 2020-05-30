@@ -77,8 +77,8 @@ function ProfileLeftCol(props) {
                 </div>
               </div>
               <p className="uk-text-right">
-                <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                <button className="uk-button uk-button-primary uk-modal-close" type="button" onClick={handleSave}>Save</button>
+                <button className="uk-button uk-modal-close uk-margin-small-right secondaryBtn" type="button">Cancel</button>
+                <button className="uk-button uk-modal-close primaryBtn" type="button" onClick={handleSave}>Save</button>
               </p>
             </form>
           </div>
