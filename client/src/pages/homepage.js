@@ -2,6 +2,8 @@ import React from "react";
 import { List, ListItem } from "../components/List";
 //images
 import "./homepage.css"
+import studentImg from "../images/studentAvatar.svg";
+import teacherImg from "../images/teacherAvatar.svg";
 import stugrade from "../images/stugrades.jpg"
 import quizimage from "../images/107284-ON60QE-338.jpg"
 import grading from "../images/grading.jpg"
@@ -24,30 +26,26 @@ function Homepage() {
                         at the touch of the keyboard. Students will be able to take the quiz and see
                         their grade where ever they are as long as they have internet access.
                     </p>
-                    <div className="uk-grid">
-                        <div className="uk-width-1-2">
-                            <div className="uk-card uk-card-default uk-card-body">
-                                <h3 className="uk-card-title">  <div className="member-info">
-                                    <a href="https://github.com/jroenitz" target="_blank" rel="noopener noreferrer">
-                                        <img className="member-thumbnail" src="https://avatars0.githubusercontent.com/u/61602629?s=460&u=1995a6a23ecd93be57fc6a84ac8f61d205401101&v=4" alt="Jordan Roenitz" />
-                                    </a>
-                                    <div>Jordan<br />Roenitz</div>
-                                </div></h3>
-                                <p> <a href="#"></a> I am a student.</p>
-
+                    <div className="uk-flex uk-flex-around">
+                        <div className="uk-card uk-card-small uk-card-body uk-card-default uk-text-center uk-flex uk-flex-column uk-flex-middle studentCard">
+                            <div className="uk-flex uk-flex-middle img-container">
+                                <img className="uk-responsive-width" src={teacherImg} alt="Avatar" />
                             </div>
+                            <div className="studentName">I'm a Teacher</div>
+                            <p>
+                                As a teacher, I want to be able to create quizzes, assign them to my 
+                                students, and analyze the results so I know how my students are doing.
+                            </p>
                         </div>
-                        <div className="uk-width-1-2">
-                            <div className="uk-card uk-card-default uk-card-body">
-                                <h3 className="uk-card-title">  <div className="member-info">
-                                    <a href="https://github.com/jroenitz" target="_blank" rel="noopener noreferrer">
-                                        <img className="member-thumbnail" src="https://avatars0.githubusercontent.com/u/61602629?s=460&u=1995a6a23ecd93be57fc6a84ac8f61d205401101&v=4" alt="Jordan Roenitz" />
-                                    </a>
-                                    <div>Jordan<br />Roenitz</div>
-                                </div></h3>
-                                <p> <a href="#"></a> I am a teacher.</p>
-
+                        <div className="uk-card uk-card-small uk-card-body uk-card-default uk-text-center uk-flex uk-flex-column uk-flex-middle studentCard">
+                            <div className="uk-flex uk-flex-middle img-container">
+                                <img className="uk-responsive-width" src={studentImg} alt="Avatar" />
                             </div>
+                            <div className="studentName">I'm a Student</div>
+                            <p>
+                                As a student, I want to be able to view all the quizzes each of my
+                                teachers has made so that I’ll be able to take them on the go.
+                            </p>
                         </div>
                     </div>
                 </div>
