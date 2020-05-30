@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { List, ListItem } from "../components/List";
 //images
@@ -16,12 +14,17 @@ import headphones from "../images/headphones.jpg"
 function Homepage() {
     return (
         <div className="uk-padding-large">
-            <div className="uk-grid">
 
-                <div className="uk-width-1-2">
+            <div className="uk-flex uk-child-width-1-2@m about-section">
+
+                <div>
                     <h1 className="uk-text-large uk-text-center">Digital Class</h1>
-                    <p className="uk-text-center">Digital Class is a improved way for teacher to create and grade quizzes all at the touch of the keyboard. Students will be able to take the quiz and see their grade where ever they are as long as they have internet access.
-                </p> <div className="uk-grid">
+                    <p className="uk-text-center">
+                        Digital Class is a improved way for teacher to create and grade quizzes all
+                        at the touch of the keyboard. Students will be able to take the quiz and see
+                        their grade where ever they are as long as they have internet access.
+                    </p>
+                    <div className="uk-grid">
                         <div className="uk-width-1-2">
                             <div className="uk-card uk-card-default uk-card-body">
                                 <h3 className="uk-card-title">  <div className="member-info">
@@ -49,9 +52,13 @@ function Homepage() {
                     </div>
                 </div>
 
-                <div className="uk-width-1-2"><div className="uk-margin-large "> <img src={headphones}></img></div></div>
+                <div className="uk-flex uk-flex-center uk-flex-middle">
+                    <img src={headphones} alt="Girl on laptop" className="about-img" uk-img={true} />
+                </div>
 
+            </div>
 
+            <div className="uk-grid features-section">
                 <div className="uk-width-1-2">
                     <div className="uk-margin-large-top uk-card uk-card-default uk-card-body">
                         <div className="uk-grid uk-flex uk-flex-column uk-flex-middle">
@@ -105,7 +112,6 @@ function Homepage() {
                     </div>
                 </div>
 
-
                 <div className="uk-width-1-2">
                     <h2 className="uk-title uk-text-center">Features</h2>
                     <div className="uk-margin-large">
@@ -116,7 +122,6 @@ function Homepage() {
                 </div>
             </div>
         </div>
-
     );
 }
 
