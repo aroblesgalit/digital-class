@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -11,7 +11,6 @@ import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
 import Homepage from "./pages/homepage";
 import StudentProfile from "./pages/StudentProfile";
-import API from "./utils/API";
 
 
 function App() {
