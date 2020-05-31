@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
-.profile-container {
-    min-height: calc(100vh - 290px);
+.profile-container, .results-container {
+    padding-bottom: 40px;
+    min-height: calc(100vh - 250px);
 }

@@ -32,7 +32,7 @@ function Nav() {
       <div className="uk-navbar-left">
         <ul className="uk-navbar-nav">
           <li className="uk-active">
-            <Link to="/" className="site-title">Digital Class</Link>
+            <Link to="/" className="site-title"><span>Digital</span>Class</Link>
           </li>
         </ul>
       </div>

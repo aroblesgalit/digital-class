@@ -204,7 +204,7 @@ function StudentQuiz() {
                   </div> : <div></div>}
 
               </div>
-              <div className="uk-flex uk-child-width-1-2@s uk-flex-wrap">
+              <div className="uk-flex uk-child-width-1-2@s uk-flex-wrap uk-flex-between">
                 {questionState.questions[questionState.currentQuestion].choices.map(item => {
                   let key = questionState.questions[questionState.currentQuestion].choices.indexOf(item);
                   return (

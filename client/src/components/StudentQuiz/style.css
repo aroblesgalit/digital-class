@@ -38,6 +38,7 @@
   border: 1px solid #c0c0c0;
   padding: 10px;
   cursor: pointer;
+  width: 49%;
 }
 
 .answer-choice label {
@@ -50,9 +51,9 @@
 
 .full-screen {
   width: 100%;
-  padding: 20px;
+  padding: 20px 20px 60px 20px;
   text-align: center;
-  min-height: calc(100vh - 290px);
+  min-height: calc(100vh - 250px);
 }
 
 .quiz-image {
@@ -81,4 +82,13 @@
 
 .my-feedback {
   max-width: 600px;
+}
+
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+  .answer-choice {
+    width: 100%;
+  }
 }
