@@ -38,6 +38,7 @@
   border: 1px solid #c0c0c0;
   padding: 10px;
   cursor: pointer;
+  width: 49%;
 }
 
 .answer-choice label {
@@ -81,4 +82,13 @@
 
 .my-feedback {
   max-width: 600px;
+}
+
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+  .answer-choice {
+    width: 100%;
+  }
 }
