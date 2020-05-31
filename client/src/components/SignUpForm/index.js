@@ -89,7 +89,6 @@ function SignUpForm() {
     function loadSchoolsDB() {
         API.getSchoolsFromDB()
             .then(res => {
-                console.log("Loading Schools DB: ", res.data);
                 setSchoolsDB(res.data);
             })
     }
@@ -117,7 +116,6 @@ function SignUpForm() {
     function handleSchoolSelect() {
         API.getTeachersBySchool(schoolRef.current.value)
             .then(res => {
-                console.log("Res.data from handleSchoolSelect: ", res.data)
                 setTeachersSelect(res.data);
             })
     };
@@ -133,12 +131,10 @@ function SignUpForm() {
         const state = stateRef.current.value;
         // Only run the search if schoolQuery is not empty
         if (schoolQuery) {
-            console.log("schoolQuery: ", schoolQuery, ". Search ran.")
             // Get the school from db that matches the schoolQuery
             const schoolDbResult = await API.getSchoolByQuery(schoolQuery)
             // If there's a match along with the state
             if (schoolDbResult.data && schoolDbResult.data.state === state) {
-                console.log("schooldDbResult.data: ", schoolDbResult.data);
                 // Then set school state to the results
                 setSchools(schoolDbResult.data.results);
                 // If there's no match from the database
