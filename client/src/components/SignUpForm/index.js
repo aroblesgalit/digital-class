@@ -40,7 +40,7 @@ function SignUpForm() {
         // Make a post request to the sign up route and pass in the teacher data
         if (schoolRef.current.value && schoolRef.current.value !== "--Select a School--") {
             API.signupTeacher({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value,
                 name: nameRef.current.value,
                 subject: subjectRef.current.value,
@@ -63,7 +63,7 @@ function SignUpForm() {
         // Student Data ----------------
         if (schoolRef.current.value && schoolRef.current.value !== "--Select a School--" && checkTeachers.length > 0) {
             API.signupStudent({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value,
                 name: nameRef.current.value,
                 school: schoolRef.current.value,

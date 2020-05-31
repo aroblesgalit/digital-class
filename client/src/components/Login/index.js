@@ -28,7 +28,7 @@ function StudentLogin() {
         if (loginTab.tab === 'student') {
             // Make a post request to the login route and pass in the email and password
             API.loginStudent({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value
             })
                 // Send user to profile page
@@ -43,7 +43,7 @@ function StudentLogin() {
                 });
         } else if (loginTab.tab === 'teacher') {
             API.loginTeacher({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value
             })
                 // Send user to profile page
