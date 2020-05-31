@@ -8,6 +8,17 @@
     margin: 40px 100px;
 }
 
+.app-logo {
+    color: rgb(63, 88, 74);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.app-logo span {
+    font-weight: 500;
+    color: rgb(95, 219, 147);
+}
+
 .about-img {
     width: 100%;
     max-width: 600px;

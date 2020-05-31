@@ -6,6 +6,11 @@
 
 .site-title {
   font-size: 18px !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.site-title span {
+  font-weight: 500;
 }
 
 .my-nav {
@@ -25,6 +30,7 @@ nav a {
   height: 38px !important;
   padding-left: 20px;
   padding-right: 20px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .loginBtn:hover {

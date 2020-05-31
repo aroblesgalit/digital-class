@@ -18,7 +18,7 @@ function Homepage() {
             <div className="uk-flex uk-child-width-1-2@m about-section">
 
                 <div className="uk-margin-top uk-flex uk-flex-column uk-flex-middle">
-                    <h1 className="uk-text-center">Digital Class</h1>
+                    <h1 className="uk-text-center app-logo"><span>DIGITAL</span>CLASS</h1>
                     <p className="uk-text-center">
                         Digital Class is an improved way for teacher to create and assign quizzes all
                         at the touch of the keyboard. Students will be able to take quizzes and see their
