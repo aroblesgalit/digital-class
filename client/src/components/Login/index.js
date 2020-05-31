@@ -18,6 +18,8 @@ function StudentLogin() {
     const emailRef = useRef();
     const passwordRef = useRef();
     // const userRef = useRef();
+    const loginRef = useRef();
+    
 
     // Event handler for when the login button is clicked
     function handleLogin(e) {
@@ -36,6 +38,7 @@ function StudentLogin() {
                 })
                 .catch(function (err) {
                     console.log(err);
+                 loginRef.current.message('incorrect password or email')
                 });
         } else if (loginTab.tab === 'teacher') {
             API.loginTeacher({
@@ -50,6 +53,7 @@ function StudentLogin() {
                 })
                 .catch(function (err) {
                     console.log(err);
+                    alert("password or email incorrect Try again")
                 });
         }
     }
