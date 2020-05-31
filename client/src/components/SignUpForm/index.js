@@ -13,6 +13,7 @@ function SignUpForm() {
     function handleToggle(tabToggle) {
         setSignup({ tab: tabToggle });
         setSchools([]);
+        setTeachersSelect([]);
     }
 
     // Load School Database
@@ -126,33 +127,38 @@ function SignUpForm() {
         e.preventDefault();
         // Set schools state to empty array
         setSchools([]);
+        setTeachersSelect([]);
         // Get references for the school search query as well as the state selected
         const schoolQuery = schoolQueryRef.current.value.toLowerCase();
         const state = stateRef.current.value;
-        // Get the school from db that matches the schoolQuery
-        const schoolDbResult = await API.getSchoolByQuery(schoolQuery)
-        // If there's a match along with the state
-        if (schoolDbResult.data && schoolDbResult.data.state === state) {
-            console.log("schooldDbResult.data: ", schoolDbResult.data);
-            // Then set school state to the results
-            setSchools(schoolDbResult.data.results);
-            // If there's no match from the database
-        } else {
-            console.log("Ran third-party API");
-            // Then run the third-party API to do the search
-            const searchRes = await API.searchSchools(schoolQuery, state);
-            console.log("3rd-party API searchRes: ", searchRes);
-            // Set the school state to the result
-            setSchools(searchRes);
-            // Add the new school to the database
-            await API.addSchoolToDB({
-                query: schoolQuery,
-                state: state,
-                results: searchRes
-            });
-            console.log("Added School to DB: ", searchRes);
+        // Only run the search if schoolQuery is not empty
+        if (schoolQuery) {
+            console.log("schoolQuery: ", schoolQuery, ". Search ran.")
+            // Get the school from db that matches the schoolQuery
+            const schoolDbResult = await API.getSchoolByQuery(schoolQuery)
+            // If there's a match along with the state
+            if (schoolDbResult.data && schoolDbResult.data.state === state) {
+                console.log("schooldDbResult.data: ", schoolDbResult.data);
+                // Then set school state to the results
+                setSchools(schoolDbResult.data.results);
+                // If there's no match from the database
+            } else {
+                console.log("Ran third-party API");
+                // Then run the third-party API to do the search
+                const searchRes = await API.searchSchools(schoolQuery, state);
+                console.log("3rd-party API searchRes: ", searchRes);
+                // Set the school state to the result
+                setSchools(searchRes);
+                // Add the new school to the database
+                await API.addSchoolToDB({
+                    query: schoolQuery,
+                    state: state,
+                    results: searchRes
+                });
+                console.log("Added School to DB: ", searchRes);
+            }
+            handleSchoolSelect();
         }
-        handleSchoolSelect();
     }
 
     function teacherSignup() {
