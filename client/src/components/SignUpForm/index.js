@@ -195,7 +195,7 @@ function SignUpForm() {
                     <div className='stateSel'>
                         <label className='uk-form-label uk-text'>State</label>
                         <div className='uk-form-controls'>
-                            <select className='uk-form-width-xsmall' ref={stateRef}>
+                            <select className='uk-form-width-xsmall uk-select' ref={stateRef}>
                                 {
                                     states.length >= 1 ? (
                                         states.map(state =>
@@ -211,7 +211,7 @@ function SignUpForm() {
                 <div className="uk-margin">
                     <label className="uk-form-label">School</label>
                     <div className="uk-form-controls">
-                        <select className="uk-select-medium schoolSelect" ref={schoolRef} >
+                        <select className="uk-select-medium schoolSelect uk-select" ref={schoolRef} >
                             {
                                 schools.length >= 1 ? (
                                     schools.map(school =>
@@ -262,7 +262,7 @@ function SignUpForm() {
                     <div className="stateSel">
                         <label className="uk-form-label uk-text">State</label>
                         <div className="uk-form-controls">
-                            <select className="uk-form-width-xsmall" ref={stateRef}>
+                            <select className="uk-form-width-xsmall uk-select" ref={stateRef}>
                                 {
                                     states.length >= 1 ? (
                                         states.map(state =>
@@ -278,7 +278,7 @@ function SignUpForm() {
                 <div className="uk-margin">
                     <label className="uk-form-label">School</label>
                     <div className="uk-form-controls">
-                        <select className="uk-select-medium stuInput" ref={schoolRef} onChange={handleSchoolSelect}>
+                        <select className="uk-select-medium stuInput uk-select" ref={schoolRef} onChange={handleSchoolSelect}>
                             {
                                 schools.length >= 1 ? (
                                     schools.map(school =>
