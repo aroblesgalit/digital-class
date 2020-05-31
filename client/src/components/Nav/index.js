@@ -6,6 +6,7 @@ import API from "../../utils/API";
 
 function Nav() {
   const [islogin, setisLogin] = useState(false);
+  const [userType, setUserType] = useState("");
 
   function handleLogout() {
     API.logoutUser()
@@ -17,7 +18,8 @@ function Nav() {
   useEffect(() => {
     API.getStudentData()
       .then((res) => {
-        console.log(res.status)
+        console.log(res.status);
+        setUserType(res.data.userType);
         setisLogin(true)
       })
       .catch(() => {
@@ -35,22 +37,27 @@ function Nav() {
         </ul>
       </div>
       <div className="uk-navbar-right">
-        <ul className="uk-navbar-nav">
-          <li className="uk-active">
-            <Link to="/">About</Link>
-          </li>
-          { islogin ?
-              <li>
-                <Link to="" onClick={handleLogout} >Logout</Link>
-              </li>
-              :
-              <li>
-                <Link to="/login">
-                  <button className='uk-button loginBtn'>Log in</button>
-                </Link>
-              </li>
-          }
-        </ul>
+        {islogin ?
+          <ul className="uk-navbar-nav">
+            <li>
+              <Link to={`/${userType}s/profile`}>Profile</Link>
+            </li>
+            <li>
+              <Link to="" onClick={handleLogout} >Logout</Link>
+            </li>
+          </ul>
+          :
+          <ul className="uk-navbar-nav">
+            <li className="uk-active">
+              <Link to="/">About</Link>
+            </li>
+            <li>
+              <Link to="/login">
+                <button className='uk-button loginBtn'>Log in</button>
+              </Link>
+            </li>
+          </ul>
+        }
       </div>
     </nav>
   );

@@ -20,7 +20,11 @@ const teacherSchema = new Schema({
   },
   imageUrl: {
     type: String
-}
+  },
+  userType: {
+    type: String,
+    default: "teacher"
+  }
   // phoneNumber: {
   //   type: Number,
   //   match: [/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Please enter a valid Phone Number"],
