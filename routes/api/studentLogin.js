@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("studentLocal"), function (req, res) {
   res.json(req.user);
-  // res.render('login');
+ res.render('login');
 });
 
 router.post("/signup", function (req, res) {
