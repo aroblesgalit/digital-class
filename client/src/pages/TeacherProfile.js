@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProfileLeftCol from '../components/ProfileLeftCol';
 import TeacherProfileContent from '../components/TeacherProfileContent';
 import API from '../utils/API';
-
+import "./profile.css";
 
 function TeacherProfile() {
   const [teacherState, setTeacherState] = useState({});
@@ -27,7 +27,7 @@ function TeacherProfile() {
 
 
   return (
-    <div>
+    <div className="profile-container">
       <ProfileLeftCol email={teacherState.email} name={teacherState.name} imageUrl={teacherState.imageUrl} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} type="teacher" />
       <TeacherProfileContent id={teacherState.id} />
     </div>
