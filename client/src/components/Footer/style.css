@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
 .member-thumbnail {
   height: 2.25rem;
   border-radius: 9999px;
@@ -7,9 +13,22 @@
 .member-info {
   font-size: 12px;
   width: 85px;
+  line-height: 1.3;
 }
 
 footer {
-  color: #333;
-  background-color: #e1e1e1;
+  width: 100%;
+  text-align: center;
+  color: #bdbdbd;
+  background-color: #2A352E;
+}
+
+.credit-text {
+  font-size: 13px;
+  padding: 10px;
+  color: #919191;
+}
+
+.credit-text:hover {
+  color: #7CEDAB;
 }

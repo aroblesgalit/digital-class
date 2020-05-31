@@ -6,7 +6,7 @@ function QuizResults() {
   const {id} = useParams();
 
  return(
-   <div>
+   <div className="results-container">
      <ResultsTable id={id} />
   </div>
  );

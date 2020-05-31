@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer>
       <div className="uk-flex uk-flex-column">
-        <div className="uk-margin-small-bottom uk-margin-small-top">
+        <div className="uk-margin uk-margin-top uk-text-small">
           Developed by
         </div>
         <div className="uk-flex uk-flex-row uk-flex-center">
@@ -15,7 +15,7 @@ function Footer() {
           {/* info for Alvin */}
           <div className="member-info">
             <a href="https://github.com/aroblesgalit" target="_blank" rel="noopener noreferrer">
-              <img className="member-thumbnail uk-" src="https://avatars2.githubusercontent.com/u/38934010?s=460&u=92262cc7b285cd2d8e8e5216bac5b54c5c989983&v=4" alt="Alvin Galit" />
+              <img className="member-thumbnail" src="https://avatars2.githubusercontent.com/u/38934010?s=460&u=92262cc7b285cd2d8e8e5216bac5b54c5c989983&v=4" alt="Alvin Galit" />
             </a>
             <div>Alvin<br />Galit</div>
           </div>
@@ -49,6 +49,7 @@ function Footer() {
           </div>
 
         </div>
+        <a className="credit-text" href="https://www.freepik.com/free-photos-vectors/background">Vectors created by freepik</a>
       </div>
     </footer>
   )

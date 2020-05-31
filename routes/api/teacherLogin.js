@@ -15,10 +15,9 @@ router.post("/signup", function (req, res) {
         subject: req.body.subject
     })
         .then(function (dbTeacher) {
-            res.json(dbTeacher);
+            res.redirect(307, "/api/teacher-login/login");
         })
         .catch(function (err) {
-            console.log(err);
             res.status(401).json(err);
         });
 });
@@ -26,7 +25,9 @@ router.post("/signup", function (req, res) {
 // Route for logging user out
 router.get("/logout", function (req, res) {
     req.logout();
-    res.redirect("/");
+    req.session.destroy(function (err) {
+        res.json({})
+    });
 });
 
 // Route for getting some data about our user to be used client side
@@ -42,7 +43,9 @@ router.get("/user_data", function (req, res) {
             id: req.user._id,
             name: req.user.name,
             school: req.user.school,
-            subject: req.user.subject
+            subject: req.user.subject,
+            imageUrl: req.user.imageUrl,
+            userType: req.user.userType
         });
     }
 });

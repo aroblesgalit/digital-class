@@ -4,6 +4,7 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("studentLocal"), function (req, res) {
   res.json(req.user);
+  // res.render('login');
 });
 
 router.post("/signup", function (req, res) {
@@ -15,11 +16,9 @@ router.post("/signup", function (req, res) {
     teachers: req.body.teachers
   })
     .then(function (dbStudent) {
-      // res.redirect(307, "/student/login");
-      res.json(dbStudent);
+      res.redirect(307, "/api/student-login/login");
     })
     .catch(function (err) {
-      console.log(err);
       res.status(401).json(err);
     });
 });
@@ -27,15 +26,16 @@ router.post("/signup", function (req, res) {
 // Route for logging user out
 router.get("/logout", function (req, res) {
   req.logout();
-  req.session.destroy();
-  res.redirect("/");
-})
+  req.session.destroy(function (err) {
+    res.json({})
+  });
+});
 
 // Route for getting some data about our user to be used client side
 router.get("/user_data", function (req, res) {
   if (!req.user) {
     // The user is not logged in, send back an empty object
-    res.json({});
+    res.status(401).json({});
   } else {
     // Otherwise send back the user's email and id
     // Sending back a password, even a hashed password, isn't a good idea
@@ -44,7 +44,9 @@ router.get("/user_data", function (req, res) {
       id: req.user._id,
       name: req.user.name,
       teachers: req.user.teachers,
-      school: req.user.school
+      school: req.user.school,
+      imageUrl: req.user.imageUrl,
+      userType: req.user.userType
     });
   }
 });

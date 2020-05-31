@@ -1,0 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.profile-container, .results-container {
+    padding-bottom: 40px;
+    min-height: calc(100vh - 250px);
+}

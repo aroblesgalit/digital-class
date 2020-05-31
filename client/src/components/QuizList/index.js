@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Link } from 'react-router-dom';
+import API from '../../utils/API'
 import './style.css';
 
 function QuizList(props) {
+const [userState, setUserState] = useState();
+useEffect(() => {
+  getUser()
+},[]);
+
+  async function getUser() {
+    if (props.user === "student") {
+      const {data: {id}} = await API.getStudentData();
+      setUserState(id);
+    }
+  }
+  
 
   const myRender = (props) => {
     if (props.quizzes !== undefined) {
@@ -21,15 +34,15 @@ function QuizList(props) {
                 </div>
                 <div className="card-bottom uk-flex uk-flex-center">
                   {props.user === "teacher" ?
-                    <Link to={"/teachers/results/" + item._id} className="result-link">
+                    <Link to={"/teachers/results/" + item._id} className="result-link uk-button">
                       View Results
                     </Link>
                     : ""}
-                  {props.user === "student" ?
-                    <Link to={"/students/quiz/" + item._id} className="quiz-link">
+                  {props.user === "student" && item.students.indexOf(userState) === -1 ?
+                    <Link to={"/students/quiz/" + item._id} className="quiz-link uk-button">
                       Take Quiz
                     </Link>
-                    : <div></div>}
+                    : props.user === "student" && <button class="uk-button uk-button-default" disabled={true}>Quiz Taken</button>}
                 </div>
               </div>
             )

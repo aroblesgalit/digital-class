@@ -1,6 +1,8 @@
 .quiz-form-container {
   max-width: 70%;
   margin: 0 3rem;
+  padding-bottom: 40px;
+  min-height: calc(100vh - 250px);
 }
 
 .my-button, .uk-button-default:focus {

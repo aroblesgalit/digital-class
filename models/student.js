@@ -28,6 +28,10 @@ const studentSchema = new Schema({
     },
     imageUrl: {
         type: String
+    },
+    userType: {
+        type: String,
+        default: "student"
     }
 
 });

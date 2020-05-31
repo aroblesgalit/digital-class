@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import ProfileLeftCol from '../components/ProfileLeftCol';
 import API from '../utils/API';
 import StudentProfileContent from '../components/StudentProfileContent';
+import "./profile.css";
 
 function StudentProfile() {
   const [studentState, setStudentState] = useState({
     id: 0,
     email: "",
     name: "",
+    imageUrl: "",
     school: "",
     teacherids: [],
     teachernames: [],
@@ -42,15 +44,16 @@ function StudentProfile() {
         teacherids: res.data.teachers,
         subjects: subjects,
         teachernames: teachernames,
-        quizzes: quizzes
+        quizzes: quizzes,
+        imageUrl: res.data.imageUrl
       });
 
     })
   }, []);
 
   return (
-    <div>
-      <ProfileLeftCol email={studentState.email} name={studentState.name} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
+    <div className="profile-container">
+      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} teachers={studentState.teachernames} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
       <StudentProfileContent quizzes={studentState.quizzes} />
     </div>
   );
