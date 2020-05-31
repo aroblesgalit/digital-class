@@ -20,9 +20,9 @@ function Homepage() {
                 <div className="uk-margin-top uk-flex uk-flex-column uk-flex-middle">
                     <h1 className="uk-text-center app-logo"><span>DIGITAL</span>CLASS</h1>
                     <p className="uk-text-center">
-                        Digital Class is an improved way for teacher to create and assign quizzes all
+                        Digital Class is an improved way for teachers to create and assign quizzes all
                         at the touch of the keyboard. Students will be able to take quizzes and see their
-                        grades where ever they are as long as they have internet access.
+                        grades wherever they are as long as they have internet access.
                     </p>
                     <Link to="/signup">
                         <button className='uk-button primaryBtn'>Sign up</button>
@@ -65,8 +65,8 @@ function Homepage() {
                                 <img src={makequiz} alt="Feature" uk-img="true" />
                             </div>
                             <div className="uk-flex uk-flex-column uk-flex-middle">
-                                <h3 className="uk-card-title uk-text-center">Creat Quizzes</h3>
-                                <p className="feature-text uk-text-center">Teachers will be able to easily create mulitple choice quizzes with time limit.</p>
+                                <h3 className="uk-card-title uk-text-center">Create Quizzes</h3>
+                                <p className="feature-text uk-text-center">Teachers will be able to easily create mulitple choice quizzes with a time limit.</p>
                             </div>
                         </div>
 
