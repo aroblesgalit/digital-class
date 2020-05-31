@@ -38,45 +38,47 @@ function SignUpForm() {
     function handleSignup(e) {
         e.preventDefault();
         // Make a post request to the sign up route and pass in the teacher data
-        API.signupTeacher({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            name: nameRef.current.value,
-            subject: subjectRef.current.value,
-            school: schoolRef.current.value
-        })
-            // Send user to profile page
-            .then(function (res) {
-                window.location.replace("/teachers/profile");
-                console.log(res);
-                console.log("Teacher signed up.");
+        if (schoolRef.current.value && schoolRef.current.value !== "--Select a School--") {
+            API.signupTeacher({
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+                name: nameRef.current.value,
+                subject: subjectRef.current.value,
+                school: schoolRef.current.value
             })
-            .catch(function (err) {
-                console.log(err);
-            });
+                // Send user to profile page
+                .then(function (res) {
+                    window.location.replace("/teachers/profile");
+                    console.log(res);
+                    console.log("Teacher signed up.");
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
     }
 
     function handleStudent(e) {
         e.preventDefault();
         // Student Data ----------------
-        console.log(checkTeachers);
-        API.signupStudent({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            name: nameRef.current.value,
-            school: schoolRef.current.value,
-            teachers: checkTeachers
-        })
-
-            //send to profile page 
-            .then(function (res) {
-                window.location.replace("/students/profile");
-                console.log(res);
-                console.log('Student is signed up');
+        if (schoolRef.current.value && schoolRef.current.value !== "--Select a School--" && checkTeachers.length > 0) {
+            API.signupStudent({
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+                name: nameRef.current.value,
+                school: schoolRef.current.value,
+                teachers: checkTeachers
             })
-            .catch(function (err) {
-                console.log(err);
-            })
+                //send to profile page 
+                .then(function (res) {
+                    window.location.replace("/students/profile");
+                    console.log(res);
+                    console.log('Student is signed up');
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
     }
 
     const [schoolsDB, setSchoolsDB] = useState([]);
