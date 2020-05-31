@@ -12,6 +12,10 @@
   background-color: #7cedab !important;
 }
 
+nav a {
+  color: rgb(56, 68, 62) !important;
+}
+
 .loginBtn {
   background-color: rgb(233, 255, 242);
   border: none;
