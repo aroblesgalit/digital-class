@@ -5,6 +5,7 @@ import API from '../../utils/API';
 
 
 function StudentQuiz() {
+  // initialize state for quiz questions
   const [questionState, setQuestionState] = useState({
     started: false,
     timeLimit: 0,
@@ -20,15 +21,19 @@ function StudentQuiz() {
     feedback: ""
   });
 
+  // initialize timer state
   const [timerState, setTimerState] = useState({
     minutes: 0,
-    seconds: 0
+    seconds: "00"
   })
 
+  // initialize state for interval for timer
   const [intervalID, setIntervalID] = useState();
 
+  // state for controlling page being displayed
   const [pageState, setPageState] = useState("quiz");
 
+  // state for student score
   const [scoreState, setScoreState] = useState();
 
   // load quiz into state on page load
@@ -61,22 +66,26 @@ function StudentQuiz() {
     });
   }
 
+  // cancel form submit if user hits enter
   const preventFormSubmit = (event) => {
     event.preventDefault();
   }
 
+  // update state to display next question in quiz
   const handleNextQuestion = () => {
     setQuestionState({
       ...questionState, currentQuestion: questionState.currentQuestion + 1
     });
   }
 
+  // update state to display prev question in quiz
   const handlePrevQuestion = () => {
     setQuestionState({
       ...questionState, currentQuestion: questionState.currentQuestion - 1
     });
   }
 
+  // update state with student feedback
   const handleFeedbackChange = (event) => {
     const feedback = event.target.value;
     setQuestionState({
@@ -84,6 +93,7 @@ function StudentQuiz() {
     })
   }
 
+  // send student quiz results and info to result db
   const handleSubmitClick = async () => {
     // build result for sending to db
     const answers = [];
@@ -100,33 +110,45 @@ function StudentQuiz() {
       score: scoreState
     }
 
+    // send student result to result db
     await API.createResult(result).then(console.log("Result Submitted!"));
-    // console.log("quizid : ", result.quiz);
-    // console.log("studentid : ", result.student);
-    // const resultData = await API.getResultsByQuizAndStudent(result.quiz, result.student);
-    // console.log("getResultByQuizAndStudent" , resultData);
-    // console.log("result id: ", resultData.data[0]._id);
+    
+    // update quiz db to reflect that logged in student has taken this quiz
     await API.updateQuizStudents(result.quiz, result.student);
     window.location.replace("/students/profile");
 
   }
 
 
+  // timer function
   const timer = () => {
     var min = timerState.minutes;
     var sec = timerState.seconds;
     clearInterval(intervalID);
     var interval = setInterval(() => {
+      // change seconds to number if it was a string
+      if (typeof sec === "string") {
+        sec = parseInt(sec);
+      }
+
+      // if time is at end
       if (sec === 0 && min === 0) {
         endQuiz();
       }
+      // if time not at end but seconds at 0
       else if (sec === 0 && min !== 0) {
         min--;
         sec = 59;
       }
+      // if seconds < 10
+      else if (sec <= 10) {
+        sec--;
+        sec = "0" + sec;
+      }
       else {
         sec--;
       }
+      // update state to reflect changing time
       setTimerState({
         ...timerState, seconds: sec, minutes: min
       });
