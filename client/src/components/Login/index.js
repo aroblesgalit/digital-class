@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import './style.css';
 import API from "../../utils/API";
 import { Link } from 'react-router-dom';
-import loginImg from "../../images/loginImg.svg";
+import womenoncomp from "../../images/womanoncomp.jpg";
 
 function StudentLogin() {
 
@@ -55,8 +55,8 @@ function StudentLogin() {
     }
 
     return (
-        <div className="uk-flex uk-child-width-1-2@s loginContainer">
-            <div className="uk-margin-top"><img src={loginImg} alt="Man leaning on large mobile phone" uk-img="true" /></div>
+        <div className="uk-flex uk-child-width-1-2 loginContainer">
+            <div><img src={womenoncomp} alt="Woman on laptop" uk-img="true" /></div>
             <div className="loginWrapper">
                 <h2>LOGIN</h2>
                 <div className="uk-flex uk-flex-center formTabs" >

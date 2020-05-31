@@ -10,7 +10,6 @@ import TakeQuiz from "./pages/TakeQuiz";
 import TeacherProfile from "./pages/TeacherProfile";
 import QuizResults from "./pages/QuizResults";
 import Homepage from "./pages/homepage";
-import StudentProfile from "./pages/StudentProfile";
 import API from "./utils/API";
 
 

@@ -1,28 +1,7 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 .site-title {
   font-size: 18px !important;
 }
 
 .my-nav {
   background-color: #7cedab !important;
-}
-
-.loginBtn {
-  background-color: rgb(233, 255, 242);
-  border: none;
-  font-weight: 400;
-  color: #4ec981;
-  letter-spacing: 1.2px;
-  height: 38px !important;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.loginBtn:hover {
-  background-color: rgb(244, 255, 248);
 }
