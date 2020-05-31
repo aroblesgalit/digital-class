@@ -18,6 +18,8 @@ function StudentLogin() {
     const emailRef = useRef();
     const passwordRef = useRef();
     // const userRef = useRef();
+    const [isWronglogin, setisWronglogin] = useState(false);
+
     
 
     // Event handler for when the login button is clicked
@@ -37,6 +39,7 @@ function StudentLogin() {
                 })
                 .catch(function (err) {
                     console.log(err);
+                    setisWronglogin(true);
                 });
         } else if (loginTab.tab === 'teacher') {
             API.loginTeacher({
@@ -51,6 +54,7 @@ function StudentLogin() {
                 })
                 .catch(function (err) {
                     console.log(err)
+                    setisWronglogin(true);
                 });
         }
     }
@@ -88,6 +92,11 @@ function StudentLogin() {
                         <div className='uk-form-controls'>
                             <input className='uk-input' id='password' type='password' placeholder="******" ref={passwordRef} />
                         </div>
+                        { isWronglogin ? <div className='uk-alert-danger' uk-alert='true'>Incorrect pasword or email Try Again.</div>
+                        : 
+                        <div></div>
+                    }
+
                     </div>
                     <div className="uk-flex uk-flex-column uk-flex-middle">
                         <button className='uk-button primaryBtn' onClick={handleLogin}>Log in</button>
