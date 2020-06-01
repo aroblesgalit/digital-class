@@ -12,6 +12,7 @@ h2 {
 .loginWrapper{
     max-width: 640px;
     margin: 40px auto;
+    padding-bottom: 40px;
 }
 
 .loginForm {
