@@ -49,6 +49,8 @@ function ProfileLeftCol(props) {
     })
   }
 
+  //initialize i for incrememnting teacher emails in props
+  var i = -1;
   return (
 
     <div className="left-col-container uk-align-left uk-flex uk-flex-column uk-padding" >
@@ -87,7 +89,13 @@ function ProfileLeftCol(props) {
           {props.teachers ? (
             <div className="uk-text-small uk-margin-top user-info">
             <div className="uk-text-small">Teachers</div>
-              {props.teachers.join(", ")}
+            {props.teachers.map(item => {
+              i++;
+              return (
+                <div uk-tooltip={props.teacheremails[i]} key={item}>{item}</div>
+                )
+            })}
+              {/* {props.teachers.join(", ")} */}
             </div>
           ) : <div></div>}
           {props.subjects ? (
