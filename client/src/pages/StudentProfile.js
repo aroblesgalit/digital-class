@@ -13,6 +13,7 @@ function StudentProfile() {
     school: "",
     teacherids: [],
     teachernames: [],
+    teacheremails: [],
     subjects: [],
     quizzes: []
   })
@@ -23,12 +24,14 @@ function StudentProfile() {
       console.log("length : " + res.data.teachers.length);
       var subjects = [];
       let teachernames = [];
+      let teacheremails = [];
       let quizzes = [];
       for (let i = 0; i < res.data.teachers.length; i++) {
 
         const result = await API.getTeacherById(res.data.teachers[i])
         subjects.push(result.data.subject);
         teachernames.push(result.data.name);
+        teacheremails.push(result.data.email);
 
         const quiz = await API.getQuizzesForStudent(res.data.teachers[i])
         quizzes.push(...quiz.data);
@@ -44,6 +47,7 @@ function StudentProfile() {
         teacherids: res.data.teachers,
         subjects: subjects,
         teachernames: teachernames,
+        teacheremails: teacheremails,
         quizzes: quizzes,
         imageUrl: res.data.imageUrl
       });
@@ -53,7 +57,7 @@ function StudentProfile() {
 
   return (
     <div className="profile-container">
-      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} teachers={studentState.teachernames} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
+      <ProfileLeftCol email={studentState.email} name={studentState.name} imageUrl={studentState.imageUrl} teachers={studentState.teachernames} teacheremails={studentState.teacheremails} school={studentState.school} subjects={studentState.subjects} id={studentState.id} type="student" />
       <StudentProfileContent quizzes={studentState.quizzes} />
     </div>
   );

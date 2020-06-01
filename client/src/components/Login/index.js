@@ -34,7 +34,6 @@ function StudentLogin() {
                 // Send user to profile page
                 .then(function (res) {
                     window.location.replace("/students/profile");
-                    console.log(res);
                     console.log("Login worked!");
                 })
                 .catch(function (err) {
@@ -49,7 +48,6 @@ function StudentLogin() {
                 // Send user to profile page
                 .then(function (res) {
                     window.location.replace("/teachers/profile");
-                    console.log(res);
                     console.log("Login worked!");
                 })
                 .catch(function (err) {
