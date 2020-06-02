@@ -21,7 +21,7 @@ function QuizForm() {
     ]
   });
 
-// set the teacher in quiz state equal to logged-in teacher's id
+  // set the teacher in quiz state equal to logged-in teacher's id
   useEffect(() => {
     API.getTeacher().then(res => {
       setNewQuizState({
@@ -65,16 +65,16 @@ function QuizForm() {
   // The state will be updated to reflect user input for the associated answer choice
   const handleChoicesChange = (event, id, c) => {
     // get choices of target question from current state
-    const choices = newQuizState.questions[id-1].choices;
+    const choices = newQuizState.questions[id - 1].choices;
 
     // update target choice
-    choices[c-1] = event.target.value;
+    choices[c - 1] = event.target.value;
 
     // new array of questions
     const newQuestions = newQuizState.questions;
 
     // update choices of target question
-    newQuestions[id-1].choices = choices;
+    newQuestions[id - 1].choices = choices;
 
     // update state with updated questions array
     setNewQuizState({
@@ -84,7 +84,7 @@ function QuizForm() {
 
   const handleBodyChange = (event, id) => {
     const newQuestions = newQuizState.questions;
-    newQuestions[id-1].question = event.target.value;
+    newQuestions[id - 1].question = event.target.value;
 
     setNewQuizState({
       ...newQuizState, questions: newQuestions
@@ -94,7 +94,7 @@ function QuizForm() {
   // state to reflect the index of the correct answer
   const handleRadio = (id, c) => {
     const newQuestions = newQuizState.questions;
-    newQuestions[id-1].answer = c-1;
+    newQuestions[id - 1].answer = c - 1;
     setNewQuizState({
       ...newQuizState, questions: newQuestions
     })
@@ -105,7 +105,7 @@ function QuizForm() {
   // takes id for updating target question in state
   const handleImageChange = (event, id) => {
     const newQuestions = newQuizState.questions;
-    newQuestions[id-1].imageUrl = event.target.value;
+    newQuestions[id - 1].imageUrl = event.target.value;
     setNewQuizState({
       ...newQuizState, questions: newQuestions
     })
@@ -151,20 +151,29 @@ function QuizForm() {
             return (
               <div key={item.id} className="uk-margin-large-bottom">
                 <div className="uk-width-auto uk-margin-bottom">
+                  {/* textarea for question body */}
                   <label htmlFor="question" className="uk-form-label">Question {item.id}</label>
-                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" onChange={(event) => handleBodyChange(event, item.id)}/>
+                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" onChange={(event) => handleBodyChange(event, item.id)} />
                 </div>
+                {/* input for image url */}
                 <div className="uk-margin-bottom">
-                  <label htmlFor="imaage-url" className="uk-form-label">Add image url here...</label>
+                  <label htmlFor="image-url" className="uk-form-label">Add image url here...</label>
                   <input className="uk-input" id="image-url" type="text" onChange={(event) => handleImageChange(event, item.id)} />
                 </div>
-                {(newQuizState.questions[item.id-1].imageUrl !== "") ? 
-                (<div>
-                  Preview image here
-                  <br/>
-                  <img src={newQuizState.questions[item.id-1].imageUrl} alt={"Figure for question " +  item.id} className="quiz-image uk-margin-bottom uk-margin-top" />
-                </div>) : (<div></div>)}
-                
+                {/* if the image url in newquizstate is not blank */}
+                {(newQuizState.questions[item.id - 1].imageUrl !== "") ?
+                  // display image preview
+                  (<div>
+                    Preview image here
+                    <br />
+                    {/* set image url from newquizstate to image src */}
+                    <img src={newQuizState.questions[item.id - 1].imageUrl} alt={"Figure for question " + item.id} className="quiz-image uk-margin-bottom uk-margin-top" />
+                  </div>)
+                  // else display nothing
+                  : (<div></div>)}
+
+
+                {/* inputs for answer choices */}
                 <div>Choice 1</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
                   <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 1)} className="uk-radio uk-margin-right"></input>
@@ -189,17 +198,14 @@ function QuizForm() {
             )
           })}
 
-
+          {/* buttons for adding new question or submitting quiz */}
           <div className="uk-margin-top uk-flex uk-flex-right">
             <label className="uk-button uk-button-default my-button uk-margin-small-right" onClick={addQuestion}>Add New Question</label>
             <label className="uk-button uk-button-default my-button" onClick={(event) => handleSubmitClick(event)}>Submit Quiz</label>
           </div>
 
-
         </form>
-
-
-
+        
       </div>
     </div>
   )
