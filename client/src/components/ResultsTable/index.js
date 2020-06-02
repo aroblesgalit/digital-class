@@ -11,28 +11,38 @@ function ResultsTable(props) {
   // tab state contains the active tab
   const [tabState, setTabState] = useState({ tab: "table" });
 
+  // on load, get results and quiz
   useEffect(() => {
     getRestuls();
     getQuiz();
   }, []);
 
+  // when the tab changes
   useEffect(() => {
+    // render the chart if the active tab is 'chart'
     if (tabState.tab === "chart") {
       renderChart();
     }
   }, [tabState.tab]);
 
+
   const getRestuls = async () => {
+    // get results based on quiz id
     await API.getResultsByQuiz(props.id).then(async (res) => {
+      // for each student id in the response
       for (let i = 0; i < res.data.length; i++) {
+        // get student info based on student id and add their name to res.data object
         await API.getStudentById(res.data[i].student).then(student => res.data[i].name = student.data.name);
       }
+      // update state
       setResultState(res.data);
 
     })
   };
+  
 
   const getQuiz = async () => {
+    // get quiz answers based on id for results chart
     await API.getQuizById(props.id).then(res => {
       const answers = [];
       res.data.questions.map(item => {
@@ -50,13 +60,17 @@ function ResultsTable(props) {
   // set up chart
   const renderChart = () => {
     var ctx = document.getElementById('myChart');
-    const labels = []
+    // initialize arrays for rendering chart
+    const labels = [];
     const bgColors = [];
     const data = [];
     const borderColors = [];
     for (let i = 0; i<quizState.length; i++) {
+      // set label to Q#
       labels.push("Q" + (i+1));
+      // set color of bar
       bgColors.push('rgb(42, 89, 143, 0.2)');
+      // set color of border
       borderColors.push('rgb(42, 89, 143, 1)');
       // for each student
       let thisans = 0;
@@ -74,6 +88,7 @@ function ResultsTable(props) {
       document.getElementById("chart-container").classList.add("chart-container-responsive");
     }
 
+    // render chart
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -107,18 +122,21 @@ function ResultsTable(props) {
     <div>
       <div className="result-wrapper">
         <div className="uk-flex uk-flex-between">
+          {/* back button to return to teacher profile page */}
           <div className="back" onClick={() => {window.location.replace("/teachers/profile")}}>
             {"< Back"}
           </div>
-          <div>
+          {/* nav area with tabs */}
+          <nav>
             <div className="nav-icon" onClick={() => handleTabChange("table")}>
               <i className="fas fa-table"></i>
             </div>
             <div className="nav-icon" onClick={() => handleTabChange("chart")}>
               <i className="fas fa-chart-bar"></i>
             </div>
-          </div>
+          </nav>
         </div>
+        {/* if the table tab is active */}
         {tabState.tab === "table" ? (
           <table className="uk-table">
             <thead>
@@ -129,6 +147,7 @@ function ResultsTable(props) {
               </tr>
             </thead>
             <tbody>
+              {/* map over results to build table */}
               {resultState.map(item => {
                 return (
                   <tr key={item._id}>
@@ -144,12 +163,12 @@ function ResultsTable(props) {
                       </div>
                     </td>
                   </tr>
-                  
                 )
               })}
             </tbody>
           </table>
 
+          // if the table tab is not active
         ) : <div id="chart-container">
             <canvas id="myChart"></canvas>
           </div>}
