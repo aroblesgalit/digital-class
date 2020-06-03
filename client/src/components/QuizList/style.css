@@ -38,6 +38,11 @@
   padding: 20px;
 }
 
+.fas {
+  line-height: unset;
+  font-size: 20px;
+}
+
 .card-title {
   color: #f2f2f2 !important;
   font-size: 24px !important;
@@ -79,6 +84,11 @@
 
 .createBtnContainer {
   width: 44px;
+}
+
+.teacher-buttons {
+  display: inline-block;
+  margin: 0 3px;
 }
 
 

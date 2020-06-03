@@ -1,21 +1,21 @@
-import React, { useEffect, useState }  from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../utils/API'
 import './style.css';
 
 function QuizList(props) {
-const [userState, setUserState] = useState();
-useEffect(() => {
-  getUser()
-},[]);
+  const [userState, setUserState] = useState();
+  useEffect(() => {
+    getUser()
+  }, []);
 
   async function getUser() {
     if (props.user === "student") {
-      const {data: {id}} = await API.getStudentData();
+      const { data: { id } } = await API.getStudentData();
       setUserState(id);
     }
   }
-  
+
 
   const myRender = (props) => {
     if (props.quizzes !== undefined) {
@@ -32,11 +32,17 @@ useEffect(() => {
                     {item.questions.length + " Questions"}
                   </div>
                 </div>
-                <div className="card-bottom uk-flex uk-flex-center">
+                <div className="card-bottom">
                   {props.user === "teacher" ?
-                    <Link to={"/teachers/results/" + item._id} className="result-link uk-button">
-                      View Results
-                    </Link>
+                    <div className="uk-flex uk-flex-row uk-flex-around">
+                      <div>
+                        <Link to={"/teachers/results/" + item._id}>
+                          <i className="fas fa-chart-bar" uk-tooltip="View Results"></i>
+                        </Link>
+                      </div>
+                      <i className="fas fa-share-square" uk-tooltip="Share with other teachers"></i>
+                      
+                    </div>
                     : ""}
                   {props.user === "student" && item.students.indexOf(userState) === -1 ?
                     <Link to={"/students/quiz/" + item._id} className="quiz-link uk-button">
@@ -63,13 +69,13 @@ useEffect(() => {
         {myRender(props)}
       </div>
       {props.user === "teacher" ?
-      <div className="createBtnContainer">
-        <Link to="/teachers/createquiz">
-          <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
-        </Link>
-      </div>
-      : <div></div>
-    }
+        <div className="createBtnContainer">
+          <Link to="/teachers/createquiz">
+            <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>
+          </Link>
+        </div>
+        : <div></div>
+      }
     </div>
   )
 }
