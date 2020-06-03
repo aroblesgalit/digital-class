@@ -9,7 +9,8 @@ router
 
 router
     .route("/teacher")
-    .get(studentsController.getStudentsByTeacher);
+    .get(studentsController.getStudentsByTeacher)
+    .put(studentsController.updateStudentsTeachers);
 
 // Matches with "/api/students/:id"
 router
