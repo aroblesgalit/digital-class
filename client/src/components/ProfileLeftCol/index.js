@@ -57,7 +57,8 @@ function ProfileLeftCol(props) {
     // Go through student's teachers array and check the teachersList if it contains these id's
     // Update the teachersList's "checked" boolean to true for each teacher registered under
   // Add logic for when the "Save" button is clicked
-    // Make a request for updating the student's teachers array
+    // Grab the ID's of the checked teachers
+    // Make a request for updating the student's teachers array with the checked teachers
 
   //initialize i for incrememnting teacher emails in props
   var i = -1;
