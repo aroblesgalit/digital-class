@@ -14,7 +14,24 @@ function TeacherProfileContent(props) {
 
   useEffect(() => {
     loadData();
+    if (props.sharedQuizzes){
+      getSharedQuizzes();
+    }
   }, []);
+
+  useEffect(() => {
+    if (teacherProfileState.tab === "Shared"){
+      getSharedQuizzes();
+    }
+  }, [teacherProfileState.tab]);
+
+  const getSharedQuizzes = async () => {
+    const shared = [];
+    for (let i = 0; i < props.sharedQuizzes.length; i++) {
+      await API.getQuizById(props.sharedQuizzes).then(sharedRes => shared.push(sharedRes.data))
+    }
+    setTeacherProfileState({...teacherProfileState, shared: shared});
+  }
 
   const handleTabChange = (selected) => {
     setTeacherProfileState({
@@ -22,33 +39,33 @@ function TeacherProfileContent(props) {
       tab: selected
     })
   }
-  
+
   const loadData = () => {
     API.getStudentsByTeacher()
       .then(result => {
         API.getQuizzesByTeacher()
-        .then(res => {
-          setTeacherProfileState({
-            ...teacherProfileState, 
-            quizzes: res.data, 
-            students: result.data
+          .then(res => {
+            setTeacherProfileState({
+              ...teacherProfileState,
+              quizzes: res.data,
+              students: result.data,
+            })
           })
-        })
       })
   }
 
   const renderTab = () => {
-    if (teacherProfileState.tab === "Students"){
-      return(<StudentList students={teacherProfileState.students} />)
+    if (teacherProfileState.tab === "Students") {
+      return (<StudentList students={teacherProfileState.students} />)
     }
-    else if (teacherProfileState.tab === "Quizzes"){
-      return(<QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} id={props.id} school={props.school} />)
+    else if (teacherProfileState.tab === "Quizzes") {
+      return (<QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} id={props.id} school={props.school} />)
     }
-    else if (teacherProfileState.tab === "Shared"){
-      return(
+    else if (teacherProfileState.tab === "Shared") {
+      return (
         <div>
           Shared Quizzes
-          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true}/>
+          <QuizList quizzes={teacherProfileState.sharedQuizzes} user={"teacher"} shared={true} />
         </div>)
     }
   }

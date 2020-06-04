@@ -45,7 +45,8 @@ router.get("/user_data", function (req, res) {
             school: req.user.school,
             subject: req.user.subject,
             imageUrl: req.user.imageUrl,
-            userType: req.user.userType
+            userType: req.user.userType,
+            sharedQuizzes: req.user.sharedQuizzes
         });
     }
 });

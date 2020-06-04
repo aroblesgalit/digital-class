@@ -45,9 +45,14 @@ function QuizList(props) {
   }
 
   // when submit is clicked in modal
-  const shareQuiz = () => {
+  const shareQuiz = async () => {
     if (checkTeachers.length !== 0) {
-      console.log("You shared quiz " + shareId + " with " + checkTeachers);
+      for (let i = 0; i < checkTeachers.length; i++) {
+        await API.addToSharedQuizzes(checkTeachers[i], shareId).then(
+          console.log("You shared quiz " + shareId + " with " + checkTeachers[i])
+        );
+      }
+      
     }
     else {
       console.log("You must make a selection first")
