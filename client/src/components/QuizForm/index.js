@@ -185,23 +185,23 @@ function QuizForm() {
                 
                 <div>Choice 1</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
-                  <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 1)} className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice1" type="text" onChange={(event) => handleChoicesChange(event, item.id, 1)} />
+                  <input type="radio" name={radioname} checked={item.answer === 0} onChange={() => handleRadio(item.id, 1)} className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice1" type="text" value={item.choices[0]} onChange={(event) => handleChoicesChange(event, item.id, 1)} />
                 </div>
                 <div>Choice 2</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
-                  <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 2)} className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice2" type="text" onChange={(event) => handleChoicesChange(event, item.id, 2)} />
+                  <input type="radio" name={radioname} checked={item.answer === 1} onChange={() => handleRadio(item.id, 2)} className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice2" type="text" value={item.choices[1]} onChange={(event) => handleChoicesChange(event, item.id, 2)} />
                 </div>
                 <div>Choice 3</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
-                  <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 3)} className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice3" type="text" onChange={(event) => handleChoicesChange(event, item.id, 3)} />
+                  <input type="radio" name={radioname} checked={item.answer === 2} onChange={() => handleRadio(item.id, 3)} className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice3" type="text" value={item.choices[2]} onChange={(event) => handleChoicesChange(event, item.id, 3)} />
                 </div>
                 <div>Choice 4</div>
                 <div className="uk-flex uk-flex-row uk-flex-middle">
-                  <input type="radio" name={radioname} onChange={() => handleRadio(item.id, 4)} className="uk-radio uk-margin-right"></input>
-                  <input className="uk-input" id="choice4" type="text" onChange={(event) => handleChoicesChange(event, item.id, 4)} />
+                  <input type="radio" name={radioname} checked={item.answer === 3} onChange={() => handleRadio(item.id, 4)} className="uk-radio uk-margin-right"></input>
+                  <input className="uk-input" id="choice4" type="text" value={item.choices[3]} onChange={(event) => handleChoicesChange(event, item.id, 4)} />
                 </div>
               </div>
             )
