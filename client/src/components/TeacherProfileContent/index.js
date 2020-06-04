@@ -65,7 +65,7 @@ function TeacherProfileContent(props) {
       return (
         <div>
           Shared Quizzes
-          <QuizList quizzes={teacherProfileState.sharedQuizzes} user={"teacher"} shared={true} />
+          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true} />
         </div>)
     }
   }
