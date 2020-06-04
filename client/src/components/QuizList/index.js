@@ -14,6 +14,7 @@ function QuizList(props) {
   const [shareId, setShareId] = useState();
   const [checkTeachers, setCheckTeachers] = useState([]);
 
+  // get studentid if the user is a student
   async function getUser() {
     if (props.user === "student") {
       const { data: { id } } = await API.getStudentData();
@@ -22,8 +23,9 @@ function QuizList(props) {
   }
 
   const getTeachers = () => {
-    console.log("getting teachers by school")
-    API.getTeachersBySchool(props.school).then(res => {setTeachersArray(res.data)});
+    if (props.user === "teacher") {
+      API.getTeachersBySchool(props.school).then(res => { setTeachersArray(res.data) });
+    }
   }
 
   // handle checkbox on modal for teachers sharing quizzes
@@ -31,20 +33,20 @@ function QuizList(props) {
     const newTeachers = [...checkTeachers];
     // if checked, add to newteachers array
     if (e.target.checked) {
-        newTeachers.push(e.target.name);
+      newTeachers.push(e.target.name);
     }
     // if unchecked, remove from newteachers array
     else {
-        const index = newTeachers.indexOf(e.target.name)
-        newTeachers.splice(index, 1);
+      const index = newTeachers.indexOf(e.target.name)
+      newTeachers.splice(index, 1);
     }
     // update state 
     setCheckTeachers(newTeachers);
-}
+  }
 
-// when submit is clicked in modal
+  // when submit is clicked in modal
   const shareQuiz = () => {
-    if (checkTeachers.length !== 0){
+    if (checkTeachers.length !== 0) {
       console.log("You shared quiz " + shareId + " with " + checkTeachers);
     }
     else {
@@ -54,9 +56,12 @@ function QuizList(props) {
 
 
   const myRender = (props) => {
+    // if the quizzes have been loaded
     if (props.quizzes !== undefined) {
+      // if the quizzes are not empty
       if (props.quizzes.length > 0) {
         return (
+          // create a card for each quiz
           (props.quizzes.map(item => {
             return (
               <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
@@ -69,32 +74,66 @@ function QuizList(props) {
                   </div>
                 </div>
                 <div className="card-bottom">
-                  {props.user === "teacher" ?
+                  {/* if the user is a teacher and they are not on the shared tab */}
+                  {props.user === "teacher" && !props.shared ?
                     <div className="uk-flex uk-flex-row uk-flex-around">
                       <div>
                         <Link to={"/teachers/results/" + item._id}>
                           <i className="fas fa-chart-bar" uk-tooltip="View Results"></i>
                         </Link>
                       </div>
-                      <i className="fas fa-share-square" uk-tooltip="Share with other teachers" uk-toggle="target: #teachers-update" onClick={() => {setShareId(item._id)}}></i>
+                      <i className="fas fa-share-square" uk-tooltip="Share with other teachers" uk-toggle="target: #teachers-update" onClick={() => { setShareId(item._id) }}></i>
                       <div id="teachers-update" uk-modal="true">
                         <div className="uk-modal-dialog uk-modal-body">
                           <h2 className="uk-modal-title">Select Teachers</h2>
                           <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            
+
                             {/* if the teachers have been loaded */}
                             {teachersArray ?
-                            // list teachers with checkboxes
-                            teachersArray.map(item => { if (item._id !== props.id){
-                              return(
-                                <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
-                              )
-                            }
-                              
+                              // list teachers with checkboxes
+                              teachersArray.map(item => {
+                                if (item._id !== props.id) {
+                                  return (
+                                    <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
+                                  )
+                                }
+
                               })
-                             : <div></div> }
-                            
-                            
+                              : <div></div>}
+
+                            {/* if the user is on their shared tab (would only be true for user==teacher) */}
+                            {props.shared ?
+                              (props.quizzes.map(item => {
+                                return (
+                                  <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
+                                    <div className="uk-flex uk-flex-column uk-flex-middle card-top">
+                                      <div className="uk-card-title card-title">
+                                        {item.title}
+                                      </div>
+                                      <div className="card-subtitle">
+                                        {item.questions.length + " Questions"}
+                                      </div>
+                                    </div>
+                                    <div className="card-bottom">
+                                      <div className="uk-flex uk-flex-row uk-flex-around">
+                                        <div>
+                                          {/* <Link to={"/teachers/results/" + item._id}> */}
+                                          <i class="fas fa-eye" uk-tooltip="View Results"></i>
+                                          {/* </Link> */}
+                                        </div>
+                                        <div>
+                                          <i class="fas fa-check" uk-tooltip="Accept"></i>
+                                        </div>
+                                        <div>
+                                          <i class="fas fa-times" uk-tooltip="Decline"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}))
+                            : <div></div>}
+
+
                           </div>
                           <div className="uk-flex uk-flex-right uk-margin-large-top">
                             <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
@@ -128,7 +167,7 @@ function QuizList(props) {
       <div className="uk-flex uk-flex-wrap">
         {myRender(props)}
       </div>
-      {props.user === "teacher" ?
+      {props.user === "teacher" && !props.shared ?
         <div className="createBtnContainer">
           <Link to="/teachers/createquiz">
             <span uk-icon="icon: plus" className="uk-flex uk-flex-center uk-flex-middle createBtn"></span>

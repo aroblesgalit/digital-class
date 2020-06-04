@@ -8,7 +8,8 @@ function TeacherProfileContent(props) {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
     students: [],
-    quizzes: []
+    quizzes: [],
+    shared: []
   })
 
   useEffect(() => {
@@ -36,15 +37,32 @@ function TeacherProfileContent(props) {
       })
   }
 
+  const renderTab = () => {
+    if (teacherProfileState.tab === "Students"){
+      return(<StudentList students={teacherProfileState.students} />)
+    }
+    else if (teacherProfileState.tab === "Quizzes"){
+      return(<QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} id={props.id} school={props.school} />)
+    }
+    else if (teacherProfileState.tab === "Shared"){
+      return(
+        <div>
+          Shared Quizzes
+          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true}/>
+        </div>)
+    }
+  }
+
   return (
 
     <div className="content">
       <ul uk-tab="true">
         <li className="uk-active" ><a onClick={() => handleTabChange("Students")}>Students</a></li>
         <li><a onClick={() => handleTabChange("Quizzes")}>Quizzes</a></li>
+        <li><a onClick={() => handleTabChange("Shared")}>Shared</a></li>
       </ul>
 
-      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} id={props.id} school={props.school} />}
+      {renderTab()}
     </div>
 
   )
