@@ -41,6 +41,7 @@
 .fas {
   line-height: unset;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .card-title {

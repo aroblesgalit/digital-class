@@ -6,14 +6,44 @@ import './style.css';
 function QuizList(props) {
   const [userState, setUserState] = useState();
   useEffect(() => {
-    getUser()
+    getUser();
+    getTeachers();
   }, []);
+
+  const [teachersArray, setTeachersArray] = useState();
+  const [shareId, setShareId] = useState();
+  const [checkTeachers, setCheckTeachers] = useState([]);
 
   async function getUser() {
     if (props.user === "student") {
       const { data: { id } } = await API.getStudentData();
       setUserState(id);
     }
+  }
+
+  const getTeachers = () => {
+    console.log("getting teachers by school")
+    API.getTeachersBySchool(props.school).then(res => {setTeachersArray(res.data)});
+  }
+
+  function handleCheckbox(e) {
+    console.log('checked', e.target.checked);
+    console.log('name', e.target.name);
+
+    const newTeachers = [...checkTeachers];
+    if (e.target.checked) {
+        newTeachers.push(e.target.name);
+    }
+    else {
+        const index = newTeachers.indexOf(e.target.name)
+        newTeachers.splice(index, 1);
+    }
+    setCheckTeachers(newTeachers);
+}
+
+
+  const shareQuiz = () => {
+    console.log("You shared quiz " + shareId + " with " + checkTeachers);
   }
 
 
@@ -40,8 +70,32 @@ function QuizList(props) {
                           <i className="fas fa-chart-bar" uk-tooltip="View Results"></i>
                         </Link>
                       </div>
-                      <i className="fas fa-share-square" uk-tooltip="Share with other teachers"></i>
-                      
+                      <i className="fas fa-share-square" uk-tooltip="Share with other teachers" uk-toggle="target: #teachers-update" onClick={() => {setShareId(item._id)}}></i>
+                      <div id="teachers-update" uk-modal="true">
+                        <div className="uk-modal-dialog uk-modal-body">
+                          <h2 className="uk-modal-title">Select Teachers</h2>
+                          <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            {
+                              /* replace <label><input>s below by mapping through the list of teachers */
+                              /* add checked="true" for teachers in this student's teachers array */
+                            }
+                            
+                            {teachersArray ?
+                            teachersArray.map(item => {
+                              return(
+                                  <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
+                                )
+                              })
+                             : <div></div> }
+                            
+                            
+                          </div>
+                          <div className="uk-flex uk-flex-right uk-margin-large-top">
+                            <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
+                            <button className="uk-button primaryBtn" type="button" onClick={() => shareQuiz()}>Save</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     : ""}
                   {props.user === "student" && item.students.indexOf(userState) === -1 ?

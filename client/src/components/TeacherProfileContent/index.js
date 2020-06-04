@@ -44,7 +44,7 @@ function TeacherProfileContent(props) {
         <li><a onClick={() => handleTabChange("Quizzes")}>Quizzes</a></li>
       </ul>
 
-      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} />}
+      {teacherProfileState.tab === "Students" ? <StudentList students={teacherProfileState.students} /> : <QuizList quizzes={teacherProfileState.quizzes} user={"teacher"} school={props.school} />}
     </div>
 
   )

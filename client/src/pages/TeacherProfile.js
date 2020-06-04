@@ -29,7 +29,7 @@ function TeacherProfile() {
   return (
     <div className="profile-container">
       <ProfileLeftCol email={teacherState.email} name={teacherState.name} imageUrl={teacherState.imageUrl} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} type="teacher" />
-      <TeacherProfileContent id={teacherState.id} />
+      <TeacherProfileContent id={teacherState.id} school={teacherState.school}/>
     </div>
   );
 }
