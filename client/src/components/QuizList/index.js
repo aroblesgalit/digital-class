@@ -27,9 +27,6 @@ function QuizList(props) {
   }
 
   function handleCheckbox(e) {
-    console.log('checked', e.target.checked);
-    console.log('name', e.target.name);
-
     const newTeachers = [...checkTeachers];
     if (e.target.checked) {
         newTeachers.push(e.target.name);
@@ -43,7 +40,12 @@ function QuizList(props) {
 
 
   const shareQuiz = () => {
-    console.log("You shared quiz " + shareId + " with " + checkTeachers);
+    if (checkTeachers.length !== 0){
+      console.log("You shared quiz " + shareId + " with " + checkTeachers);
+    }
+    else {
+      console.log("You must make a selection first")
+    }
   }
 
 
@@ -81,10 +83,12 @@ function QuizList(props) {
                             }
                             
                             {teachersArray ?
-                            teachersArray.map(item => {
+                            teachersArray.map(item => { if (item._id !== props.id){
                               return(
-                                  <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
-                                )
+                                <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
+                              )
+                            }
+                              
                               })
                              : <div></div> }
                             
