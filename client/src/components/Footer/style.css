@@ -18,6 +18,9 @@
 
 footer {
   width: 100%;
+  /* position: absolute; */
+  bottom: 0;
+  min-height: 172px;
   text-align: center;
   color: #bdbdbd;
   background-color: #2A352E;

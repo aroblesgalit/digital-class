@@ -18,6 +18,9 @@ function StudentLogin() {
     const emailRef = useRef();
     const passwordRef = useRef();
     // const userRef = useRef();
+    const [isWronglogin, setisWronglogin] = useState(false);
+
+    
 
     // Event handler for when the login button is clicked
     function handleLogin(e) {
@@ -25,31 +28,31 @@ function StudentLogin() {
         if (loginTab.tab === 'student') {
             // Make a post request to the login route and pass in the email and password
             API.loginStudent({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value
             })
                 // Send user to profile page
                 .then(function (res) {
                     window.location.replace("/students/profile");
-                    console.log(res);
                     console.log("Login worked!");
                 })
                 .catch(function (err) {
                     console.log(err);
+                    setisWronglogin(true);
                 });
         } else if (loginTab.tab === 'teacher') {
             API.loginTeacher({
-                email: emailRef.current.value,
+                email: emailRef.current.value.toLowerCase(),
                 password: passwordRef.current.value
             })
                 // Send user to profile page
                 .then(function (res) {
                     window.location.replace("/teachers/profile");
-                    console.log(res);
                     console.log("Login worked!");
                 })
                 .catch(function (err) {
-                    console.log(err);
+                    console.log(err)
+                    setisWronglogin(true);
                 });
         }
     }
@@ -87,6 +90,11 @@ function StudentLogin() {
                         <div className='uk-form-controls'>
                             <input className='uk-input' id='password' type='password' placeholder="******" ref={passwordRef} />
                         </div>
+                        { isWronglogin ? <div className='uk-alert-danger' uk-alert='true'>Incorrect pasword or email Try Again.</div>
+                        : 
+                        <div></div>
+                    }
+
                     </div>
                     <div className="uk-flex uk-flex-column uk-flex-middle">
                         <button className='uk-button primaryBtn' onClick={handleLogin}>Log in</button>

@@ -124,5 +124,8 @@ export default {
   // Get result by quiz id and student id
   getResultsByQuizAndStudent: function (quiz, student) {
     return axios.get("/api/results/" + quiz + "/" + student);
+  },
+  updateStudentsTeachers: function (teachers) {
+    return axios.put("/api/students/teacher", teachers);
   }
 };

@@ -49,6 +49,19 @@ function ProfileLeftCol(props) {
     })
   }
 
+  // Create const for the current state of teachersList array
+    // Each teacher should be an object with properties for "id", "name", and "checked"
+    // "checked" should be a boolean, true if this student is registered under them
+  // Add logic here for getting all the teachers under this student's school
+    // Use getTeachersBySchool and set the teachersList with data from this request
+    // Go through student's teachers array and check the teachersList if it contains these id's
+    // Update the teachersList's "checked" boolean to true for each teacher registered under
+  // Add logic for when the "Save" button is clicked
+    // Grab the ID's of the checked teachers
+    // Make a request for updating the student's teachers array with the checked teachers
+
+  //initialize i for incrememnting teacher emails in props
+  var i = -1;
   return (
 
     <div className="left-col-container uk-align-left uk-flex uk-flex-column uk-padding" >
@@ -86,8 +99,35 @@ function ProfileLeftCol(props) {
         <div className="uk-flex uk-flex-column">
           {props.teachers ? (
             <div className="uk-text-small uk-margin-top user-info">
-            <div className="uk-text-small">Teachers</div>
-              {props.teachers.join(", ")}
+              <div className="uk-flex uk-flex-middle">
+                <div className="uk-text-small uk-margin-small-right">Teachers</div>
+                <button uk-icon="icon: pencil; ratio: .9" type="button" uk-toggle="target: #teachers-update"></button>
+              </div>
+              <div id="teachers-update" uk-modal="true">
+                <div className="uk-modal-dialog uk-modal-body">
+                  <h2 className="uk-modal-title">Update Teachers</h2>
+                  <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                    {
+                      /* replace <label><input>s below by mapping through the list of teachers */
+                      /* add checked="true" for teachers in this student's teachers array */
+                    }
+                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> John Doe</label>
+                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> Jane Doe</label>
+                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> Miss Frizzle</label>
+                  </div>
+                  <div className="uk-flex uk-flex-right uk-margin-large-top">
+                    <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
+                    <button className="uk-button primaryBtn" type="button">Save</button>
+                  </div>
+                </div>
+              </div>
+              {props.teachers.map(item => {
+                i++;
+                return (
+                  <div uk-tooltip={props.teacheremails[i]} key={item}>{item}</div>
+                )
+              })}
+              {/* {props.teachers.join(", ")} */}
             </div>
           ) : <div></div>}
           {props.subjects ? (
