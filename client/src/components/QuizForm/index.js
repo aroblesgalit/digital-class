@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../utils/API'
 import './style.css';
+import { useParams } from 'react-router-dom';
 
 function QuizForm() {
+
+  const {id} = useParams();
+  if (id) {
+    console.log(id);
+  }
+  else {
+    console.log("no id")
+  }
 
   // initialize quiz state with one empty question
   // this quiz state is updated with user input and sent to DB as-is on submit
@@ -21,12 +30,21 @@ function QuizForm() {
     ]
   });
 
-// set the teacher in quiz state equal to logged-in teacher's id
+// set the teacher in quiz state equal to logged-in teacher's id, get the quiz data from params if there are params
   useEffect(() => {
     API.getTeacher().then(res => {
-      setNewQuizState({
-        ...newQuizState, teacher: res.data.id
-      })
+      if (id) {
+        API.getQuizById(id).then(quiz => {
+          setNewQuizState({
+            ...newQuizState, teacher: res.data.id, title: quiz.data.title, timeLimit: quiz.data.timeLimit, questions: quiz.data.questions
+          })
+        })
+      }
+      else {
+        setNewQuizState({
+          ...newQuizState, teacher: res.data.id
+        })
+      }
     })
   }, [])
 
@@ -130,7 +148,7 @@ function QuizForm() {
   return (
     <div>
       <div className="quiz-form-container">
-        <h4 className="uk-margin-large-bottom uk-margin-large-top">Create Quiz</h4>
+        {id ? <h4 className="uk-margin-large-bottom uk-margin-large-top">Review Shared Quiz</h4> : <h4 className="uk-margin-large-bottom uk-margin-large-top">Create Quiz</h4>}
         <form onSubmit={(event) => preventFormSubmit(event)}>
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
@@ -139,7 +157,7 @@ function QuizForm() {
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
               <div className="uk-width-1-1">
-                <label htmlFor="minutes" className="uk-form-label">Time Limit (Minutes)</label>
+                <label htmlFor="minutes" className="uk-form-label">Time Limit (min)</label>
                 <input className="uk-input" id="minutes" type="number" min="0" onChange={(event) => handleMinutesChange(event)} placeholder="00" />
               </div>
             </div>

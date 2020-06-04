@@ -102,9 +102,10 @@ function QuizList(props) {
       return (
         <div className="uk-flex uk-flex-row uk-flex-around">
           <div>
-            {/* <Link to={"/teachers/results/" + item._id}> */}
-            <i class="fas fa-eye" uk-tooltip="View/Edit Quiz"></i>
-            {/* </Link> */}
+
+            <Link to={"/teachers/createquiz/" + item._id}>
+              <i class="fas fa-eye" uk-tooltip="View/Edit Quiz"></i>
+            </Link>
           </div>
           <div>
             <i class="fas fa-check" uk-tooltip="Accept"></i>

@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route exact path="/teachers/createquiz">
+          <Route path={["/teachers/createquiz/:id", "/teachers/createquiz"]}>
             <CreateQuiz />
           </Route>
           <Route exact path='/signup'>
