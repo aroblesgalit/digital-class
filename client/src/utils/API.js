@@ -127,5 +127,9 @@ export default {
   },
   updateStudentsTeachers: function (teachers) {
     return axios.put("/api/students/teacher", teachers);
+  },
+  // Add to sharedQuizzes
+  addToSharedQuizzes: function (teacherid, quizid) {
+    return axios.put("/api/teachers/" + teacherid + "/" + quizid);
   }
 };

@@ -18,4 +18,8 @@ router
     .route("/school/:school")
     .get(teachersController.getTeachersBySchool);
 
+router
+    .route("/:id/:quizid")
+    .put(teachersController.addToSharedQuizzes);
+
 module.exports = router;
