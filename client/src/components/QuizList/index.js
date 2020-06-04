@@ -26,19 +26,23 @@ function QuizList(props) {
     API.getTeachersBySchool(props.school).then(res => {setTeachersArray(res.data)});
   }
 
+  // handle checkbox on modal for teachers sharing quizzes
   function handleCheckbox(e) {
     const newTeachers = [...checkTeachers];
+    // if checked, add to newteachers array
     if (e.target.checked) {
         newTeachers.push(e.target.name);
     }
+    // if unchecked, remove from newteachers array
     else {
         const index = newTeachers.indexOf(e.target.name)
         newTeachers.splice(index, 1);
     }
+    // update state 
     setCheckTeachers(newTeachers);
 }
 
-
+// when submit is clicked in modal
   const shareQuiz = () => {
     if (checkTeachers.length !== 0){
       console.log("You shared quiz " + shareId + " with " + checkTeachers);
@@ -77,12 +81,10 @@ function QuizList(props) {
                         <div className="uk-modal-dialog uk-modal-body">
                           <h2 className="uk-modal-title">Select Teachers</h2>
                           <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            {
-                              /* replace <label><input>s below by mapping through the list of teachers */
-                              /* add checked="true" for teachers in this student's teachers array */
-                            }
                             
+                            {/* if the teachers have been loaded */}
                             {teachersArray ?
+                            // list teachers with checkboxes
                             teachersArray.map(item => { if (item._id !== props.id){
                               return(
                                 <label key={item._id}><input name={item._id} className="uk-checkbox" type="checkbox" onChange={handleCheckbox} />  {item.name}</label>
@@ -96,7 +98,7 @@ function QuizList(props) {
                           </div>
                           <div className="uk-flex uk-flex-right uk-margin-large-top">
                             <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                            <button className="uk-button primaryBtn" type="button" onClick={() => shareQuiz()}>Save</button>
+                            <button className="uk-button primaryBtn" type="button" onClick={() => shareQuiz()}>Submit</button>
                           </div>
                         </div>
                       </div>
