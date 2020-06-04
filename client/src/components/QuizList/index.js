@@ -150,7 +150,9 @@ function QuizList(props) {
                     {item.questions.length + " Questions"}
                   </div>
                 </div>
-                {myRenderCardBottom(item)}
+                <div className="card-bottom">
+                  {myRenderCardBottom(item)}
+                </div>
               </div>
             )
           })))
