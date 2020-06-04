@@ -24,7 +24,13 @@ const teacherSchema = new Schema({
   userType: {
     type: String,
     default: "teacher"
-  }
+  },
+  sharedQuizzes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Quiz"
+    }
+  ]
   // phoneNumber: {
   //   type: Number,
   //   match: [/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, "Please enter a valid Phone Number"],
