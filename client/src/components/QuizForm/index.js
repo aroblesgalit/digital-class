@@ -153,12 +153,12 @@ function QuizForm() {
           <div className="uk-grid-small" uk-grid="true">
             <div className="uk-width-3-4@s">
               <label htmlFor="quiz-title" className="uk-form-label" >Title</label>
-              <input className="uk-input" id="quiz-title" type="text" onChange={(event) => handleTitleChange(event)} />
+              <input className="uk-input" id="quiz-title" type="text" value={newQuizState.title} onChange={(event) => handleTitleChange(event)} />
             </div>
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
               <div className="uk-width-1-1">
                 <label htmlFor="minutes" className="uk-form-label">Time Limit (min)</label>
-                <input className="uk-input" id="minutes" type="number" min="0" onChange={(event) => handleMinutesChange(event)} placeholder="00" />
+                <input className="uk-input" id="minutes" type="number" min="0" value={newQuizState.timeLimit} onChange={(event) => handleMinutesChange(event)} placeholder="00" />
               </div>
             </div>
           </div>
@@ -170,11 +170,11 @@ function QuizForm() {
               <div key={item.id} className="uk-margin-large-bottom">
                 <div className="uk-width-auto uk-margin-bottom">
                   <label htmlFor="question" className="uk-form-label">Question {item.id}</label>
-                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" onChange={(event) => handleBodyChange(event, item.id)}/>
+                  <textarea className="uk-textarea" id="question" type="textarea" placeholder="Question" value={item.question} onChange={(event) => handleBodyChange(event, item.id)}/>
                 </div>
                 <div className="uk-margin-bottom">
                   <label htmlFor="imaage-url" className="uk-form-label">Add image url here...</label>
-                  <input className="uk-input" id="image-url" type="text" onChange={(event) => handleImageChange(event, item.id)} />
+                  <input className="uk-input" id="image-url" type="text" value={item.imageUrl} onChange={(event) => handleImageChange(event, item.id)} />
                 </div>
                 {(newQuizState.questions[item.id-1].imageUrl !== "") ? 
                 (<div>
