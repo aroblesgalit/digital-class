@@ -6,19 +6,13 @@ import { useParams } from 'react-router-dom';
 function QuizForm() {
 
   const {id} = useParams();
-  if (id) {
-    console.log(id);
-  }
-  else {
-    console.log("no id")
-  }
 
   // initialize quiz state with one empty question
   // this quiz state is updated with user input and sent to DB as-is on submit
   const [newQuizState, setNewQuizState] = useState({
     title: "",
     teacher: "",
-    timeLimit: 0,
+    timeLimit: 1,
     questions: [
       {
         id: 1,
@@ -158,7 +152,7 @@ function QuizForm() {
             <div className="uk-width-1-4@s uk-grid uk-grid-collapse">
               <div className="uk-width-1-1">
                 <label htmlFor="minutes" className="uk-form-label">Time Limit (min)</label>
-                <input className="uk-input" id="minutes" type="number" min="0" value={newQuizState.timeLimit} onChange={(event) => handleMinutesChange(event)} placeholder="00" />
+                <input className="uk-input" id="minutes" type="number" min="1" value={newQuizState.timeLimit} onChange={(event) => handleMinutesChange(event)} placeholder="1" />
               </div>
             </div>
           </div>
@@ -215,8 +209,6 @@ function QuizForm() {
 
 
         </form>
-
-
 
       </div>
     </div>
