@@ -69,4 +69,13 @@ router.get("/students", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
+router.put("/:id/:quizid", function(req, res) {
+    db.Teacher
+        .updateOne({ _id: req.params.id }, {
+            $pull: { sharedQuizzes: req.params.quizid }
+        }, { safe: true, multi: true })
+            .then(res => res.json(res))
+            .catch(err => res.status(422).json(err));
+})
+
 module.exports = router;

@@ -131,5 +131,9 @@ export default {
   // Add to sharedQuizzes
   addToSharedQuizzes: function (teacherid, quizid) {
     return axios.put("/api/teachers/" + teacherid + "/" + quizid);
+  },
+  // Remove one from sharedQuizzes
+  removeASharedQuiz: function(teacherid, quizid) {
+    return axios.put("/api/teacher-login/" + teacherid + "/" + quizid);
   }
 };
