@@ -1,18 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../utils/API'
 import './style.css';
+import authenticatedTeacherContext from '../../utils/authenticatedTeacherContext';
 
 function QuizList(props) {
   const [userState, setUserState] = useState();
   useEffect(() => {
     getUser();
     getTeachers();
+    getSharedQuizzes()
   }, []);
+
+  const {sharedQuizzes} = useContext(authenticatedTeacherContext);
 
   const [teachersArray, setTeachersArray] = useState();
   const [shareId, setShareId] = useState();
   const [checkTeachers, setCheckTeachers] = useState([]);
+  const [sharedQuizzesState, setSharedQuizzesState] = useState([]);
+
+  const getSharedQuizzes = async () => {
+    const shared = [];
+    for (let i = 0; i < sharedQuizzes.length; i++) {
+      await API.getQuizById(sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
+    }
+    setSharedQuizzesState(shared);
+  }
 
   // get studentid if the user is a student
   async function getUser() {
@@ -45,19 +58,21 @@ function QuizList(props) {
   }
 
   // when submit is clicked in modal
-  const shareQuiz = async () => {
+  const shareQuiz = async (event) => {
+    event.preventDefault();
     if (checkTeachers.length !== 0) {
       for (let i = 0; i < checkTeachers.length; i++) {
         await API.addToSharedQuizzes(checkTeachers[i], shareId).then(
           // change to alert
-          console.log("You shared quiz " + shareId + " with " + checkTeachers[i])
+          alert("You shared quiz " + shareId + " with " + checkTeachers[i])
         );
       }
+      setCheckTeachers([]);
 
     }
     else {
       // change to alert
-      console.log("You must make a selection first")
+      console.log("You must make a selection first");
     }
   }
 
@@ -67,8 +82,7 @@ function QuizList(props) {
 
   const declineQuiz = (quiz) => {
     console.log("You declined the quiz");
-    API.removeASharedQuiz(props.id, quiz);
-    
+    API.removeASharedQuiz(props.id, quiz).then(res => { console.log("remove response : ", res) }).catch(err => { console.log("remove didn't work ", err) });
   }
 
 
@@ -101,7 +115,7 @@ function QuizList(props) {
               </div>
               <div className="uk-flex uk-flex-right uk-margin-large-top">
                 <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                <button className="uk-button primaryBtn" type="button" onClick={() => shareQuiz()}>Submit</button>
+                <button className="uk-button primaryBtn uk-modal-close" type="button" onClick={shareQuiz}>Submit</button>
               </div>
             </div>
           </div>
@@ -119,10 +133,10 @@ function QuizList(props) {
             </Link>
           </div>
           <div>
-            <i className="fas fa-check" uk-tooltip="Accept" onClick={() => {acceptQuiz(item._id)}}></i>
+            <i className="fas fa-check" uk-tooltip="Accept" onClick={() => { acceptQuiz(item._id) }}></i>
           </div>
           <div>
-            <i className="fas fa-times" uk-tooltip="Decline" onClick={() => {declineQuiz(item._id)}}></i>
+            <i className="fas fa-times" uk-tooltip="Decline" onClick={() => { declineQuiz(item._id) }}></i>
           </div>
         </div>
       )
@@ -140,35 +154,64 @@ function QuizList(props) {
       return (
         <button className="uk-button uk-button-default" disabled={true}>Quiz Taken</button>
       )
-    } 
+    }
   }
 
 
   const myRenderQuizzes = (props) => {
-    // if the quizzes have been loaded
-    if (props.quizzes !== undefined) {
-      // if the quizzes are not empty
-      if (props.quizzes.length > 0) {
-        return (
-          // create a card for each quiz
-          (props.quizzes.map(item => {
-            return (
-              <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
-                <div className="uk-flex uk-flex-column uk-flex-middle card-top">
-                  <div className="uk-card-title card-title">
-                    {item.title}
+    if (!props.shared) {
+      if (props.quizzes !== undefined) {
+        // if the quizzes are not empty
+        if (props.quizzes.length > 0) {
+          return (
+            // create a card for each quiz
+            (props.quizzes.map(item => {
+              return (
+                <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
+                  <div className="uk-flex uk-flex-column uk-flex-middle card-top">
+                    <div className="uk-card-title card-title">
+                      {item.title}
+                    </div>
+                    <div className="card-subtitle">
+                      {item.questions.length + " Questions"}
+                    </div>
                   </div>
-                  <div className="card-subtitle">
-                    {item.questions.length + " Questions"}
+                  <div className="card-bottom">
+                    {myRenderCardBottom(item)}
                   </div>
                 </div>
-                <div className="card-bottom">
-                  {myRenderCardBottom(item)}
-                </div>
-              </div>
-            )
-          })))
+              )
+            })))
+        }
       }
+      else if (props.shared) {
+        if (sharedQuizzesState !== undefined) {
+          // if the quizzes are not empty
+          if (sharedQuizzesState.length > 0) {
+            return (
+              // create a card for each quiz
+              (sharedQuizzesState.map(item => {
+                return (
+                  <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
+                    <div className="uk-flex uk-flex-column uk-flex-middle card-top">
+                      <div className="uk-card-title card-title">
+                        {item.title}
+                      </div>
+                      <div className="card-subtitle">
+                        {item.questions.length + " Questions"}
+                      </div>
+                    </div>
+                    <div className="card-bottom">
+                      {myRenderCardBottom(item)}
+                    </div>
+                  </div>
+                )
+              })))
+          }
+        }
+      }
+      // if the quizzes have been loaded
+
       else {
         return (
           <div>No quizzes to display</div>
@@ -176,6 +219,8 @@ function QuizList(props) {
       }
     }
   }
+
+
 
   return (
     <div className="uk-flex uk-flex-between">
