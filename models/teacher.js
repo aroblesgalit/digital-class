@@ -30,6 +30,12 @@ const teacherSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Quiz"
     }
+  ],
+  sharedHomeworks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Homework"
+    }
   ]
   // phoneNumber: {
   //   type: Number,
