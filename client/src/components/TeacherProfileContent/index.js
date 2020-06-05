@@ -28,7 +28,7 @@ function TeacherProfileContent(props) {
   const getSharedQuizzes = async () => {
     const shared = [];
     for (let i = 0; i < props.sharedQuizzes.length; i++) {
-      await API.getQuizById(props.sharedQuizzes).then(sharedRes => shared.push(sharedRes.data))
+      await API.getQuizById(props.sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
     }
     setTeacherProfileState({...teacherProfileState, shared: shared});
   }
@@ -64,8 +64,7 @@ function TeacherProfileContent(props) {
     else if (teacherProfileState.tab === "Shared") {
       return (
         <div>
-          Shared Quizzes
-          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true} />
+          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true} id={props.id}/>
         </div>)
     }
   }

@@ -65,8 +65,10 @@ function QuizList(props) {
     console.log("you accepted the quiz");
   }
 
-  const declineQuiz = () => {
-    console.log("You declined the quiz")
+  const declineQuiz = (quiz) => {
+    console.log("You declined the quiz");
+    API.removeASharedQuiz(props.id, quiz);
+    
   }
 
 
@@ -113,14 +115,14 @@ function QuizList(props) {
           <div>
 
             <Link to={"/teachers/createquiz/" + item._id}>
-              <i class="fas fa-eye" uk-tooltip="View/Edit Quiz"></i>
+              <i className="fas fa-eye" uk-tooltip="View/Edit Quiz"></i>
             </Link>
           </div>
           <div>
-            <i class="fas fa-check" uk-tooltip="Accept" onClick={() => {acceptQuiz(item._id)}}></i>
+            <i className="fas fa-check" uk-tooltip="Accept" onClick={() => {acceptQuiz(item._id)}}></i>
           </div>
           <div>
-            <i class="fas fa-times" uk-tooltip="Decline" onClick={() => {declineQuiz(item._id)}}></i>
+            <i className="fas fa-times" uk-tooltip="Decline" onClick={() => {declineQuiz(item._id)}}></i>
           </div>
         </div>
       )
@@ -136,7 +138,7 @@ function QuizList(props) {
     }
     else if (props.user === "student") {
       return (
-        <button class="uk-button uk-button-default" disabled={true}>Quiz Taken</button>
+        <button className="uk-button uk-button-default" disabled={true}>Quiz Taken</button>
       )
     } 
   }
