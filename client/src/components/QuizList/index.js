@@ -49,6 +49,7 @@ function QuizList(props) {
     if (checkTeachers.length !== 0) {
       for (let i = 0; i < checkTeachers.length; i++) {
         await API.addToSharedQuizzes(checkTeachers[i], shareId).then(
+          // change to alert
           console.log("You shared quiz " + shareId + " with " + checkTeachers[i])
         );
       }
