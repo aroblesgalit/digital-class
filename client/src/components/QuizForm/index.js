@@ -12,7 +12,7 @@ function QuizForm() {
   const [newQuizState, setNewQuizState] = useState({
     title: "",
     teacher: "",
-    timeLimit: 1,
+    timeLimit: 10,
     questions: [
       {
         id: 1,

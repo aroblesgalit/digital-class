@@ -55,10 +55,18 @@ function QuizList(props) {
 
     }
     else {
+      // change to alert
       console.log("You must make a selection first")
     }
   }
 
+  const acceptQuiz = () => {
+    console.log("you accepted the quiz");
+  }
+
+  const declineQuiz = () => {
+    console.log("You declined the quiz")
+  }
 
 
   const myRenderCardBottom = (item) => {
@@ -108,10 +116,10 @@ function QuizList(props) {
             </Link>
           </div>
           <div>
-            <i class="fas fa-check" uk-tooltip="Accept"></i>
+            <i class="fas fa-check" uk-tooltip="Accept" onClick={() => {acceptQuiz(item._id)}}></i>
           </div>
           <div>
-            <i class="fas fa-times" uk-tooltip="Decline"></i>
+            <i class="fas fa-times" uk-tooltip="Decline" onClick={() => {declineQuiz(item._id)}}></i>
           </div>
         </div>
       )
