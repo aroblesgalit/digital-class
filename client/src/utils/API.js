@@ -32,6 +32,10 @@ export default {
   createQuiz: function (quizData) {
     return axios.post("/api/quizzes", quizData);
   },
+  // Creating a Homework assignment
+  creatingHomework: function (homeworkData) {
+    return axios.post("/api/homeworks", homeworkData)
+  },
   // Get teacher data
   getTeacher: function () {
     return axios.get("/api/teacher-login/user_data");
@@ -78,6 +82,29 @@ export default {
   },
   updateQuizStudents: function (quizid, studentid) {
     return axios.put("/api/quizzes/" + quizid + "/" + studentid);
+  },
+  // Get all results for a homework
+  getResultsByHomework: function (homeworkId) {
+    return axios.get("/api/results/homework/" + homeworkId);
+  },
+  // Get all homeworks by teacher's id
+  getHomeworksByTeacher: function () {
+    return axios.get("/api/teacher-login/homeworks");
+  },
+  // Get a homework by its id
+  getHomeworkById: function (id) {
+    return axios.get("/api/homeworks/" + id);
+  },
+  // Get all homeworks
+  getAllHomeworks: function () {
+    return axios.get("/api/homeworks")
+  },
+  // get homeworks for student by teacher id
+  getHomeworksForStudent: function (id) {
+    return axios.get("/api/homeworks/teacher/" + id)
+  },
+  updateHomeworkStudents: function (homeworkid, studentid) {
+    return axios.put("/api/homeworks/" + homeworkid + "/" + studentid);
   },
   // Search for schools
   searchSchools: function (query, state) {
