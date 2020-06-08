@@ -6,10 +6,10 @@ import teacherImg from "../../images/teacherAvatar.svg";
 // import TeacherProfile from "../../pages/TeacherProfile";
 
 function ProfileLeftCol(props) {
-
+  // Authenticated user's state
   const [userState, setUserState] = useState({});
 
-  // Create const for the current state of teachersList array
+  // Current state of teachersList array
   const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ function ProfileLeftCol(props) {
   }
 
   let imageUrlRef = useRef();
-
+  // Update user's imageUrl field with the new url
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -86,18 +86,6 @@ function ProfileLeftCol(props) {
       imageUrl: imageUrlRef.current.value
     })
   }
-
-
-
-  // Each teacher should be an object with properties for "id", "name", and "checked"
-  // "checked" should be a boolean, true if this student is registered under them
-  // Add logic here for getting all the teachers under this student's school
-  // Use getTeachersBySchool and set the teachersList with data from this request
-  // Go through student's teachers array and check the teachersList if it contains these id's
-  // Update the teachersList's "checked" boolean to true for each teacher registered under
-  // Add logic for when the "Save" button is clicked
-  // Grab the ID's of the checked teachers
-  // Make a request for updating the student's teachers array with the checked teachers
 
   //initialize i for incrememnting teacher emails in props
   var i = -1;
@@ -147,8 +135,6 @@ function ProfileLeftCol(props) {
                   <h2 className="uk-modal-title">Update Teachers</h2>
                   <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                     {
-                      /* replace <label><input>s below by mapping through the list of teachers */
-                      /* add checked="true" for teachers in this student's teachers array */
                       teachers && teachers.length > 0 ? (
                         teachers.map(teacher => {
                           return <label key={teacher._id}>
