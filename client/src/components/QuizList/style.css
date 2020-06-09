@@ -92,6 +92,13 @@
   margin: 0 3px;
 }
 
+.my-alert {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {

@@ -9,23 +9,24 @@ function QuizList(props) {
   useEffect(() => {
     getUser();
     getTeachers();
-    getSharedQuizzes()
+    // getSharedQuizzes()
   }, []);
 
-  const {sharedQuizzes} = useContext(authenticatedTeacherContext);
+  // const {sharedQuizzes} = useContext(authenticatedTeacherContext);
 
   const [teachersArray, setTeachersArray] = useState();
   const [shareId, setShareId] = useState();
   const [checkTeachers, setCheckTeachers] = useState([]);
-  const [sharedQuizzesState, setSharedQuizzesState] = useState([]);
+  const [sharedState, setSharedState] = useState(false);
+  // const [sharedQuizzesState, setSharedQuizzesState] = useState([]);
 
-  const getSharedQuizzes = async () => {
-    const shared = [];
-    for (let i = 0; i < sharedQuizzes.length; i++) {
-      await API.getQuizById(sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
-    }
-    setSharedQuizzesState(shared);
-  }
+  // const getSharedQuizzes = async () => {
+  //   const shared = [];
+  //   for (let i = 0; i < sharedQuizzes.length; i++) {
+  //     await API.getQuizById(sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
+  //   }
+  //   setSharedQuizzesState(shared);
+  // }
 
   // get studentid if the user is a student
   async function getUser() {
@@ -57,16 +58,28 @@ function QuizList(props) {
     setCheckTeachers(newTeachers);
   }
 
+  const alertShare = () => {
+    return (
+      <div className="uk-alert uk-alert-success my-alert" uk-alert="true">
+        <div className="uk-alert-close" uk-close="true" onClick={()=> {setSharedState(false)}}></div>
+        <p>Quiz successfully shared</p>
+      </div>
+    )
+  }
+
   // when submit is clicked in modal
   const shareQuiz = async (event) => {
     event.preventDefault();
     if (checkTeachers.length !== 0) {
       for (let i = 0; i < checkTeachers.length; i++) {
-        await API.addToSharedQuizzes(checkTeachers[i], shareId).then(
-          // change to alert
-          alert("You shared quiz " + shareId + " with " + checkTeachers[i])
-        );
+        await API.addToSharedQuizzes(checkTeachers[i], shareId).then(() => {
+          console.log("You shared quiz " + shareId + " with " + checkTeachers[i]);
+          setSharedState(true);
+        })
       }
+      // change to alert
+
+
       setCheckTeachers([]);
 
     }
@@ -159,7 +172,7 @@ function QuizList(props) {
 
 
   const myRenderQuizzes = (props) => {
-    if (!props.shared) {
+    // if (!props.shared) {
       if (props.quizzes !== undefined) {
         // if the quizzes are not empty
         if (props.quizzes.length > 0) {
@@ -183,33 +196,33 @@ function QuizList(props) {
               )
             })))
         }
-      }
-      else if (props.shared) {
-        if (sharedQuizzesState !== undefined) {
-          // if the quizzes are not empty
-          if (sharedQuizzesState.length > 0) {
-            return (
-              // create a card for each quiz
-              (sharedQuizzesState.map(item => {
-                return (
-                  <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
-                    <div className="uk-flex uk-flex-column uk-flex-middle card-top">
-                      <div className="uk-card-title card-title">
-                        {item.title}
-                      </div>
-                      <div className="card-subtitle">
-                        {item.questions.length + " Questions"}
-                      </div>
-                    </div>
-                    <div className="card-bottom">
-                      {myRenderCardBottom(item)}
-                    </div>
-                  </div>
-                )
-              })))
-          }
-        }
-      }
+      // }
+      // else if (props.shared) {
+      //   if (sharedQuizzesState !== undefined) {
+      //     // if the quizzes are not empty
+      //     if (sharedQuizzesState.length > 0) {
+      //       return (
+      //         // create a card for each quiz
+      //         (sharedQuizzesState.map(item => {
+      //           return (
+      //             <div className="uk-card uk-card-small uk-card-body uk-card-default quizCard" key={item._id}>
+      //               <div className="uk-flex uk-flex-column uk-flex-middle card-top">
+      //                 <div className="uk-card-title card-title">
+      //                   {item.title}
+      //                 </div>
+      //                 <div className="card-subtitle">
+      //                   {item.questions.length + " Questions"}
+      //                 </div>
+      //               </div>
+      //               <div className="card-bottom">
+      //                 {myRenderCardBottom(item)}
+      //               </div>
+      //             </div>
+      //           )
+      //         })))
+      //     }
+      //   }
+      // }
       // if the quizzes have been loaded
 
       else {
@@ -223,7 +236,9 @@ function QuizList(props) {
 
 
   return (
-    <div className="uk-flex uk-flex-between">
+    <div>
+      {sharedState ? alertShare() : ""}
+      <div className="uk-flex uk-flex-between">
       <div className="uk-flex uk-flex-wrap">
         {myRenderQuizzes(props)}
       </div>
@@ -236,6 +251,8 @@ function QuizList(props) {
         : <div></div>
       }
     </div>
+    </div>
+    
   )
 }
 

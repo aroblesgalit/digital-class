@@ -2,36 +2,37 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import StudentList from '../StudentList';
 import QuizList from '../QuizList';
+import ShareList from '../ShareList';
 import API from '../../utils/API';
 
 function TeacherProfileContent(props) {
   const [teacherProfileState, setTeacherProfileState] = useState({
     tab: "Students",
     students: [],
-    quizzes: [],
-    shared: []
+    quizzes: []
+    // shared: []
   })
 
   useEffect(() => {
     loadData();
-    if (props.sharedQuizzes){
-      getSharedQuizzes();
-    }
+    // if (props.sharedQuizzes){
+    //   getSharedQuizzes();
+    // }
   }, []);
 
-  useEffect(() => {
-    if (teacherProfileState.tab === "Shared"){
-      getSharedQuizzes();
-    }
-  }, [teacherProfileState.tab]);
+  // useEffect(() => {
+  //   if (teacherProfileState.tab === "Shared"){
+  //     getSharedQuizzes();
+  //   }
+  // }, [teacherProfileState.tab]);
 
-  const getSharedQuizzes = async () => {
-    const shared = [];
-    for (let i = 0; i < props.sharedQuizzes.length; i++) {
-      await API.getQuizById(props.sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
-    }
-    setTeacherProfileState({...teacherProfileState, shared: shared});
-  }
+  // const getSharedQuizzes = async () => {
+  //   const shared = [];
+  //   for (let i = 0; i < props.sharedQuizzes.length; i++) {
+  //     await API.getQuizById(props.sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
+  //   }
+  //   setTeacherProfileState({...teacherProfileState, shared: shared});
+  // }
 
   const handleTabChange = (selected) => {
     setTeacherProfileState({
@@ -64,7 +65,7 @@ function TeacherProfileContent(props) {
     else if (teacherProfileState.tab === "Shared") {
       return (
         <div>
-          <QuizList quizzes={teacherProfileState.shared} user={"teacher"} shared={true} id={props.id}/>
+          <ShareList quizIds={props.sharedQuizzes} user={"teacher"} id={props.id}/>
         </div>)
     }
   }
