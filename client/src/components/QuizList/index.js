@@ -2,31 +2,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import API from '../../utils/API'
 import './style.css';
-import authenticatedTeacherContext from '../../utils/authenticatedTeacherContext';
 
 function QuizList(props) {
   const [userState, setUserState] = useState();
   useEffect(() => {
     getUser();
     getTeachers();
-    // getSharedQuizzes()
   }, []);
-
-  // const {sharedQuizzes} = useContext(authenticatedTeacherContext);
 
   const [teachersArray, setTeachersArray] = useState();
   const [shareId, setShareId] = useState();
   const [checkTeachers, setCheckTeachers] = useState([]);
   const [sharedState, setSharedState] = useState(false);
-  // const [sharedQuizzesState, setSharedQuizzesState] = useState([]);
-
-  // const getSharedQuizzes = async () => {
-  //   const shared = [];
-  //   for (let i = 0; i < sharedQuizzes.length; i++) {
-  //     await API.getQuizById(sharedQuizzes[i]).then(sharedRes => shared.push(sharedRes.data))
-  //   }
-  //   setSharedQuizzesState(shared);
-  // }
 
   // get studentid if the user is a student
   async function getUser() {
@@ -74,14 +61,11 @@ function QuizList(props) {
       for (let i = 0; i < checkTeachers.length; i++) {
         await API.addToSharedQuizzes(checkTeachers[i], shareId).then(() => {
           console.log("You shared quiz " + shareId + " with " + checkTeachers[i]);
+          // set state to true
           setSharedState(true);
         })
       }
-      // change to alert
-
-
       setCheckTeachers([]);
-
     }
     else {
       // change to alert
@@ -94,7 +78,6 @@ function QuizList(props) {
   }
 
   const declineQuiz = (quiz) => {
-    console.log("You declined the quiz");
     API.removeASharedQuiz(props.id, quiz).then(res => { console.log("remove response : ", res) }).catch(err => { console.log("remove didn't work ", err) });
   }
 

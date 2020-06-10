@@ -33,11 +33,12 @@ function ShareList(props) {
           console.log(res);
         })
         .catch(err => console.log(err));
-      API.removeASharedQuiz(props.id, quiz).then(res => { console.log("remove response : ", res) }).catch(err => { console.log("remove didn't work ", err) });
+      API.removeASharedQuiz(props.id, id).then(res => { console.log("remove response : ", res) }).catch(err => { console.log("remove didn't work ", err) });
       const newQuizzes = [...sharedQuizzesState];
-      const result = newQuizzes.filter(item => item._id !== quiz);
+      const result = newQuizzes.filter(item => item._id !== id);
+      console.log(result);
       setSharedQuizzesState(result);
-
+      window.location.replace("/teachers/profile");
     })
 
   }
@@ -71,7 +72,6 @@ function ShareList(props) {
 
 
   const myRenderQuizzes = () => {
-    if (sharedQuizzesState !== undefined) {
       // if the quizzes are not empty
       if (sharedQuizzesState.length > 0) {
         return (
@@ -94,7 +94,6 @@ function ShareList(props) {
             )
           })))
       }
-    }
     else {
       return (
         <div>No quizzes to display</div>
