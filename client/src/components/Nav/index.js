@@ -28,7 +28,7 @@ function Nav() {
   }, [])
 
   return (
-    <nav className="uk-navbar-container my-nav" uk-navbar="true">
+    <nav className="uk-navbar-container my-nav" id="navbar" uk-navbar="true">
       <div className="uk-navbar-left">
         <ul className="uk-navbar-nav">
           <li className="uk-active">

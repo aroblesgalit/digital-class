@@ -17,7 +17,8 @@ function TeacherProfile() {
         name: res.data.name,
         school: res.data.school,
         subject: res.data.subject,
-        imageUrl: res.data.imageUrl
+        imageUrl: res.data.imageUrl,
+        sharedQuizzes: res.data.sharedQuizzes
       });
     })
     // .then(
@@ -29,7 +30,7 @@ function TeacherProfile() {
   return (
     <div className="profile-container">
       <ProfileLeftCol email={teacherState.email} name={teacherState.name} imageUrl={teacherState.imageUrl} school={teacherState.school} subject={teacherState.subject} id={teacherState.id} type="teacher" />
-      <TeacherProfileContent id={teacherState.id} />
+      <TeacherProfileContent id={teacherState.id} school={teacherState.school} sharedQuizzes={teacherState.sharedQuizzes}/>
     </div>
   );
 }
