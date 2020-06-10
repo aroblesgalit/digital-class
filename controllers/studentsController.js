@@ -6,7 +6,7 @@ module.exports = {
         db.Student
             .findOneAndUpdate({ _id: req.user._id }, {
                 teachers: req.body
-            })
+            }, { new: true })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

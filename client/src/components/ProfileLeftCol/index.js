@@ -6,8 +6,11 @@ import teacherImg from "../../images/teacherAvatar.svg";
 // import TeacherProfile from "../../pages/TeacherProfile";
 
 function ProfileLeftCol(props) {
-
+  // Authenticated user's state
   const [userState, setUserState] = useState({});
+
+  // Current state of teachersList array
+  const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
     async function loadData() {
@@ -19,17 +22,52 @@ function ProfileLeftCol(props) {
         })
       } else {
         const data = await API.getStudentData();
+        // console.log("Loading student's data...", data);
         setUserState({
           type: props.type,
-          imageUrl: data.data.imageUrl
+          imageUrl: data.data.imageUrl,
+          teachers: data.data.teachers,
+          school: data.data.school
         })
+        // console.log("Printing data.data.teachers from getStudentData()...", data.data.teachers);
+        const teachers = await API.getTeachersBySchool(data.data.school);
+        setTeachers(teachers.data);
+        // console.log("Printing teachers.data...", teachers.data);
       }
     }
     loadData();
   }, []);
 
-  let imageUrlRef = useRef();
+  const [checkTeachers, setCheckTeachers] = useState([]);
+  // Handle for checking checkboxes for teachers
+  function handleCheckbox(e) {
+    // console.log('checked', e.target.checked);
+    // console.log('name', e.target.name);
+    const newTeachers = [...checkTeachers];
+    if (e.target.checked) {
+      newTeachers.push(e.target.name);
+    }
+    else {
+      const index = newTeachers.indexOf(e.target.name)
+      newTeachers.splice(index, 1);
+    }
+    setCheckTeachers(newTeachers);
+  }
+  // Update student's list of teachers in the db
+  function saveTeachers(e) {
+    e.preventDefault();
+    API.updateStudentsTeachers(checkTeachers)
+      .then(res => {
+        console.log("Student's teachers updated...printing new list", res);
+      })
+      .catch(err => {
+        console.log("Oh no! Something went wrong while updating the student's teachers list...", err);
+      })
+    window.location.reload(false);
+  }
 
+  let imageUrlRef = useRef();
+  // Update user's imageUrl field with the new url
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -48,17 +86,6 @@ function ProfileLeftCol(props) {
       imageUrl: imageUrlRef.current.value
     })
   }
-
-  // Create const for the current state of teachersList array
-    // Each teacher should be an object with properties for "id", "name", and "checked"
-    // "checked" should be a boolean, true if this student is registered under them
-  // Add logic here for getting all the teachers under this student's school
-    // Use getTeachersBySchool and set the teachersList with data from this request
-    // Go through student's teachers array and check the teachersList if it contains these id's
-    // Update the teachersList's "checked" boolean to true for each teacher registered under
-  // Add logic for when the "Save" button is clicked
-    // Grab the ID's of the checked teachers
-    // Make a request for updating the student's teachers array with the checked teachers
 
   //initialize i for incrememnting teacher emails in props
   var i = -1;
@@ -108,16 +135,25 @@ function ProfileLeftCol(props) {
                   <h2 className="uk-modal-title">Update Teachers</h2>
                   <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                     {
-                      /* replace <label><input>s below by mapping through the list of teachers */
-                      /* add checked="true" for teachers in this student's teachers array */
+                      teachers && teachers.length > 0 ? (
+                        teachers.map(teacher => {
+                          return <label key={teacher._id}>
+                            <input
+                              name={teacher._id}
+                              className="uk-checkbox"
+                              type="checkbox"
+                              onClick={handleCheckbox}
+                            />
+                            {teacher.name}
+                          </label>
+                        })
+                      ) : <p className="uk-text-danger">No teachers found under this school.</p>
                     }
-                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> John Doe</label>
-                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> Jane Doe</label>
-                    <label key="-teachersId-"><input name="-teachersId-" className="uk-checkbox" type="checkbox" /> Miss Frizzle</label>
+
                   </div>
                   <div className="uk-flex uk-flex-right uk-margin-large-top">
                     <button className="uk-button secondaryBtn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                    <button className="uk-button primaryBtn" type="button">Save</button>
+                    <button className="uk-button primaryBtn" type="button" onClick={saveTeachers}>Save</button>
                   </div>
                 </div>
               </div>
