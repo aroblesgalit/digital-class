@@ -4,6 +4,24 @@
 This was a group project where we built a full-stack app using the MERN stack. Digital Class is an improved way for teacher to create and assign quizzes all at the touch of the keyboard. Students will be able to take quizzes and see their grades where ever they are as long as they have internet access.
 
 
+## Deployed Application / Live Demo
+[Digital Class](https://digital-class-production.herokuapp.com/)
+
+
+## Demo GIFs
+Sign up as a teacher or a student. Students will be able to see the teachers who have signed up already under their school.
+![Sign Up](./client/src/images/signup.gif)
+
+Teachers can change their profile picture and view their students, quizzes and shared quizzes from other teachers.
+They can view quiz results on a table, as well as analyze on a bar graph, which problem their students are struggling on.
+They can also share quizzes as well as accept, decline, or view/edit shared quizzes.
+![Teacher and Features](./client/src/images/teacher.gif)
+
+Students can change their profile picture and view quizzes their teachers have created.
+They can take the quizzes and see their results with an option for adding feedback at the end.
+![Student and Features](./client/src/images/student.gif)
+
+
 ## User Stories
 
 ```
@@ -43,8 +61,6 @@ WHEN I finish taking the quiz
 THEN I am presented with my score and an option to give feedback
 ```
 
-## Deployed Application
-[Digital Class](https://digital-class-production.herokuapp.com/)
 
 ## Screenshots
 ![Home](./client/src/images/home-screenshot.JPG)  
