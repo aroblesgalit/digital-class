@@ -22,7 +22,7 @@ function ProfileLeftCol(props) {
         })
       } else {
         const data = await API.getStudentData();
-        // console.log("Loading student's data...", data);
+        console.log("Loading student's data...", data.data);
         setUserState({
           type: props.type,
           imageUrl: data.data.imageUrl,
@@ -54,15 +54,16 @@ function ProfileLeftCol(props) {
     setCheckTeachers(newTeachers);
   }
   // Update student's list of teachers in the db
-  function saveTeachers(e) {
+  async function saveTeachers(e) {
     e.preventDefault();
-    API.updateStudentsTeachers(checkTeachers)
-      .then(res => {
-        console.log("Student's teachers updated...printing new list", res);
-      })
-      .catch(err => {
-        console.log("Oh no! Something went wrong while updating the student's teachers list...", err);
-      })
+    const newData = await API.updateStudentsTeachers(checkTeachers);
+    console.log("Student's teachers updated...printing new data...", newData.data);
+    // setUserState({
+    //   type: newData.data.userType,
+    //   imageUrl: newData.data.imageUrl,
+    //   teachers: newData.data.teachers,
+    //   school: newData.data.school
+    // });
     window.location.reload(false);
   }
 
