@@ -22,7 +22,7 @@ app.use(passport.session());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/digitalClass", {
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/digitalClass", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false
